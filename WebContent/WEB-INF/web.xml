@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Carnegie Financial Service</display-name>
+  <description>
+      Carnegie Financial Service
+    </description>
+  <servlet>
+    <servlet-name>controller-servlet</servlet-name>
+    <servlet-class>
+        	controller.Controller
+        </servlet-class>
+    <init-param>
+      <param-name>jdbcDriverName</param-name>
+      <param-value>   com.mysql.jdbc.Driver   </param-value>
+    </init-param>
+    <init-param>
+      <param-name>jdbcURL</param-name>
+      <param-value>   jdbc:mysql://my-db-instance.cvkh8esmpvzk.us-west-2.rds.amazonaws.com:3306/applicationDB  </param-value>
+    </init-param>
+    <init-param>
+      <param-name>db_username</param-name>
+      <param-value>   root   </param-value>
+    </init-param>
+    <init-param>
+      <param-name>db_password</param-name>
+      <param-value>  12345678   </param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>controller-servlet</servlet-name>
+    <url-pattern>   *.do                     </url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>controller-servlet</servlet-name>
+    <url-pattern>   /welcome                    </url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>   welcome   </welcome-file>
+  </welcome-file-list>
+</web-app>
