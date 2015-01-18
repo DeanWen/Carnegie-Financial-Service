@@ -13,7 +13,7 @@ File Structure:
     -Action
     -Controller
     -RegisterAction
-  -Model(DAO)
+  -Model(DAO) CRUD Interfaces Completed: create() read() update() delete()
     -Customer
     -Employee
     -Fund
@@ -32,16 +32,16 @@ File Structure:
 </pre>
 
 ### Database
-  if you want to access databases, please type follow command in your terminal
+  if you want to access databases, please type follow command in your terminal.Then you will be able to remote AWS RDS MySQL and execute query 
   <pre>
-  mysql -h my-db-instance.cvkh8esmpvzk.us-west-2.rds.amazonaws.com -u root -p12345678
+  mysql -h my-db-instance.cvkh8esmpvzk.us-west-2.rds.amazonaws.com -u root -p 12345678
   </pre>
-  Then you will be able to remote AWS RDS MySQL and execute query  
+  
   Please note:  
       You are logged in as ROOT, be carefull about your operation in case affect others
   
 ### How to configure to your local repository? 
-Two ways very easy  
+Two easy ways 
 <pre>
 1.Directly import from your Eclipse 
     --File
@@ -56,10 +56,10 @@ Two ways very easy
 Currenlty I implemented employee register action for testing.   
 After you run on your local Tomcat Server,  You will see DAO Test page, once you click "Done" button, "Register Successfully" Message come out. 
 
-Congratulations! You totally did that correct and start Coding your action now.
+Congratulations! You totally did that correctly and start Coding your action and jsp now.
 
 Let's Ace the Task!
 
 Dean W.  
 Team 14 Infinity  
-1/17/2015
+Last updated: 1/18/2015
