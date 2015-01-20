@@ -293,6 +293,9 @@
                                 <li>
                                 	<a href="sellFund.do"> Sell Fund </a>
                                 </li>
+                                <li>
+                                	<a href="deposit.do"> Deposit </a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

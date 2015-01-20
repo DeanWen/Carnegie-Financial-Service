@@ -68,6 +68,7 @@ public class CustomerDAO {
 			pstmt.setString(8, customer.getCity());
 			pstmt.setString(9, customer.getState());
 			pstmt.setInt(10, customer.getZip());
+			// NOOOOOO this should be Integer
 			pstmt.setFloat(11, customer.getCash());
 
 			int count = pstmt.executeUpdate();
@@ -116,6 +117,7 @@ public class CustomerDAO {
 			pstmt.setString(7, customer.getCity());
 			pstmt.setString(8, customer.getState());
 			pstmt.setInt(9, customer.getZip());
+			// NOOOOOO this should be Integer
 			pstmt.setFloat(10, customer.getCash());
 			pstmt.setInt(11, customer.getCustomer_id());
 			int count = pstmt.executeUpdate();

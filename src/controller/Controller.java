@@ -36,6 +36,7 @@ public class Controller extends HttpServlet {
 		Action.add(new TransactionHistoryViewAction(model));
 		Action.add(new ChangePWDAction(model));
 		Action.add(new SellFundAction(model));
+		Action.add(new DepositAction(model));
 	}
 
 	/**
