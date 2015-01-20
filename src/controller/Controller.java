@@ -29,6 +29,13 @@ public class Controller extends HttpServlet {
 	public void init() throws ServletException {
 		Model model = new Model(getServletConfig());
 		Action.add(new RegisterAction(model));
+		Action.add(new LoginAction(model));
+		Action.add(new CustomerAccountEditAction(model));
+		Action.add(new CustomerAccountViewAction(model));
+		Action.add(new FundListViewAction(model));
+		Action.add(new TransactionHistoryViewAction(model));
+		Action.add(new ChangePWDAction(model));
+		Action.add(new SellFundAction(model));
 	}
 
 	/**
@@ -59,13 +66,14 @@ public class Controller extends HttpServlet {
 		
 		if (customer == null) {
 			// If the user hasn't logged in, direct him to the login page
-			return Action.perform("register.do", request);
+			return Action.perform("login.do", request);
 		}
+//		
+//		if (action.equals("register.do") || action.equals("login.do")) {
+//			// Allow these actions without logging in
+//			return Action.perform(action, request);
+//		}
 		
-		if (action.equals("register.do") || action.equals("login.do")) {
-			// Allow these actions without logging in
-			return Action.perform(action, request);
-		}
 		
 		// Let the logged in user run his chosen action
 		return Action.perform(action, request);

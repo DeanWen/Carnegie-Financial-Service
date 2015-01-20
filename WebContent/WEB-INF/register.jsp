@@ -8,7 +8,7 @@
 	<table>
 		<tr>
 			<td>Username:</td>
-			<td><input type="text" name="username" value="${form.username}" /></td>
+			<td><input type="text" name="userid" value="${form.userid}" /></td>
 		</tr>
 		<tr>
 			<td>First Name:</td>

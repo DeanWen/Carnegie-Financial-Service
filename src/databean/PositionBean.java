@@ -10,16 +10,16 @@ import java.io.Serializable;
 public class PositionBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private float shares;
+	private String shares;
 	private int customer_id;
 	private int fund_id;
 
-	public float getShares() {
+	public String getShares() {
 		return shares;
 	}
 
 	public void setShares(float shares) {
-		this.shares = shares;
+		this.shares = String.format("%.3f", shares);
 	}
 
 	public int getCustomer_id() {

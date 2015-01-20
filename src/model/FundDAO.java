@@ -176,4 +176,39 @@ public class FundDAO {
 			throw new MyDAOException(e);
 		}
 	}
+	
+	public FundBean readByName(String fundName) throws MyDAOException {
+		Connection con = null;
+		try {
+			con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
+					+ tableName + " WHERE name = ? ");
+			pstmt.setString(1, fundName);
+			ResultSet rs = pstmt.executeQuery();
+
+			FundBean item;
+			if (!rs.next()) {
+				item = null;
+			} else {
+				item = new FundBean();
+				item.setFund_id(rs.getInt("fund_id"));
+				item.setName(rs.getString("name"));
+				item.setSymbol(rs.getString("symbol"));
+			}
+
+			rs.close();
+			pstmt.close();
+			releaseConnection(con);
+			return item;
+		} catch (SQLException e) {
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e2) {
+				/* ignore */
+			}
+			throw new MyDAOException(e);
+		}
+	}
 }

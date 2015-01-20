@@ -58,7 +58,7 @@ public class TransactionDAO {
 					.prepareStatement("INSERT INTO "
 							+ tableName
 							+ "(transaction_id, customer_id, fund_id, execute_date, shares, transaction_type, amount) "
-							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+							+ "VALUES (?, ?, ?, ?, ?, ?, ?)");
 			pstmt.setInt(1, item.getTransaction_id());
 			pstmt.setInt(2, item.getCustomer_id());
 			pstmt.setInt(3, item.getFund_id());
@@ -151,6 +151,45 @@ public class TransactionDAO {
 			throw new MyDAOException(e);
 		}
 	}
+	
+	public TransactionBean last(int customer_id) throws MyDAOException {
+		Connection con = null;
+		try {
+			con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
+					+ tableName + " WHERE execute_date = (SELECT MAX(execute_date) FROM " + tableName + " WHERE customer_id = ?)");
+			pstmt.setInt(1, customer_id);
+			ResultSet rs = pstmt.executeQuery();
+
+			TransactionBean item;
+			if (!rs.next()) {
+				item = null;
+			} else {
+				item = new TransactionBean();
+				item.setTransaction_id(rs.getInt("transaction_id"));
+				item.setCustomer_id(rs.getInt("customer_id"));
+				item.setFund_id(rs.getInt("fund_id"));
+				item.setShares(rs.getFloat("shares"));
+				item.setExecute_date(rs.getDate("execute_date"));
+				item.setTransaction_type(rs.getString("transaction_type"));
+				item.setAmount(rs.getFloat("amount"));
+			}
+
+			rs.close();
+			pstmt.close();
+			releaseConnection(con);
+			return item;
+		} catch (SQLException e) {
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e2) {
+				/* ignore */
+			}
+			throw new MyDAOException(e);
+		}
+	}
 
 	public TransactionBean read(int transaction_id) throws MyDAOException {
 		Connection con = null;
@@ -174,11 +213,51 @@ public class TransactionDAO {
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getFloat("amount"));
 			}
-
+			
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
 			return item;
+		} catch (SQLException e) {
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e2) {
+				/* ignore */
+			}
+			throw new MyDAOException(e);
+		}
+	}
+	
+	public ArrayList<TransactionBean> getTransactions(int customerID, int fundID) throws MyDAOException {
+		Connection con = null;
+		try {
+			con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
+					+ tableName + " WHERE customer_id = ? AND fund_id = ? ORDER BY execute_date ASC");
+			pstmt.setInt(1, customerID);
+			pstmt.setInt(2, fundID);
+			ResultSet rs = pstmt.executeQuery();
+			
+			ArrayList<TransactionBean> transactions = new ArrayList<TransactionBean>();
+			TransactionBean item;
+			while(rs.next()) {
+				item = new TransactionBean();
+				item.setTransaction_id(rs.getInt("transaction_id"));
+				item.setCustomer_id(rs.getInt("customer_id"));
+				item.setFund_id(rs.getInt("fund_id"));
+				item.setShares(rs.getFloat("shares"));
+				item.setExecute_date(rs.getDate("execute_date"));
+				item.setTransaction_type(rs.getString("transaction_type"));
+				item.setAmount(rs.getFloat("amount"));
+				transactions.add(item);
+			}
+			
+			rs.close();
+			pstmt.close();
+			releaseConnection(con);
+			return transactions;
 		} catch (SQLException e) {
 			try {
 				if (con != null) {

@@ -94,9 +94,9 @@ public class CustomerDAO {
 
 		try {
 			con = getConnection();
-			PreparedStatement pstmt = con.prepareStatement("UPDATE"
+			PreparedStatement pstmt = con.prepareStatement("UPDATE "
 					+ tableName 
-					+ "set username = ? "
+					+ " set username = ? "
 					  + ", password = ? "
 					  + ", firstname = ? "
 					  + ", lastname = ? "

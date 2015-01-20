@@ -12,7 +12,7 @@ public class Fund_Price_History_Bean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Date price_date;
-	private float price;
+	private String price;
 	private int fund_id;
 
 	public Date getPrice_date() {
@@ -23,12 +23,12 @@ public class Fund_Price_History_Bean implements Serializable {
 		this.price_date = price_date;
 	}
 
-	public float getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
 	public void setPrice(float price) {
-		this.price = price;
+		this.price = String.format("%.2f", price);
 	}
 
 	public int getFund_id() {

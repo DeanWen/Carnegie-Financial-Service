@@ -57,11 +57,11 @@ public class PositionDAO {
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
 							+ tableName
-							+ "(fund_id, customer_id, shares) "
+							+ "(Fund_fund_id, Customer_customer_id, shares) "
 							+ "VALUES (?, ?, ?)");
 			pstmt.setInt(1, item.getFund_id());
 			pstmt.setInt(2, item.getCustomer_id());
-			pstmt.setFloat(3, item.getShares());
+			pstmt.setFloat(3, Float.parseFloat(item.getShares()));
 
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
@@ -87,12 +87,12 @@ public class PositionDAO {
 
 		try {
 			con = getConnection();
-			PreparedStatement pstmt = con.prepareStatement("UPDATE"
+			PreparedStatement pstmt = con.prepareStatement("UPDATE "
 					+ tableName 
-					+ "set shares = ? "
-				    + "where fund_id = ? and customer_id = ? ");
+					+ " set shares = ? "
+				    + "where Fund_fund_id = ? and Customer_customer_id = ? ");
 			
-			pstmt.setFloat(1, item.getShares());
+			pstmt.setFloat(1, Float.parseFloat(item.getShares()));
 			pstmt.setInt(2, item.getFund_id());
 			pstmt.setInt(3, item.getCustomer_id());
 			
@@ -120,7 +120,7 @@ public class PositionDAO {
 		try {
 			con = getConnection();
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM "
-					+ tableName + " where fund_id = ? and customer_id = ? ");
+					+ tableName + " where Fund_fund_id = ? and Customer_customer_id = ? ");
 			pstmt.setInt(1, fund_id);
 			pstmt.setInt(2, customer_id);
 
@@ -147,7 +147,7 @@ public class PositionDAO {
 		try {
 			con = getConnection();
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
-					+ tableName + " WHERE fund_id = ? and customer_id = ?");
+					+ tableName + " WHERE Fund_fund_id = ? AND Customer_customer_id = ?");
 			pstmt.setInt(1, fund_id);
 			pstmt.setInt(2, customer_id);
 			ResultSet rs = pstmt.executeQuery();
@@ -157,8 +157,8 @@ public class PositionDAO {
 				item = null;
 			} else {
 				item = new PositionBean();
-				item.setFund_id(rs.getInt("fund_id"));
-				item.setCustomer_id(rs.getInt("customer_id"));
+				item.setFund_id(rs.getInt("Fund_fund_id"));
+				item.setCustomer_id(rs.getInt("Customer_customer_id"));
 				item.setShares(rs.getFloat("shares"));
 			}
 
@@ -166,6 +166,41 @@ public class PositionDAO {
 			pstmt.close();
 			releaseConnection(con);
 			return item;
+		} catch (SQLException e) {
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e2) {
+				/* ignore */
+			}
+			throw new MyDAOException(e);
+		}
+	}
+	
+	public ArrayList<PositionBean> getPositions(int customer_id) throws MyDAOException {
+		Connection con = null;
+		ArrayList<PositionBean> positions = new ArrayList<PositionBean>();
+		try {
+			con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
+					+ tableName + " WHERE Customer_customer_id = ? ORDER BY Fund_fund_id ASC");
+			pstmt.setInt(1, customer_id);
+			ResultSet rs = pstmt.executeQuery();
+
+			PositionBean item;
+			while(rs.next()) {
+				item = new PositionBean();
+				item.setFund_id(rs.getInt("Fund_fund_id"));
+				item.setCustomer_id(rs.getInt("Customer_customer_id"));
+				item.setShares(rs.getFloat("shares"));
+				positions.add(item);
+			}
+
+			rs.close();
+			pstmt.close();
+			releaseConnection(con);
+			return positions;
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
