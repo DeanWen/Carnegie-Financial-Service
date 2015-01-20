@@ -294,6 +294,9 @@
                                 	<a href="sellFund.do"> Sell Fund </a>
                                 </li>
                                 <li>
+                                	<a href="createFund.do"> Create Fund </a>
+                                </li>
+                                <li>
                                 	<a href="deposit.do"> Deposit </a>
                                 </li>
                             </ul>
