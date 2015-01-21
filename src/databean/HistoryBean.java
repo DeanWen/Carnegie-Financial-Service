@@ -1,6 +1,7 @@
 package databean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class HistoryBean implements Serializable{
@@ -8,9 +9,9 @@ public class HistoryBean implements Serializable{
 	private Date date;
 	private String type;
 	private String fundName;
-	private String shares;
-	private String price;
-	private String amount;
+	private BigDecimal shares;
+	private BigDecimal price;
+	private BigDecimal amount;
 	
 	public Date getDate() {
 		return date;
@@ -32,25 +33,22 @@ public class HistoryBean implements Serializable{
 	public void setFundName(String fundName) {
 		this.fundName = fundName;
 	}
-	
-	public String getShares() {
+	public BigDecimal getShares() {
 		return shares;
 	}
-	public void setShares(float shares) {
-		this.shares = String.format("%.3f", shares);
+	public void setShares(BigDecimal shares) {
+		this.shares = shares;
 	}
-	
-	public String getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(float price) {
-		this.price = String.format("%.2f", price);
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
-	
-	public String getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount(float amount) {
-		this.amount = String.format("%.2f", amount);
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 }

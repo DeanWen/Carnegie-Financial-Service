@@ -1,6 +1,7 @@
 package databean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class RecordBean implements Serializable{
 	/**
@@ -9,9 +10,9 @@ public class RecordBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String fundName;
 	private String fundSymbol;
-	private String shares;
-	private String price;
-	private String value;
+	private BigDecimal shares;
+	private BigDecimal price;
+	private BigDecimal value;
 	private int fundID;
 	
 	public String getFundName() {
@@ -28,27 +29,24 @@ public class RecordBean implements Serializable{
 		this.fundSymbol = fundSymbol;
 	}
 	
-	public String getShares() {
+	public BigDecimal getShares() {
 		return shares;
 	}
-	public void setShares(float shares) {
-		this.shares = String.format("%.3f", shares);
+	public void setShares(BigDecimal shares) {
+		this.shares = shares;
 	}
-	
-	public String getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(float price) {
-		this.price = String.format("%.2f", price);
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
-	
-	public String getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
-	public void setValue(float value) {
-		this.value = String.format("%.2f", value);
+	public void setValue(BigDecimal value) {
+		this.value = value;
 	}
-	
 	public int getFundID() {
 		return fundID;
 	}

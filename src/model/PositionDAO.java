@@ -61,7 +61,7 @@ public class PositionDAO {
 							+ "VALUES (?, ?, ?)");
 			pstmt.setInt(1, item.getFund_id());
 			pstmt.setInt(2, item.getCustomer_id());
-			pstmt.setFloat(3, Float.parseFloat(item.getShares()));
+			pstmt.setBigDecimal(3, item.getShares());
 
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
@@ -92,7 +92,7 @@ public class PositionDAO {
 					+ " set shares = ? "
 				    + "where Fund_fund_id = ? and Customer_customer_id = ? ");
 			
-			pstmt.setFloat(1, Float.parseFloat(item.getShares()));
+			pstmt.setBigDecimal(1, item.getShares());
 			pstmt.setInt(2, item.getFund_id());
 			pstmt.setInt(3, item.getCustomer_id());
 			
@@ -159,7 +159,7 @@ public class PositionDAO {
 				item = new PositionBean();
 				item.setFund_id(rs.getInt("Fund_fund_id"));
 				item.setCustomer_id(rs.getInt("Customer_customer_id"));
-				item.setShares(rs.getFloat("shares"));
+				item.setShares(rs.getBigDecimal("shares"));
 			}
 
 			rs.close();
@@ -193,7 +193,7 @@ public class PositionDAO {
 				item = new PositionBean();
 				item.setFund_id(rs.getInt("Fund_fund_id"));
 				item.setCustomer_id(rs.getInt("Customer_customer_id"));
-				item.setShares(rs.getFloat("shares"));
+				item.setShares(rs.getBigDecimal("shares"));
 				positions.add(item);
 			}
 

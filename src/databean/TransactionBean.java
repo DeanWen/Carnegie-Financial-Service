@@ -6,6 +6,7 @@ package databean;
  */
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TransactionBean implements Serializable {
@@ -15,9 +16,9 @@ public class TransactionBean implements Serializable {
 	private int customer_id;
 	private int fund_id;
 	private Date execute_date;
-	private float shares;
+	private BigDecimal shares;
 	private String transaction_type;
-	private float amount;
+	private BigDecimal amount;
 
 	public int getTransaction_id() {
 		return transaction_id;
@@ -51,13 +52,7 @@ public class TransactionBean implements Serializable {
 		this.execute_date = execute_date;
 	}
 
-	public float getShares() {
-		return shares;
-	}
 
-	public void setShares(float shares) {
-		this.shares = shares;
-	}
 
 	public String getTransaction_type() {
 		return transaction_type;
@@ -67,11 +62,21 @@ public class TransactionBean implements Serializable {
 		this.transaction_type = transaction_type;
 	}
 
-	public float getAmount() {
+	public BigDecimal getShares() {
+		return shares;
+	}
+
+	public void setShares(BigDecimal shares) {
+		this.shares = shares;
+	}
+
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(float amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
+
+
 }

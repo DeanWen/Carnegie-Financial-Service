@@ -61,7 +61,7 @@ public class Fund_Price_History_DAO {
 							+ "(price_date, price, Fund_fund_id) "
 							+ "VALUES (?, ?, ?)");
 			pstmt.setDate(1, (Date) item.getPrice_date());
-			pstmt.setFloat(2, Float.parseFloat(item.getPrice()));
+			pstmt.setBigDecimal(2, item.getPrice());
 			pstmt.setInt(3, item.getFund_id());
 
 			int count = pstmt.executeUpdate();
@@ -93,7 +93,7 @@ public class Fund_Price_History_DAO {
 					+ "set price = ? "
 				    + "where Fund_fund_id = ? and price_date = ?");
 			
-			pstmt.setFloat(1, Float.parseFloat(item.getPrice()));
+			pstmt.setBigDecimal(1, item.getPrice());
 			pstmt.setInt(2, item.getFund_id());
 			pstmt.setDate(3, (Date) item.getPrice_date());
 			
@@ -159,7 +159,7 @@ public class Fund_Price_History_DAO {
 				item = new Fund_Price_History_Bean();
 				item.setFund_id(rs.getInt("Fund_fund_id"));
 				item.setPrice_date(rs.getDate("price_date"));
-				item.setPrice(rs.getFloat("price"));
+				item.setPrice(rs.getBigDecimal("price"));
 			}
 
 			rs.close();
@@ -194,7 +194,7 @@ public class Fund_Price_History_DAO {
 				item = new Fund_Price_History_Bean();
 				item.setFund_id(rs.getInt("Fund_fund_id"));
 				item.setPrice_date(rs.getDate("price_date"));
-				item.setPrice(rs.getFloat("price"));
+				item.setPrice(rs.getBigDecimal("price"));
 			}
 
 			rs.close();

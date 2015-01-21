@@ -6,6 +6,7 @@ package databean;
  */
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class CustomerBean implements Serializable {
 
@@ -20,7 +21,7 @@ public class CustomerBean implements Serializable {
 	private String city;
 	private String state;
 	private int zip;
-	private float cash;
+	private BigDecimal cash;
 
 	public int getCustomer_id() {
 		return customer_id;
@@ -102,11 +103,11 @@ public class CustomerBean implements Serializable {
 		this.zip = zip;
 	}
 
-	public float getCash() {
+	public BigDecimal getCash() {
 		return cash;
 	}
 
-	public void setCash(float cash) {
+	public void setCash(BigDecimal cash) {
 		this.cash = cash;
 	}
 

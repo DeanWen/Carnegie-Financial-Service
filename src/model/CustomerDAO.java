@@ -68,7 +68,7 @@ public class CustomerDAO {
 			pstmt.setString(8, customer.getCity());
 			pstmt.setString(9, customer.getState());
 			pstmt.setInt(10, customer.getZip());
-			pstmt.setFloat(11, customer.getCash());
+			pstmt.setBigDecimal(11, customer.getCash());
 
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
@@ -116,7 +116,7 @@ public class CustomerDAO {
 			pstmt.setString(7, customer.getCity());
 			pstmt.setString(8, customer.getState());
 			pstmt.setInt(9, customer.getZip());
-			pstmt.setFloat(10, customer.getCash());
+			pstmt.setBigDecimal(10, customer.getCash());
 			pstmt.setInt(11, customer.getCustomer_id());
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
@@ -187,7 +187,7 @@ public class CustomerDAO {
 				customer.setState(rs.getString("state"));
 				customer.setState(rs.getString("state"));
 				customer.setZip(rs.getInt("zip"));
-				customer.setCash(rs.getFloat("cash"));
+				customer.setCash(rs.getBigDecimal("cash"));
 			}
 
 			rs.close();

@@ -60,11 +60,11 @@ public class FundListViewAction extends Action{
 				continue;
 			}
 			item.setFundID(fund.getFund_id());
-			item.setShares(Float.parseFloat(positions.get(i).getShares()));
+			item.setShares(positions.get(i).getShares());
 			item.setFundName(fund.getName());
 			item.setFundSymbol(fund.getSymbol());
-			item.setPrice(Float.parseFloat(history.getPrice()));
-			item.setValue(Float.parseFloat(history.getPrice()) * Float.parseFloat(positions.get(i).getShares()));
+			item.setPrice(history.getPrice());
+			item.setValue(history.getPrice().multiply(positions.get(i).getShares()).setScale(2));
 			records.add(item);
 		}
 		

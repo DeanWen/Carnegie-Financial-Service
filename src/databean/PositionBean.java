@@ -6,20 +6,23 @@ package databean;
  */
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class PositionBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String shares;
+	private BigDecimal shares;
 	private int customer_id;
 	private int fund_id;
 
-	public String getShares() {
+
+
+	public BigDecimal getShares() {
 		return shares;
 	}
 
-	public void setShares(float shares) {
-		this.shares = String.format("%.3f", shares);
+	public void setShares(BigDecimal shares) {
+		this.shares = shares;
 	}
 
 	public int getCustomer_id() {

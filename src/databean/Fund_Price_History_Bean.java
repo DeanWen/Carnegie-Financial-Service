@@ -6,13 +6,14 @@ package databean;
  */
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Fund_Price_History_Bean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Date price_date;
-	private String price;
+	private BigDecimal price;
 	private int fund_id;
 
 	public Date getPrice_date() {
@@ -23,12 +24,12 @@ public class Fund_Price_History_Bean implements Serializable {
 		this.price_date = price_date;
 	}
 
-	public String getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
-		this.price = String.format("%.2f", price);
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 	public int getFund_id() {

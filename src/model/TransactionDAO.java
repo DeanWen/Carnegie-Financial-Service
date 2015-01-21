@@ -63,9 +63,9 @@ public class TransactionDAO {
 			pstmt.setInt(2, item.getCustomer_id());
 			pstmt.setInt(3, item.getFund_id());
 			pstmt.setDate(4, (Date) item.getExecute_date());
-			pstmt.setFloat(5, item.getShares());
+			pstmt.setBigDecimal(5, item.getShares());
 			pstmt.setString(6, item.getTransaction_type());
-			pstmt.setFloat(7, item.getAmount());
+			pstmt.setBigDecimal(7, item.getAmount());
 
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
@@ -103,9 +103,9 @@ public class TransactionDAO {
 			pstmt.setInt(1, item.getCustomer_id());
 			pstmt.setInt(2, item.getFund_id());
 			pstmt.setDate(3, (Date) item.getExecute_date());
-			pstmt.setFloat(4, item.getShares());
+			pstmt.setBigDecimal(4, item.getShares());
 			pstmt.setString(5, item.getTransaction_type());
-			pstmt.setFloat(6, item.getAmount());
+			pstmt.setBigDecimal(6, item.getAmount());
 			pstmt.setInt(7, item.getTransaction_id());
 			
 			int count = pstmt.executeUpdate();
@@ -169,10 +169,10 @@ public class TransactionDAO {
 				item.setTransaction_id(rs.getInt("transaction_id"));
 				item.setCustomer_id(rs.getInt("customer_id"));
 				item.setFund_id(rs.getInt("fund_id"));
-				item.setShares(rs.getFloat("shares"));
+				item.setShares(rs.getBigDecimal("shares"));
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
-				item.setAmount(rs.getFloat("amount"));
+				item.setAmount(rs.getBigDecimal("amount"));
 			}
 
 			rs.close();
@@ -208,10 +208,10 @@ public class TransactionDAO {
 				item.setTransaction_id(rs.getInt("transaction_id"));
 				item.setCustomer_id(rs.getInt("customer_id"));
 				item.setFund_id(rs.getInt("fund_id"));
-				item.setShares(rs.getFloat("shares"));
+				item.setShares(rs.getBigDecimal("shares"));
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
-				item.setAmount(rs.getFloat("amount"));
+				item.setAmount(rs.getBigDecimal("amount"));
 			}
 			
 			rs.close();
@@ -247,10 +247,10 @@ public class TransactionDAO {
 				item.setTransaction_id(rs.getInt("transaction_id"));
 				item.setCustomer_id(rs.getInt("customer_id"));
 				item.setFund_id(rs.getInt("fund_id"));
-				item.setShares(rs.getFloat("shares"));
+				item.setShares(rs.getBigDecimal("shares"));
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
-				item.setAmount(rs.getFloat("amount"));
+				item.setAmount(rs.getBigDecimal("amount"));
 				transactions.add(item);
 			}
 			

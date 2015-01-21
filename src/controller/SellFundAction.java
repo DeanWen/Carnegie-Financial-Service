@@ -1,5 +1,6 @@
 package controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,8 +80,8 @@ public class SellFundAction extends Action{
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}
-		// Not float
-		float sellAmount = Float.parseFloat(form.getCfmAmount());
+		
+		BigDecimal sellAmount = new BigDecimal(form.getCfmAmount());
 		
 		PositionBean position;
 		try {
@@ -91,20 +92,20 @@ public class SellFundAction extends Action{
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}
-		// Shouldn't be float
-		Float ownAmount = Float.parseFloat(position.getShares());
-		if(sellAmount > ownAmount) {
+		
+		BigDecimal ownAmount = position.getShares();
+		if(sellAmount.compareTo(ownAmount) == 1) {
 			errors.add("You don't have enough shares to sell");
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}
-		if(sellAmount <= 0) {
+		if(sellAmount.compareTo(BigDecimal.ZERO) == 0 || sellAmount.compareTo(BigDecimal.ZERO) == -1) {
 			errors.add("You cannot sell " + sellAmount + " shares");
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}
 		
-		Float newAmount = ownAmount - sellAmount;
+		BigDecimal newAmount = ownAmount.subtract(sellAmount);
 		
 		position.setShares(newAmount);
 		try {

@@ -1,5 +1,6 @@
 package controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,9 +66,10 @@ public class DepositAction extends Action{
 		        }	        	
 		        
 		        // Update cash
-		        int currentCash = (int)customerDAO.read(Integer.parseInt(form.getUserid())).getCash();
+		        int currentCash = customerDAO.read(Integer.parseInt(form.getUserid())).getCash().intValue();
 		        int addAmount = Integer.parseInt(form.getDepositAmount());
-		        customerDAO.read(Integer.parseInt(form.getUserid())).setCash(currentCash + addAmount);
+		        int newCash = currentCash + addAmount;
+		        customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
 		        
 			} catch (MyDAOException e1) {
 				e1.printStackTrace();

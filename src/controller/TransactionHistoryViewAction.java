@@ -97,11 +97,11 @@ public class TransactionHistoryViewAction extends Action{
 				continue;
 			}
 			item.setFundID(fund.getFund_id());
-			item.setShares(Float.parseFloat(positions.get(i).getShares()));
+			item.setShares(positions.get(i).getShares());
 			item.setFundName(fund.getName());
 			item.setFundSymbol(fund.getSymbol());
-			item.setPrice(Float.parseFloat(history.getPrice()));
-			item.setValue(Float.parseFloat(history.getPrice()) * Float.parseFloat(positions.get(i).getShares()));
+			item.setPrice(history.getPrice());
+			item.setValue(history.getPrice().multiply(positions.get(i).getShares()));
 			records.add(item);
 		}
 		
@@ -123,7 +123,7 @@ public class TransactionHistoryViewAction extends Action{
 			cur.setShares(transactions.get(i).getShares());
 			cur.setType(transactions.get(i).getTransaction_type());
 			if(fph != null) {
-				cur.setPrice(Float.parseFloat(fph.getPrice()));
+				cur.setPrice(fph.getPrice());
 			}
 			histories.add(cur);
 		}
