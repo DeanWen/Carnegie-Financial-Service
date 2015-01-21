@@ -58,7 +58,20 @@
                                             </div>
                                             </td>
                                         </tr>
-                                        <tr class="odd gradeX">
+                                        
+                                        <tr>
+                							<td><div align="left"><b>ZIP code:</b></div></td>
+                							<td><input name="zip" type="text" size="5" id="zipL" id="L5"></td>
+                						</tr>
+            							<tr>
+                							<td><div align="left"><b>State/Region:</b></div></td>
+                							<td>
+                    						<select name="state" size="1" id="statelist" id="L8">
+                    						</select>
+                    						</td>
+            							</tr>
+                                        
+<%--                                         <tr class="odd gradeX">
                                             <th class="col-md-3"> State </th>
                                             <td>
                                             <div class="form-group">
@@ -73,7 +86,7 @@
                                             <input class="form-control" placeholder="Zip Code" name = "zip" value = "${form.getZip()}" />
                                             </div>
                                             </td>
-                                        </tr>
+                                        </tr> --%>
                                     </tbody>
                                 </table>
                                 <c:forEach var="error" items="${errors}">
