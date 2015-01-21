@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/checkout.css">
+    <script type="text/javascript" src="javascript/jquery-1.11.1.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="javascript/account.js" charset="utf-8"></script>
+    <script type="text/javascript" src="javascript/state.js" charset="utf-8"></script>
+
+    <title>Billing and Shipping</title>
+</head>
+
+<body>
+    <div id="main_form">
+    	<a href="index.html">
+            <img src="images/pay1.jpg" width="1000">
+        </a>
+        <img src="images/pay3.jpg" width="1000">
+        <div id="output"></div>
+        <div>
+            <h2>Step 1/3: Billing and Shipping Information</h2>
+        </div>
+
+        <hr>
+<h3>New Customers</h3>
+<h4>1. Please fill your information for your checkout.</h4>
+<div align="center">
+    <table width="900" border="0">
+        <tbody>
+            <tr>
+                <td><h3>Billing Information</h3></td>
+                <td width="250">&nbsp;</td>
+                <td><h3>Shipping Information</h3></td>
+                <td width="250">
+                    <form action="" class="links">
+                        <input type="checkbox" name="same" value="1" id="sameaddr">Same as Billing Info.<br>
+                        </form>
+                    </td>
+                </tr>
+            <tr>
+                <td><div align="right">First Name:</div></td>
+                <td><input type="text" size="10" id="L0"  tabindex=3></td>
+                <td><div align="right">First Name:</div></td>
+                <td><input type="text" size="10" id="R0" tabindex=11></td>
+                </tr>
+            <tr>
+                <td><div align="right">Last Name:</div></td>
+                <td><input type="text" size="10" id="L1"  tabindex=4></td>
+                <td><div align="right">Last Name:</div></td>
+                <td><input type="text" size="10" id="R1"  tabindex=12></td>
+                </tr>
+            <tr>
+                <td><div align="right">Address Line 1:</div></td>
+                <td><input type="text" size="20" id="L2"  tabindex=5></td>
+                <td><div align="right">Address Line 1:</div></td>
+                <td><input type="text" size="20" id="R2" tabindex=13></td>
+                </tr>
+            <tr>
+                <td><div align="right">Address Line 2:</div></td>
+                <td><input type="text" size="20" id="L3" tabindex=6></td>
+                <td><div align="right">Address Line 2:</div></td>
+                <td><input type="text" size="20" id="R3" tabindex=14></td>
+                </tr>
+            <tr>
+                <td><div align="right"></div></td>
+                <td>(optional)</td>
+                <td><div align="right"></div></td>
+                <td>(optional)</td>
+                </tr>
+            <tr>
+                <td><div align="right">City:</div></td>
+                <td><input type="text" size="20" id="L4" tabindex=7></td>
+                <td><div align="right">City:</div></td>
+                <td><input type="text" size="20" id="R4" tabindex=15></td>
+                </tr>
+            <tr>
+                <td><div align="right">ZIP code:</div></td>
+                <td><input type="text" size="5" id="zipL" id="L5" tabindex=8></td>
+                <td><div align="right">ZIP code:</div></td>
+                <td><input type="text" size="5" id="zipR" id="R5" tabindex=16></td>
+                </tr>
+            <tr>
+                <td><div align="right">State/Region:</div></td>
+                <td>
+                    <select name="header" size="1" id="statelist" id="L8">
+                    </select>
+                    </td>
+                <td><div align="right">State/Region:</div></td>
+                <td>
+                    <select name="header" size="1" id="statelistR" id="R8">
+                    </select>
+                    </td>
+            </tr>
+            <tr>
+                <td><div align="right">E-mail Address:</div></td>
+                <td><input type="email" size="20" id="L6"  tabindex=9></td>
+                <td><div align="right">E-mail Address:</div></td>
+                <td><input type="email" size="20" id="R6" tabindex=17></td>
+                </tr>
+            <tr>
+                <td><div align="right">Phone:</div></td>
+                <td><input type="text" size="20" id="L7" tabindex=10></td>
+                <td><div align="right">Phone:</div></td>
+                <td><input type="text" size="20" id="R7" tabindex=18></td>
+                </tr>
+            </tbody>
+    </table>
+</div>
+<h4>2. Please choose your payment information.</h4>
+	<div>
+
+<div class = "ChkPaymentInfo" >
+<h4 style="margin-bottom:20px;">Payment Information</h4>
+<div align="left">
+    <table id= "ChkPaymentInfoCC">
+        <tr><td valign="top"><div id="tblPaymentInfo">
+            <table id="tblcreditcard" border="0" cellpadding="2" cellspacing="0">
+                <tr style="background-color:RGB(220,220,220);height:45px;"><td style="width:20px;padding-left:7px;"><input id="paymentmethod" name="paymentmethod" type="radio" title="Credit card" value="0" onclick="selectPaymentTypeCC('0')" ></td><td style="width:100px;"><span id="billCard"><b>Card</b></span></td><td style="width:100px;">&nbsp;</td><td style="width:400px;padding-right:9px;" align="right"><img title="Credit cards" src="images/credit_card_new_logos.gif" vspace="0" hspace="0" alt="Credit cards" /></td></tr>
+                </table>
+            <div id="dvCreditcard" style="visibility:hidden;display:none;""><fieldset class="fieldset-settings"><table border="0" cellpadding="3" cellspacing="0" style="width:100%" summary="Credit card"><tr valign="top""><td align="right"><label for="selCCType"><b>Payment method:</b></label></td><td nowrap="nowrap"><select name="selCCType" id="selCCType" style="width:9.9em">
+            	<option value="1" >MasterCard</option>
+            	<option value="2" >Visa</option>
+            	<option value="3" >American Express</option>
+            	<option value="4" >Discover</option>
+            	<option value="7" >Diners Club</option>
+            </select></td>
+        </tr>
+        <tr class="AddJQueryerror"><td></td>
+        	<td><span class="error" id="CCNumError"></span></td>
+    	</tr>
+    	<tr valign="top">
+    		<script type="text/javascript">function make_blank(e){var str = e.value; str = str.indexOf("*");if(str != -1){e.value = '';}}</script>
+    		<td align="right">
+    			<label for="txtCCNumber" id="lblCCNumber"><b>Card number:</b></label>
+    		</td>
+    		<td><input type="text" name="txtCCNumber" id="txtCCNumber" style="width:11em" maxlength="20" value="" onfocus="make_blank(this);" autocomplete="off"/></td>
+    	</tr>
+    	<tr class="AddJQueryerror"><td></td><td><span class="error" id="ExpirydateError"></span></td>
+    	</tr>
+    	<tr valign="top">
+    		<td align="right">
+    		<label for="selCCExpMonth" id="lblSelCCExpMonth"><b>Expiration date:</b></label>
+    		</td>
+    		<td><select name="selCCExpMonth" id="selCCExpMonth" style="width:8.6em">
+    			<option  value="1">01 (January)</option><option  value="2">02 (February)</option><option  value="3">03 (March)</option><option  value="4">04 (April)</option><option  value="5">05 (May)</option><option  value="6">06 (June)</option><option  value="7">07 (July)</option><option  value="8">08 (August)</option><option  value="9">09 (September)</option><option  value="10">10 (October)</option><option  value="11">11 (November)</option><option  value="12">12 (December)</option></select>&nbsp;&nbsp;<select name="selCCExpYear" id="selCCExpYear" title="Select Year" ><option  selected  value="2014">2014</option><option  value="2015">2015</option><option  value="2016">2016</option><option  value="2017">2017</option><option  value="2018">2018</option><option  value="2019">2019</option><option  value="2020">2020</option><option  value="2021">2021</option><option  value="2022">2022</option><option  value="2023">2023</option><option  value="2024">2024</option><option  value="2025">2025</option><option  value="2026">2026</option><option  value="2027">2027</option><option  value="2028">2028</option><option  value="2029">2029</option><option  value="2030">2030</option><option  value="2031">2031</option><option  value="2032">2032</option><option  value="2033">2033</option><option  value="2034">2034</option><option  value="2035">2035</option><option  value="2036">2036</option><option  value="2037">2037</option><option  value="2038">2038</option><option  value="2039">2039</option><option  value="2040">2040</option><option  value="2041">2041</option><option  value="2042">2042</option><option  value="2043">2043</option><option  value="2044">2044</option><option  value="2045">2045</option><option  value="2046">2046</option><option  value="2047">2047</option><option  value="2048">2048</option><option  value="2049">2049</option><option  value="2050">2050</option><option  value="2051">2051</option><option  value="2052">2052</option><option  value="2053">2053</option>
+    		</select></td>
+    	</tr>
+    	<tr class="AddJQueryerror">
+    		<td></td>
+    		<td><span class="error" id="CCNameError"></span></td>
+    	</tr>
+    	<tr valign="top">
+    		<td align="right"><label for="txtCCNameOnCard" id="lblCCNameOnCard"><b>Cardholder's name:</b></label>
+    		</td>
+    		<td valign="top" align="left">
+    			<input type="text" name="txtCCNameOnCard" id="txtCCNameOnCard" style="width:17.9em" maxlength="40" value="" /><br /><div class="xsmall">(as it appears on the card)</div>
+    		</td></tr>
+    	</table></fieldset>
+
+    	<div id="PaymentInfoNote"></div>
+    	<input type="hidden" name="hdnPayPalName" id="hdnPayPalName" size="35" maxlength="40" value="PayPal" /><input type="hidden" name="hdnPayPalPayerID" id="hdnPayPalPayerID" size="35" maxlength="40" value="0000000000000" /></div>
+
+    	<table id="tblBML" border="0" cellpadding="2" cellspacing="0">
+            <tr style="background-color:RGB(220,220,220);height:45px" >
+            	<td style="width:20px;padding-left:7px;">
+            		<input id="paymentmethod" name="paymentmethod" title="Bill Me Later" type="radio" value="11" onclick="selectPaymentTypeBML('11')" >
+            	</td>
+            	<td class="tdBML"><span id="billCard" style="font-weight:bold;">Bill Me Later<sup>&reg;</sup></span>
+            	</td>
+            	<td style="width:410px;">&nbsp;</td>
+            	<td style="width:100px;padding-right:9px;" align="right"><img title="Bill Me Later" src="images/bml_36x23.jpg" vspace="0" hspace="0" alt="Bill Me Later" />
+            	</td>
+            </tr>
+        </table>
+        <div id="dvBML" style="visibility:hidden;display:none;">
+        	<table border="0" cellpadding="3" cellspacing="0" style="width:100%" summary="Bill me later">
+	            <tr valign="top">
+	            	<td id="tdChk90dol" name="tdChk90dol" colspan="2" style="padding-left:20px;width:100%"><input type="checkbox" name="chkBML" id="chkBML" disabled="disabled">
+	            		<label for="chkBML">Yes, I'd like No Payments for 6 Months on orders over $100!</label>
+	            	</td>
+	            </tr>
+	            <tr valign="top">
+	            	<td colspan="2" style="padding-left:20px;width:100%">
+	            		<img title="Bill Me Later" src="images/bml_30x47.gif" vspace="0" hspace="0" alt="Bill Me Later" /> 
+	            		<a href="checkout0.html" class="bill-me-later">See Terms</a></td></tr>
+	        </table>
+        </div>
+        <table id="tblPayPal" border="0" cellpadding="2" cellspacing="0">
+            <tr style="background-color:RGB(220,220,220);height:45px;"><td style="width:20px;padding-left:7px;"><input id="paymentmethod" name="paymentmethod" type="radio" title="PayPal" value="12" onclick="selectPaymentTypePayPal('12')" ></td><td style="width:100px;"><span id="billCard" style="font-weight:bold;">PayPal<sup>&reg;</sup></span></td><td style="width:400px;">&nbsp;</td><td style="width:100px;padding-right:9px;" align="right"><img title="PayPal" src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" vspace="0" hspace="0" alt="PayPal" /></td></tr>
+        </table>
+            <div id="dvPaypal" style="visibility:hidden;display:none;"><table border="0" cellpadding="3" cellspacing="0" style="width:100%">
+                <tr valign="top"><td nowrap="nowrap"><div style="margin-bottom:10px;padding-left:20px;">Save Time. Checkout securely. Pay without sharing your financial information.</div>
+                    <div style="margin-bottom:10px;padding-left:20px;">You will be required to either create a new PayPal account or login to your existing </div><div style="padding-left:20px;">PayPal account to complete this order.</div><hr style="height:1px;"/></td></tr>
+                </table></div></div>
+            </td></tr>
+    </table>
+</div>
+</div>
+
+
+
+	</div>
+
+	<h4>3. Please choose a password for access your order in the future.</h4>
+	<div align="center">
+	    <table width="702" border="0">
+	        <tbody>
+	            <tr>
+	                <td width="213"><div align="right">Password:</div></td>
+	                <td width="473"><input type="password" size="20"></td>
+                </tr>
+	            <tr>
+	                <td><div align="right"></div></td>
+	                <td><table cellpadding="3" border="0">
+	                    <tbody>
+	                        <tr valign="top">
+	                            <td>(Passwords are case sensitive and must contain six or more characters and at least one number.)</td>
+	                            </tr>
+	                        <tr>                
+                            </tbody>
+	                    </table>
+                    <br></td>
+                </tr>
+	            <tr>
+	                <td><div align="right">Re-type the above password:</div></td>
+	                <td><input type="password" size="20"></td>
+                </tr>
+	            <tr>
+                    <td>
+                        <p><a href="cart.html"><img src="images/back2.jpg"></a></p>
+                    </td>
+                    <td>
+	                    <p><a href="checkout1.html"><img src="images/button_continue.gif"></a></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+	    
+	    <img src="images/pay2.jpg" width="1000"></div>
+
+
+    <!--script type="text/javascript" src="http://form.jotform.us/jsform/42916275151151"></script-->
+</div> <!--main div end-->
+
+</body>
+</html>

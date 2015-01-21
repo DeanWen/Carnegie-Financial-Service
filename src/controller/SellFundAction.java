@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.FundDAO;
+import model.Fund_Price_History_DAO;
 import model.Model;
 import model.MyDAOException;
 import model.PositionDAO;
@@ -17,7 +18,9 @@ import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
 import databean.FundBean;
+import databean.Fund_Price_History_Bean;
 import databean.PositionBean;
+import databean.RecordBean;
 import databean.TransactionBean;
 import form.SellForm;
 
@@ -94,6 +97,11 @@ public class SellFundAction extends Action{
 		Float ownAmount = Float.parseFloat(position.getShares());
 		if(sellAmount > ownAmount) {
 			errors.add("You don't have enough shares to sell");
+			request.setAttribute("errors", errors);
+			return "sellFund.jsp";
+		}
+		if(sellAmount <= 0) {
+			errors.add("You cannot sell " + sellAmount + " shares");
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}

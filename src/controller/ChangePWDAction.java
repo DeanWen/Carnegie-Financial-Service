@@ -11,6 +11,7 @@ import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
 import form.ChangePWDForm;
+import form.LoginForm;
 import model.CustomerDAO;
 import model.Model;
 import model.MyDAOException;
@@ -46,6 +47,7 @@ public class ChangePWDAction extends Action{
 		List<String> errors = new ArrayList<String>();
 		errors.addAll(form.getValidationErrors());
 		String oldPWD = form.getOldPWD();
+		String newPWD = form.getNewPWD();
 		String cfmPWD = form.getCfmPWD();
 		
 		if(!customer.getPassword().equals(oldPWD)) {

@@ -20,7 +20,6 @@ public class CustomerBean implements Serializable {
 	private String city;
 	private String state;
 	private int zip;
-	// NOOOOOO this should be Integer
 	private float cash;
 
 	public int getCustomer_id() {
@@ -102,11 +101,11 @@ public class CustomerBean implements Serializable {
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
-	// NOOOOOO this should be Integer
+
 	public float getCash() {
 		return cash;
 	}
-	// NOOOOOO this should be Integer
+
 	public void setCash(float cash) {
 		this.cash = cash;
 	}

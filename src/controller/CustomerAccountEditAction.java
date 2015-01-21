@@ -74,7 +74,7 @@ public class CustomerAccountEditAction extends Action{
 		customer.setCity(form.getCity());
 		customer.setState(form.getState());
 		customer.setZip(Integer.parseInt(form.getZip()));
-		
+		System.out.println("State:" + form.getState());
 		if(form.getAction().equals("Done")) {
 			System.out.println("Done");
 			try {
