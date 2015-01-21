@@ -2,13 +2,14 @@
 
 <jsp:include page="error-list.jsp" />
 
+
 <p>
-<form action="register.do" method="post">
+<form action="createEmployeeAccount.do" method="post">
 	<input type="hidden" name="redirect" value="${redirect}" />
 	<table>
 		<tr>
 			<td>Username:</td>
-			<td><input type="text" name="userid" value="${form.userid}" /></td>
+			<td><input type="text" name="userid" value="${form.username}" /></td>
 		</tr>
 		<tr>
 			<td>First Name:</td>
@@ -30,6 +31,5 @@
 	</table>
 </form>
 </p>
-
 <jsp:include page="template-bottom.jsp" />
 

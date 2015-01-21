@@ -28,7 +28,7 @@ public class Controller extends HttpServlet {
 	 */
 	public void init() throws ServletException {
 		Model model = new Model(getServletConfig());
-		Action.add(new RegisterAction(model));
+		Action.add(new CreateEmployeeAccountAction(model));
 		Action.add(new LoginAction(model));
 		Action.add(new CustomerAccountEditAction(model));
 		Action.add(new CustomerAccountViewAction(model));

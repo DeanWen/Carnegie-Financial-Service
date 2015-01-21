@@ -45,9 +45,7 @@
                         <form role="form">
                             <fieldset>
                                 <div class="form-group">
-
-                                    <input class="form-control" placeholder="ID" name="userid" type="text" value = "${form.getUserid()}" autofocus>
-
+                                    <input class="form-control" placeholder="ID" name="userid" type="useid" value = "${form.getUserid()}" autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
@@ -59,7 +57,6 @@
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input class="btn btn-lg btn-success btn-block" id = "Login" type = "submit" name = "action" value = "Login"/>
-                                <input class="btn btn-lg btn-success btn-block" id = "LoginE" type = "submit" name = "action" value = "Login as Employee"/>
                                 <br/>
                                 <c:forEach var="error" items="${errors}">
 								<div class="alert alert-danger">

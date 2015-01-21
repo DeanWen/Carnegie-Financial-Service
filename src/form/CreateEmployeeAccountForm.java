@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.mybeans.form.FormBean;
 
-public class RegisterForm extends FormBean {
-	private String userid;
+public class CreateEmployeeAccountForm extends FormBean {
+	private String username;
 	private String password;
 	private String firstname;
 	private String lastname;
@@ -49,18 +49,18 @@ public class RegisterForm extends FormBean {
 		return action;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserid(String username) {
-		this.userid = username;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (userid == null || userid.length() == 0) {
+		if (username == null || username.length() == 0) {
 			errors.add("email is required");
 		}
 		if (password == null || password.length() == 0) {
