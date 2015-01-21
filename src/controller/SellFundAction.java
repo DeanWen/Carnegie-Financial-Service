@@ -79,7 +79,7 @@ public class SellFundAction extends Action{
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}
-		
+		// Not float
 		float sellAmount = Float.parseFloat(form.getCfmAmount());
 		
 		PositionBean position;
@@ -91,9 +91,15 @@ public class SellFundAction extends Action{
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}
+		// Shouldn't be float
 		Float ownAmount = Float.parseFloat(position.getShares());
 		if(sellAmount > ownAmount) {
 			errors.add("You don't have enough shares to sell");
+			request.setAttribute("errors", errors);
+			return "sellFund.jsp";
+		}
+		if(sellAmount <= 0) {
+			errors.add("You cannot sell " + sellAmount + " shares");
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}

@@ -1,6 +1,7 @@
 /build/
 ##java class
 *.classpath
+.settings/
 
 ## generic files to ignore
 *~
