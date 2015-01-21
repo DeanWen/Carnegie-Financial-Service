@@ -8,13 +8,10 @@
 package controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import model.CustomerDAO;
-import model.EmployeeDAO;
 import model.Model;
 import model.MyDAOException;
 
@@ -22,17 +19,15 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
-import databean.EmployeeBean;
 import form.RegisterForm;
 
 public class RegisterAction extends Action {
 	private FormBeanFactory<RegisterForm> formBeanFactory = FormBeanFactory
 			.getInstance(RegisterForm.class);
 
-	private EmployeeDAO userDAO;
 	private CustomerDAO customerDAO;
 	public RegisterAction(Model model) {
-		userDAO = model.getEmployeeDAO();
+		model.getEmployeeDAO();
 		customerDAO = model.getCustomerDAO();
 	}
 
@@ -61,25 +56,6 @@ public class RegisterAction extends Action {
 			if (errors.size() != 0) {
 				return "register.jsp";
 			}
-
-			// Create the user bean
-//			EmployeeBean user = new EmployeeBean();
-//			if (userDAO.read(form.getUsername()) != null) {
-//				errors.add("User Exist");
-//				return "register.jsp";
-//			} else {
-//				user.setUsername(form.getUsername());
-//				user.setFirstname(form.getFirstname());
-//				user.setLastname(form.getLastname());
-//				user.setPassword(form.getPassword());
-//				userDAO.create(user);
-//
-//// 				Attach (this copy of) the user bean to the session
-////				HttpSession session = request.getSession(false);
-////				session.setAttribute("user", user);
-//				request.setAttribute("message", "Register Successfully!");
-//				return "success.jsp";
-//			}
 			
 			CustomerBean customer = new CustomerBean();
 			if(customerDAO.read(Integer.parseInt(form.getUserid())) != null) {
