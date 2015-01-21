@@ -18,13 +18,12 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Fund</th>
-                                            <th>Ticker</th>
-                                            <th>Shares</th>
-                                            <th>Price</th>
-                                            <th>Value</th>
-                                            <th></th>
+                                            <td><b>#</b></td>
+                                            <td><b>Fund</b></td>
+                                            <td><b>Ticker</b></td>
+                                            <td align="right"><b>Shares</b></td>
+                                            <td align="right"><b>Price</b></td>
+                                            <td align="right"><b>Value</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>
