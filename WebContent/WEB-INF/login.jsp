@@ -45,7 +45,7 @@
                         <form role="form">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="ID" name="userid" type="useid" value = "${form.getUserid()}" autofocus>
+                                    <input class="form-control" placeholder="ID" name="userid" type="text" value = "${form.getUserid()}" autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
