@@ -1,6 +1,5 @@
 /*
- * Homework 9 for 08600-Java J2EE Programming 
- * Author: Dian Wen (AndrewID: dwen) 
+ * Author: Qiyue Ma (AndrewID: qma) 
  * Date: Nov. 30th, 2014
  * Copyright(C) 2014 All rights reserved.  
  */
@@ -8,10 +7,12 @@
 package controller;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import model.CustomerDAO;
+import model.EmployeeDAO;
 import model.Model;
 import model.MyDAOException;
 
@@ -19,20 +20,20 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
-import form.RegisterForm;
+import databean.EmployeeBean;
+import form.CreateEmployeeAccountForm;
 
-public class RegisterAction extends Action {
-	private FormBeanFactory<RegisterForm> formBeanFactory = FormBeanFactory
-			.getInstance(RegisterForm.class);
+public class CreateEmployeeAccountAction extends Action {
+	private FormBeanFactory<CreateEmployeeAccountForm> formBeanFactory = FormBeanFactory
+			.getInstance(CreateEmployeeAccountForm.class);
 
-	private CustomerDAO customerDAO;
-	public RegisterAction(Model model) {
-		model.getEmployeeDAO();
-		customerDAO = model.getCustomerDAO();
+	private EmployeeDAO employeeDAO;
+	public CreateEmployeeAccountAction(Model model) {
+		employeeDAO = model.getEmployeeDAO();
 	}
 
 	public String getName() {
-		return "register.do";
+		return "createEmployeeAccount.do";
 	}
 
 	public String perform(HttpServletRequest request) {
@@ -41,32 +42,31 @@ public class RegisterAction extends Action {
 		request.setAttribute("errors", errors);
 
 		try {	
-			RegisterForm form = formBeanFactory.create(request);
+			CreateEmployeeAccountForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 
 			// If no params were passed, return with no errors so that the form
 			// will be
 			// presented (we assume for the first time).
 			if (!form.isPresent()) {
-				return "register.jsp";
+				return "createEmployeeAccount.jsp";
 			}
 
 			// Any validation errors?
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "register.jsp";
+				return "createEmployeeAccount.jsp";
 			}
 			
-			CustomerBean customer = new CustomerBean();
-			if(customerDAO.read(Integer.parseInt(form.getUserid())) != null) {
+			EmployeeBean employee = new EmployeeBean();
+			if(employeeDAO.read(form.getUsername()) != null) {
 				errors.add("User Exist");
-				return "register.jsp";
+				return "createEmployeeAccount.jsp";
 			} else {
-				customer.setCustomer_id(Integer.parseInt(form.getUserid()));
-				customer.setFirstname(form.getFirstname());
-				customer.setLastname(form.getLastname());
-				customer.setPassword(form.getPassword());
-				customerDAO.create(customer);
+				employee.setFirstname(form.getFirstname());
+				employee.setLastname(form.getLastname());
+				employee.setPassword(form.getPassword());
+				employeeDAO.create(employee);
 				request.setAttribute("message", "Register Successfully!");
 				return "success.jsp";
 			}

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.CustomerDAO;
+import model.EmployeeDAO;
 import model.Model;
 import model.MyDAOException;
 
@@ -20,6 +21,7 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
+import databean.EmployeeBean;
 import form.LoginForm;
 
 
@@ -28,9 +30,11 @@ public class LoginAction extends Action{
 			.getInstance(LoginForm.class);
 
 	private CustomerDAO customerDAO;
-
+	private EmployeeDAO employeeDAO;
+	
 	public LoginAction(Model model) {
 		customerDAO = model.getCustomerDAO();
+		employeeDAO = model.getEmployeeDAO();
 	}
 	
 	public String getName() {
@@ -63,27 +67,49 @@ public class LoginAction extends Action{
 			request.setAttribute("errors", errors);
 			return "login.jsp";
 		}
-		CustomerBean customer = null;
-		try {
-			customer = customerDAO.read(Integer.parseInt(form.getUserid()));
-			if (customer == null) {
-				errors = new ArrayList<String>();
-				errors.add("This account does not exists");
-				
-				request.setAttribute("errors", errors);
-				return "login.jsp";
-			} else if(!customer.getPassword().equals(form.getPassword())){
-				errors.add("Password is wrong");
-				request.setAttribute("errors", errors);
-				return "login.jsp";
-			}
-		} catch (MyDAOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 
 		if (form.getAction().equals("Login")) {
+			CustomerBean customer = null;
+			try {
+				customer = customerDAO.read(Integer.parseInt(form.getUserid()));
+				if (customer == null) {
+					errors = new ArrayList<String>();
+					errors.add("This account does not exists");
+					request.setAttribute("errors", errors);
+					return "login.jsp";
+				} else if(!customer.getPassword().equals(form.getPassword())){
+					errors.add("Password is wrong");
+					request.setAttribute("errors", errors);
+					return "login.jsp";
+				}
+			} catch (MyDAOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			session.setAttribute("customer", customer);
+			return "customerAccountView.do";
+		}
+		if (form.getAction().equals("Login as Employee")) {
+			EmployeeBean employee = null;
+			try {
+				employee = employeeDAO.read(form.getUserid());
+				if (employee == null) {
+					errors = new ArrayList<String>();
+					errors.add("This account does not exists");
+					request.setAttribute("errors", errors);
+					return "login.jsp";
+				} else if(!employee.getPassword().equals(form.getPassword())){
+					errors.add("Password is wrong");
+					request.setAttribute("errors", errors);
+					return "login.jsp";
+				}
+			} catch (MyDAOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			session.setAttribute("employee", employee);
 			return "customerAccountView.do";
 		}
 		return "login.jsp";

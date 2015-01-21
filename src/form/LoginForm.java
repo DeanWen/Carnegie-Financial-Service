@@ -49,7 +49,7 @@ public class LoginForm extends FormBean {
 		if (errors.size() > 0) {
 			return errors;
 		}
-		if (!action.equals("Login")) {
+		if (!(action.equals("Login")||action.equals("Login as Employee"))) {
 			errors.add("Invalid button");
 		}
 
