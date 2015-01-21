@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Carnegie Financial Service</a>
+                <a class="navbar-brand" href="customerAccountView.do">Carnegie Financial Service</a>
             </div>
             <!-- /.navbar-header -->
 
