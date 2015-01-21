@@ -18,13 +18,13 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Fund</th>
-                                            <th>Ticker</th>
-                                            <th>Shares</th>
-                                            <th>Price</th>
-                                            <th>Value</th>
-                                            <th></th>
+                                            <td><b>#</b></td>
+                                            <td><b>Fund</b></td>
+                                            <td><b>Ticker</b></td>
+                                            <td align="right"><b>Shares</b></td>
+                                            <td align="right"><b>Price</b></td>
+                                            <td align="right"><b>Value</b></td>
+                                            <td></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,12 +68,12 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Date</th>
-                                            <th>Type</th>
-                                            <th>Shares</th>
-                                            <th>Price</th>
-                                            <th>Dollar Amount</th>
+                                            <td><b>Name</b></td>
+                                            <td><b>Date</b></td>
+                                            <td><b>Type</b></td>
+                                            <td align="right"><b>Shares</b></td>
+                                            <td align="right"><b>Price</b></td>
+                                            <td align="right"><b>Dollar&nbsp;Amount</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>
