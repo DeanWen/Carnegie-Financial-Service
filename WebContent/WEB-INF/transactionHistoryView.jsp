@@ -33,9 +33,9 @@
                                             <td>${record.getFundID()}</td>
                                             <td>${record.getFundName()}</td>
                                             <td>${record.getFundSymbol()}</td>
-                                            <td>${record.getShares()}</td>
-                                            <td>${record.getPrice()}</td>
-                                            <td>${record.getValue()}</td>
+                                            <td align="right">${record.getShares()}</td>
+                                            <td align="right">${record.getPrice()}</td>
+                                            <td align="right">${record.getValue()}</td>
                                             <td>
                                             <form action="transactionHistoryView.do" method="POST">
                                             <input type="hidden" name="id" value="${record.getFundID()}"/>
@@ -82,9 +82,9 @@
                                             <td>${history.getFundName()}</td>
                                             <td>${history.getDate()}</td>
                                             <td>${history.getType()}</td>
-                                            <td>${history.getShares()}</td>
-                                            <td>${history.getPrice()}</td>
-                                            <td>${history.getAmount()}</td>
+                                            <td align="right">${history.getShares()}</td>
+                                            <td align="right">${history.getPrice()}</td>
+                                            <td align="right">${history.getAmount()}</td>
                                         </tr>
 										</c:forEach>
                                     </tbody>
