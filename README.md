@@ -34,7 +34,7 @@ File Structure:
 ### Database
   if you want to access databases, please type follow command in your terminal.Then you will be able to remote AWS RDS MySQL and execute query 
   <pre>
-  mysql -h my-db-instance.cvkh8esmpvzk.us-west-2.rds.amazonaws.com -u root -p 12345678
+  mysql -h my-east-db-instance.cq6vzlml6j4g.us-east-1.rds.amazonaws.com:3306 -u root -p 12345678
   </pre>
   
   Please note:  
@@ -62,4 +62,4 @@ Let's Ace the Task!
 
 Dean W.  
 Team 14 Infinity  
-Last updated: 1/18/2015
+Last updated: 1/21/2015

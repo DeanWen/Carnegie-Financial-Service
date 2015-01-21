@@ -15,7 +15,7 @@
     </init-param>
     <init-param>
       <param-name>jdbcURL</param-name>
-      <param-value>   jdbc:mysql://my-db-instance.cvkh8esmpvzk.us-west-2.rds.amazonaws.com:3306/applicationDB  </param-value>
+      <param-value>   jdbc:mysql://my-east-db-instance.cq6vzlml6j4g.us-east-1.rds.amazonaws.com:3306/applicationDB  </param-value>
     </init-param>
     <init-param>
       <param-name>db_username</param-name>
