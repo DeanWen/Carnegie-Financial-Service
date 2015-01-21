@@ -101,7 +101,7 @@ public class TransactionHistoryViewAction extends Action{
 			item.setFundName(fund.getName());
 			item.setFundSymbol(fund.getSymbol());
 			item.setPrice(history.getPrice());
-			item.setValue(history.getPrice().multiply(positions.get(i).getShares()));
+			item.setValue(history.getPrice().multiply(positions.get(i).getShares()).setScale(2));
 			records.add(item);
 		}
 		

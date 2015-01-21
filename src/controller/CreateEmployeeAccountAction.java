@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.CustomerDAO;
 import model.EmployeeDAO;
 import model.Model;
 import model.MyDAOException;
@@ -19,7 +18,6 @@ import model.MyDAOException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databean.CustomerBean;
 import databean.EmployeeBean;
 import form.CreateEmployeeAccountForm;
 
