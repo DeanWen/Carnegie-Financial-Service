@@ -286,6 +286,9 @@
                                     <a href="changePWD.do"> Change Password </a>
                                 </li>
                                 <li>
+                                	<a href="requestCheck.do">Request Check</a>
+                                </li>
+                                <li>
                                 	<a href="buyFund.do"> Buy Fund </a>
                                 </li>
                                 <li>
