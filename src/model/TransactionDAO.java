@@ -109,8 +109,8 @@ public class TransactionDAO {
 			pstmt.setBigDecimal(4, item.getShares());
 			pstmt.setString(5, item.getTransaction_type());
 			pstmt.setBigDecimal(6, item.getAmount());
-			pstmt.setInt(7, item.getTransaction_id());
-			pstmt.setBoolean(8, item.getStatus());
+			pstmt.setBoolean(7, item.getStatus());
+			pstmt.setInt(8, item.getTransaction_id());
 			
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
