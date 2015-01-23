@@ -177,6 +177,40 @@ public class FundDAO {
 		}
 	}
 	
+	public ArrayList<FundBean> readAll() throws MyDAOException {
+		Connection con = null;
+		ArrayList<FundBean> funds = new ArrayList<FundBean>();
+		try {
+			con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
+					+ tableName);
+			ResultSet rs = pstmt.executeQuery();
+
+			FundBean item;
+			while(rs.next()) {
+				item = new FundBean();
+				item.setFund_id(rs.getInt("fund_id"));
+				item.setName(rs.getString("name"));
+				item.setSymbol(rs.getString("symbol"));
+				funds.add(item);
+			}
+
+			rs.close();
+			pstmt.close();
+			releaseConnection(con);
+			return funds;
+		} catch (SQLException e) {
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e2) {
+				/* ignore */
+			}
+			throw new MyDAOException(e);
+		}
+	}
+	
 	public FundBean readByName(String fundName) throws MyDAOException {
 		Connection con = null;
 		try {
