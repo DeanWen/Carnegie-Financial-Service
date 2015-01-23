@@ -58,8 +58,8 @@ public class TransactionDAO {
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
 							+ tableName
-							+ "(transaction_id, customer_id, fund_id, execute_date, shares, transaction_type, amount) "
-							+ "VALUES (?, ?, ?, ?, ?, ?, ?)");
+							+ "(transaction_id, customer_id, fund_id, execute_date, shares, transaction_type, amount, status) "
+							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 			pstmt.setInt(1, item.getTransaction_id());
 			pstmt.setInt(2, item.getCustomer_id());
 			pstmt.setInt(3, item.getFund_id());
@@ -67,7 +67,7 @@ public class TransactionDAO {
 			pstmt.setBigDecimal(5, item.getShares());
 			pstmt.setString(6, item.getTransaction_type());
 			pstmt.setBigDecimal(7, item.getAmount());
-
+			pstmt.setBoolean(8, item.getStatus());
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
@@ -101,6 +101,7 @@ public class TransactionDAO {
 					  + ", shares = ? "
 					  + ", transaction_type = ? "
 					  + ", amount = ? "
+					  + ", status = ? "
 				    + "where transaction_id = ?");
 			pstmt.setInt(1, item.getCustomer_id());
 			pstmt.setInt(2, item.getFund_id());
@@ -109,6 +110,7 @@ public class TransactionDAO {
 			pstmt.setString(5, item.getTransaction_type());
 			pstmt.setBigDecimal(6, item.getAmount());
 			pstmt.setInt(7, item.getTransaction_id());
+			pstmt.setBoolean(8, item.getStatus());
 			
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
@@ -178,6 +180,7 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
+				item.setStatus(rs.getBoolean("status"));
 			}
 			con.commit();
 			rs.close();
@@ -218,6 +221,7 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
+				item.setStatus(rs.getBoolean("status"));
 			}
 			con.commit();
 			rs.close();
@@ -258,6 +262,7 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
+				item.setStatus(rs.getBoolean("status"));
 				transactions.add(item);
 			}
 			con.commit();
