@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import model.Model;
 import databean.CustomerBean;
+import databean.EmployeeBean;
 
 /**
  * Servlet implementation class Controller
@@ -67,8 +68,9 @@ public class Controller extends HttpServlet {
 		String servletPath = request.getServletPath();
 		String action = getActionName(servletPath);
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+		EmployeeBean employee = (EmployeeBean) session.getAttribute("employee");
 		
-		if (customer == null) {
+		if (customer == null && employee == null) {
 			// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do", request);
 		}
