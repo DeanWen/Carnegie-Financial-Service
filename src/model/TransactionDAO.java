@@ -78,7 +78,8 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -122,7 +123,8 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 
@@ -149,7 +151,8 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 
@@ -190,7 +193,8 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -231,7 +235,8 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -273,7 +278,8 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */

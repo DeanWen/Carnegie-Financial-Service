@@ -54,6 +54,7 @@ public class EmployeeDAO {
 
 		try {
 			con = getConnection();
+			//transaction begin
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO "
 					+ tableName + " (username, firstname, "
@@ -67,13 +68,16 @@ public class EmployeeDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
+			
+			//commit transaction
 			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -86,6 +90,7 @@ public class EmployeeDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			//transaction begin
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE username = ?");
@@ -102,7 +107,7 @@ public class EmployeeDAO {
 				user.setLastname(rs.getString("lastname"));
 				user.setPassword(rs.getString("password"));
 			}
-
+			//commit transaction
 			con.commit();
 			rs.close();
 			pstmt.close();
@@ -111,7 +116,8 @@ public class EmployeeDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -126,10 +132,10 @@ public class EmployeeDAO {
 		String sql = "SELECT * FROM " + tableName;
 		try {
 			con = getConnection();
+			//transaction begin
 			con.setAutoCommit(false);
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			con.commit();
 			EmployeeBean user;
 			while (rs.next()) {
 				user = new EmployeeBean();
@@ -139,7 +145,9 @@ public class EmployeeDAO {
 				user.setPassword(rs.getString("password"));
 				users.add(user);
 			}
-
+			
+			//commit transaction
+			con.commit();
 			rs.close();
 			stmt.close();
 			releaseConnection(con);
@@ -147,7 +155,8 @@ public class EmployeeDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -162,6 +171,7 @@ public class EmployeeDAO {
 				+ " set password = ? where userID = ?";
 		try {
 			con = getConnection();
+			//transaction begin
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getPassword());
@@ -170,16 +180,18 @@ public class EmployeeDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
+			//commit transaction
 			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
-
+				/* ignore */
 			}
 			throw new MyDAOException(e);
 		}

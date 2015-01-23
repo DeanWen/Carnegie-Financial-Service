@@ -55,6 +55,7 @@ public class Fund_Price_History_DAO {
 
 		try {
 			con = getConnection();
+			//transaction begin
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
@@ -69,13 +70,15 @@ public class Fund_Price_History_DAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
+			//commit to db
 			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -89,6 +92,7 @@ public class Fund_Price_History_DAO {
 
 		try {
 			con = getConnection();
+			//transaction begin
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("UPDATE"
 					+ tableName 
@@ -103,13 +107,15 @@ public class Fund_Price_History_DAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
+			//commit transaction
 			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 
@@ -122,6 +128,7 @@ public class Fund_Price_History_DAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			//transaction start
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM "
 					+ tableName + " WHERE Fund_fund_id = ? and price_date = ?");
@@ -131,13 +138,15 @@ public class Fund_Price_History_DAO {
 			if (count != 1) {
 				throw new SQLException("Delete updated" + count + "rows");
 			}
+			//commit to db
 			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 
@@ -150,13 +159,13 @@ public class Fund_Price_History_DAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			//transaction begin
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE Fund_fund_id = ? and price_date = ?");
 			pstmt.setInt(1, fund_id);
 			pstmt.setDate(2, price_date);
 			ResultSet rs = pstmt.executeQuery();
-			con.commit();
 			
 			Fund_Price_History_Bean item;
 			if (!rs.next()) {
@@ -168,6 +177,8 @@ public class Fund_Price_History_DAO {
 				item.setPrice(rs.getBigDecimal("price"));
 			}
 			
+			//commit transaction 
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -175,7 +186,8 @@ public class Fund_Price_History_DAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -188,13 +200,13 @@ public class Fund_Price_History_DAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			//transaction begin
 			con.setAutoCommit(false);
 			
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE price_date = (SELECT MAX(price_date) from " + tableName + " WHERE Fund_fund_id = ?)");
 			pstmt.setInt(1, fund_id);
 			ResultSet rs = pstmt.executeQuery();
-			con.commit();
 			Fund_Price_History_Bean item;
 			if (!rs.next()) {
 				item = null;
@@ -204,7 +216,9 @@ public class Fund_Price_History_DAO {
 				item.setPrice_date(rs.getDate("price_date"));
 				item.setPrice(rs.getBigDecimal("price"));
 			}
-
+			
+			//commit transaction 
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -212,7 +226,8 @@ public class Fund_Price_History_DAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
