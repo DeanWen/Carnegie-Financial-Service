@@ -110,7 +110,7 @@ public class LoginAction extends Action{
 				e1.printStackTrace();
 			}
 			session.setAttribute("employee", employee);
-			return "createFund.do";
+			return "transition.do";
 		}
 		return "login.jsp";
 	}

@@ -273,7 +273,7 @@
                             <a href="transition.do"><i class="fa fa-paper-plane fa-fw"></i> Transition Day</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-key fa-fw"></i> Change Password</a>
+                            <a href="ChangeEmpPWD.do"><i class="fa fa-key fa-fw"></i> Change Password</a>
                         </li>
                         
                         <li>

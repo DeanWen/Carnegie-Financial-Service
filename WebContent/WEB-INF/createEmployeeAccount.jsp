@@ -1,4 +1,4 @@
-<jsp:include page="template-top.jsp" />
+<jsp:include page="admin-top.jsp" />
 
 <jsp:include page="error-list.jsp" />
 
@@ -31,5 +31,5 @@
 	</table>
 </form>
 </p>
-<jsp:include page="template-bottom.jsp" />
+<jsp:include page="admin-bottom.jsp" />
 

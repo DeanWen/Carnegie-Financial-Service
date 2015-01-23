@@ -53,7 +53,7 @@ public class ChangeEmpPWDAction extends Action{
 		}
 		if (errors.size() > 0) {
 			request.setAttribute("errors", errors);
-			return "changePWD.jsp";
+			return "changeEmpPWD.jsp";
 		}
 		
 		employee.setPassword(cfmPWD);
@@ -64,10 +64,10 @@ public class ChangeEmpPWDAction extends Action{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			request.setAttribute("check", check);
-			return "changePWD.jsp";
+			return "changeEmpPWD.jsp";
 		}
 		check = true;
 		request.setAttribute("check", check);
-		return "changePWD.jsp";
+		return "changeEmpPWD.jsp";
 	}
 }
