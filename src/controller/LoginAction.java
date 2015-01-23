@@ -110,7 +110,7 @@ public class LoginAction extends Action{
 				e1.printStackTrace();
 			}
 			session.setAttribute("employee", employee);
-			return "customerAccountView.do";
+			return "createFund.do";
 		}
 		return "login.jsp";
 	}

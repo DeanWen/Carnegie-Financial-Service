@@ -25,13 +25,13 @@
                                         <tr class="odd gradeX">
                                             <th> Fund Name</th>
                                             <td class="center">
-                                                <input class="text" placeholder="Name" name="fundName" type="text"/>
+                                                <input class="text" placeholder="Name" name="fundName" type="text" value = "${form.getFundName()}"/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <th> Fund Ticker</th>
                                             <td class="center">
-                                                <input class="text" placeholder="Ticker" name="fundTicker" type="text"/>
+                                                <input class="text" placeholder="Ticker" name="fundTicker" type="text" value = "${form.getFundTicker()}"/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
@@ -44,6 +44,11 @@
                                 </table>
                             </div>
                             <!-- dataTable_wrapper -->
+                            <c:forEach var="error" items="${errors}">
+								<div class="alert alert-danger">
+                                ${error}.
+                            	</div> 
+							</c:forEach>
                         </div>
                         <!-- /.panel-body -->
                     </div>

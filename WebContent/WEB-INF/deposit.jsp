@@ -25,13 +25,13 @@
                                         <tr class="odd gradeX">
                                             <th> Customer ID</th>
                                             <td class="center">
-                                                <input class="text" placeholder="Customer ID" name="customerId" type="text"/>
+                                                <input class="text" placeholder="User ID" name="userid" type="text" value = "${form.getUserid()}"/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <th> Deposit Amount</th>
                                             <td class="center">
-                                                <input class="text" placeholder="Deposit Amount" name="depositAmount" type="text"/>
+                                                <input class="text" placeholder="Deposit Amount" name="depositAmount" type="text" value = "${form.getDepositAmount()}"/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
@@ -44,6 +44,11 @@
                                 </table>
                             </div>
                             <!-- dataTable_wrapper -->
+                                <c:forEach var="error" items="${errors}">
+								<div class="alert alert-danger">
+                                ${error}.
+                            	</div> 
+							</c:forEach>
                         </div>
                         <!-- /.panel-body -->
                     </div>

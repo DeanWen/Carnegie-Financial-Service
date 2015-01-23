@@ -53,10 +53,10 @@ public class CreateFundAction extends Action {
 			
 			FundBean fund = new FundBean();
 			if(fundDAO.readByName(form.getFundName()) != null) {
-				errors.add("Fund Exist");
+				errors.add("Fund Exists");
 				return "createFund.jsp";
 			} else {
-				fund.setFund_id(0);// Auto_increase in database?
+				// fund_id need to be AUTO_INCREMENT
 				fund.setName(form.getFundName());
 				fund.setSymbol(form.getFundTicker());
 				fundDAO.create(fund);

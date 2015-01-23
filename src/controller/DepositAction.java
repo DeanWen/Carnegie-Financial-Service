@@ -69,13 +69,16 @@ public class DepositAction extends Action{
 		        int currentCash = customerDAO.read(Integer.parseInt(form.getUserid())).getCash().intValue();
 		        int addAmount = Integer.parseInt(form.getDepositAmount());
 		        int newCash = currentCash + addAmount;
-		        customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
+		        // customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
+		        customer.setCash(new BigDecimal(newCash));
+		        customerDAO.update(customer);
+		        request.setAttribute("message", "Deposit Successfully!");
+		        return "success.jsp";
 		        
 			} catch (MyDAOException e1) {
 				e1.printStackTrace();
 			}
 	        
-	        // If redirectTo is null, redirect to the "todolist" action
 			return "deposit.do";
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
