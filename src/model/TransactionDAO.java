@@ -245,15 +245,14 @@ public class TransactionDAO {
 		}
 	}
 	
-	public ArrayList<TransactionBean> getTransactions(int customerID, int fundID) throws MyDAOException {
+	public ArrayList<TransactionBean> getTransactions(int customerID) throws MyDAOException {
 		Connection con = null;
 		try {
 			con = getConnection();
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
-					+ tableName + " WHERE customer_id = ? AND fund_id = ? ORDER BY execute_date ASC");
+					+ tableName + " WHERE customer_id = ? ORDER BY execute_date ASC");
 			pstmt.setInt(1, customerID);
-			pstmt.setInt(2, fundID);
 			ResultSet rs = pstmt.executeQuery();
 			
 			ArrayList<TransactionBean> transactions = new ArrayList<TransactionBean>();
