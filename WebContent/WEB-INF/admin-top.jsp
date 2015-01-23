@@ -270,26 +270,32 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="transition.do"><i class="fa fa-paper-plane fa-fw"></i> Transition Day</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-key fa-fw"></i> Change Password</a>
                         </li>
                         
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i> Create Account <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Create Customer</a>
+                                    <a href="#">Customer Account</a>
                                 </li>
                                 <li>
-                                	<a href="createEmployeeAccount.do"> Create Employee </a>
+                                	<a href="createEmployeeAccount.do"> Employee Account</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="deposit.do"><i class="fa fa-sign-out fa-fw"></i> Deposit Check</a>
+                            <a href="createFund.do"><i class="fa fa-line-chart fa-fw"></i> Create Fund</a>
                         </li>
                         <li>
-                            <a href="transition.do"><i class="fa fa-sign-out fa-fw"></i> Transition Day</a>
+                            <a href="deposit.do"><i class="fa fa-money fa-fw"></i> Deposit Check</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pencil-square-o fa-fw"></i> Manage Customer Account</a>
                         </li>
                         <li>
                             <a href="login.do"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>

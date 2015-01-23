@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="template-top.jsp" />
+<jsp:include page="admin-top.jsp" />
 
         <!-- Page Content -->
         <div id="page-wrapper">
@@ -60,4 +60,4 @@
     </div>
     <!-- /#wrapper -->
 
-<jsp:include page="template-bottom.jsp" />
+<jsp:include page="admin-bottom.jsp" />

@@ -1,5 +1,5 @@
-<jsp:include page="template-top.jsp" />
+<jsp:include page="admin-top.jsp" />
 
-<p style="font-size: medium">${message}</p>
+<p style="font-size: medium">Fund created successfully.</p>
 
-<jsp:include page="template-bottom.jsp" />
+<jsp:include page="admin-bottom.jsp" />
