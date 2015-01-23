@@ -10,14 +10,14 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databean.EmployeeBean;
-import form.ChangePWDForm;
+import form.ChangeEmpPWDForm;
 import model.EmployeeDAO;
 import model.Model;
 import model.MyDAOException;
 
 public class ChangeEmpPWDAction extends Action{
-	private FormBeanFactory<ChangePWDForm> formBeanFactory = FormBeanFactory
-			.getInstance(ChangePWDForm.class);
+	private FormBeanFactory<ChangeEmpPWDForm> formBeanFactory = FormBeanFactory
+			.getInstance(ChangeEmpPWDForm.class);
 	private EmployeeDAO employeeDAO;
 	
 	public ChangeEmpPWDAction(Model model) {
@@ -33,7 +33,7 @@ public class ChangeEmpPWDAction extends Action{
 		
 		EmployeeBean employee = (EmployeeBean) session.getAttribute("employee");
 		
-		ChangePWDForm form = null;
+		ChangeEmpPWDForm form = null;
 		try{
 			form = formBeanFactory.create(request);
 		} catch (FormBeanException e1) {

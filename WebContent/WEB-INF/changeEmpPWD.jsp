@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Change Password</h1>
+                        <h1 class="page-header">Change Employee Password</h1>
                         <div class="panel panel-default">
 
                         <!-- /.panel-heading -->
@@ -35,7 +35,7 @@
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center" colspan="2">
-                                                <center><input class="btn btn-lg btn-success btn-block" id = "changePWD" type = "submit" name = "action" value = "Done"/></center>
+                                                <center><input class="btn btn-lg btn-success btn-block" id = "changeEmpPWD" type = "submit" name = "action" value = "Done"/></center>
                                             </td>
                                         </tr>
                                     </form>
