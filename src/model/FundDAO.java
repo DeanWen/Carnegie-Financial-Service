@@ -54,6 +54,7 @@ public class FundDAO {
 
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
 							+ tableName
@@ -67,7 +68,7 @@ public class FundDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -87,6 +88,7 @@ public class FundDAO {
 
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("UPDATE"
 					+ tableName 
 					+ "set name = ? "
@@ -101,7 +103,7 @@ public class FundDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -120,6 +122,7 @@ public class FundDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM "
 					+ tableName + " WHERE fund_id = ? ");
 			pstmt.setInt(1, fund_id);
@@ -128,6 +131,7 @@ public class FundDAO {
 			if (count != 1) {
 				throw new SQLException("Delete updated" + count + "rows");
 			}
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -146,11 +150,12 @@ public class FundDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE fund_id = ? ");
 			pstmt.setInt(1, fund_id);
 			ResultSet rs = pstmt.executeQuery();
-
+			con.commit();
 			FundBean item;
 			if (!rs.next()) {
 				item = null;
@@ -182,10 +187,11 @@ public class FundDAO {
 		ArrayList<FundBean> funds = new ArrayList<FundBean>();
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName);
 			ResultSet rs = pstmt.executeQuery();
-
+			con.commit();
 			FundBean item;
 			while(rs.next()) {
 				item = new FundBean();
@@ -215,11 +221,12 @@ public class FundDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE name = ? ");
 			pstmt.setString(1, fundName);
 			ResultSet rs = pstmt.executeQuery();
-
+			con.commit();
 			FundBean item;
 			if (!rs.next()) {
 				item = null;

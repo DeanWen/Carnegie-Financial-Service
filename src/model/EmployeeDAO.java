@@ -54,6 +54,7 @@ public class EmployeeDAO {
 
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO "
 					+ tableName + " (username, firstname, "
 					+ "lastname, password) VALUES (?,?,?,?)");
@@ -66,7 +67,7 @@ public class EmployeeDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -85,7 +86,7 @@ public class EmployeeDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
-
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE username = ?");
 			pstmt.setString(1, username);
@@ -102,6 +103,7 @@ public class EmployeeDAO {
 				user.setPassword(rs.getString("password"));
 			}
 
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -124,10 +126,10 @@ public class EmployeeDAO {
 		String sql = "SELECT * FROM " + tableName;
 		try {
 			con = getConnection();
-
+			con.setAutoCommit(false);
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-
+			con.commit();
 			EmployeeBean user;
 			while (rs.next()) {
 				user = new EmployeeBean();
@@ -160,6 +162,7 @@ public class EmployeeDAO {
 				+ " set password = ? where userID = ?";
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getPassword());
 			pstmt.setString(2, user.getUsername());
@@ -167,7 +170,7 @@ public class EmployeeDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {

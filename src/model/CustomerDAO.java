@@ -53,6 +53,7 @@ public class CustomerDAO {
 
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
 							+ tableName
@@ -74,7 +75,7 @@ public class CustomerDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -94,6 +95,7 @@ public class CustomerDAO {
 
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("UPDATE "
 					+ tableName 
 					+ " set username = ? "
@@ -122,7 +124,7 @@ public class CustomerDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -141,6 +143,7 @@ public class CustomerDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM "
 					+ tableName + " WHERE customer_id = ?");
 			pstmt.setInt(1, customer_id);
@@ -148,6 +151,7 @@ public class CustomerDAO {
 			if (count != 1) {
 				throw new SQLException("Delete updated" + count + "rows");
 			}
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -166,11 +170,13 @@ public class CustomerDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE customer_id = ?");
 			pstmt.setInt(1, customer_id);
 			ResultSet rs = pstmt.executeQuery();
-
+			con.commit();
+			
 			CustomerBean customer;
 			if (!rs.next()) {
 				customer = null;
@@ -189,7 +195,7 @@ public class CustomerDAO {
 				customer.setZip(rs.getInt("zip"));
 				customer.setCash(rs.getBigDecimal("cash"));
 			}
-
+			
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);

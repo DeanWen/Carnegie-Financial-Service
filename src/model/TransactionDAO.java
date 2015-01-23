@@ -54,6 +54,7 @@ public class TransactionDAO {
 
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
 							+ tableName
@@ -71,7 +72,7 @@ public class TransactionDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -91,6 +92,7 @@ public class TransactionDAO {
 
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("UPDATE"
 					+ tableName 
 					+ "set customer_id = ? "
@@ -112,7 +114,7 @@ public class TransactionDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -131,6 +133,7 @@ public class TransactionDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM "
 					+ tableName + " WHERE transaction_id = ?");
 			pstmt.setInt(1, transaction_id);
@@ -138,6 +141,7 @@ public class TransactionDAO {
 			if (count != 1) {
 				throw new SQLException("Delete updated" + count + "rows");
 			}
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
@@ -156,6 +160,7 @@ public class TransactionDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE execute_date = (SELECT MAX(execute_date) FROM " + tableName + " WHERE customer_id = ?)");
 			pstmt.setInt(1, customer_id);
@@ -174,7 +179,7 @@ public class TransactionDAO {
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
 			}
-
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -195,6 +200,7 @@ public class TransactionDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE transaction_id = ?");
 			pstmt.setInt(1, transaction_id);
@@ -213,7 +219,7 @@ public class TransactionDAO {
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
 			}
-			
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -234,6 +240,7 @@ public class TransactionDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE customer_id = ? AND fund_id = ? ORDER BY execute_date ASC");
 			pstmt.setInt(1, customerID);
@@ -253,7 +260,7 @@ public class TransactionDAO {
 				item.setAmount(rs.getBigDecimal("amount"));
 				transactions.add(item);
 			}
-			
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
