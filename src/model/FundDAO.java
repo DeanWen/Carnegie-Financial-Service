@@ -74,7 +74,8 @@ public class FundDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -109,7 +110,8 @@ public class FundDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 
@@ -137,7 +139,8 @@ public class FundDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 
@@ -150,12 +153,12 @@ public class FundDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			//transaction start
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE fund_id = ? ");
 			pstmt.setInt(1, fund_id);
 			ResultSet rs = pstmt.executeQuery();
-			con.commit();
 			FundBean item;
 			if (!rs.next()) {
 				item = null;
@@ -165,7 +168,8 @@ public class FundDAO {
 				item.setName(rs.getString("name"));
 				item.setSymbol(rs.getString("symbol"));
 			}
-
+			//commit to db
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -173,7 +177,8 @@ public class FundDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -187,11 +192,11 @@ public class FundDAO {
 		ArrayList<FundBean> funds = new ArrayList<FundBean>();
 		try {
 			con = getConnection();
+			//transaction start
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName);
 			ResultSet rs = pstmt.executeQuery();
-			con.commit();
 			FundBean item;
 			while(rs.next()) {
 				item = new FundBean();
@@ -200,7 +205,8 @@ public class FundDAO {
 				item.setSymbol(rs.getString("symbol"));
 				funds.add(item);
 			}
-
+			//commit to db
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -208,7 +214,8 @@ public class FundDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -221,12 +228,12 @@ public class FundDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			//transaction start
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE name = ? ");
 			pstmt.setString(1, fundName);
 			ResultSet rs = pstmt.executeQuery();
-			con.commit();
 			FundBean item;
 			if (!rs.next()) {
 				item = null;
@@ -236,7 +243,8 @@ public class FundDAO {
 				item.setName(rs.getString("name"));
 				item.setSymbol(rs.getString("symbol"));
 			}
-
+			//commit transaction to db
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -244,7 +252,8 @@ public class FundDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */

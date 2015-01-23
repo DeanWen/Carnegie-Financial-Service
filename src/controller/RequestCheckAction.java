@@ -81,12 +81,12 @@ public class RequestCheckAction extends Action {
 			}
 		}
 
-/*		
+		
 			TransactionBean transactionBean = new TransactionBean();
 			transactionBean.setAmount(amount);
 			transactionBean.setCustomer_id(customerBean.getCustomer_id());
-			transactionBean.setTransaction_type("Check Request");
-			transactionBean.setStatus("Pending");
+			transactionBean.setTransaction_type("Withdraw");
+			transactionBean.setStatus(false);
 
 			
 			try {
@@ -97,7 +97,7 @@ public class RequestCheckAction extends Action {
 				request.setAttribute("errors", errors);
 				return "buyFund.jsp";
 			}
-*/		
+		
 			check = true;
 			request.setAttribute("check", check);
 			return "requestCheck.jsp";
