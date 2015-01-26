@@ -61,7 +61,7 @@ public class CreateEmployeeAccountForm extends FormBean {
 		List<String> errors = new ArrayList<String>();
 
 		if (username == null || username.length() == 0) {
-			errors.add("email is required");
+			errors.add("Username is required");
 		}
 		if (password == null || password.length() == 0) {
 			errors.add("Password is required");

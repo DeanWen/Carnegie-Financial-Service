@@ -280,7 +280,7 @@
                             <a href="#"><i class="fa fa-user fa-fw"></i> Create Account <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Customer Account</a>
+                                    <a href="createCustomerAccount.do">Customer Account</a>
                                 </li>
                                 <li>
                                 	<a href="createEmployeeAccount.do"> Employee Account</a>

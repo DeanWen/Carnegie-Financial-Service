@@ -6,10 +6,17 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class SellForm extends FormBean{
-	private String sellAmount;
-	private String cfmAmount;
-	private String action;
-	private String id;
+	String fundName;
+	String sellAmount;
+	String cfmAmount;
+	String action;
+	
+	public void setFundName(String s) {
+		fundName = s.trim();
+	}
+	public String getFundName() {
+		return fundName;
+	}
 	
 	public void setSellAmount(String s) {
 		sellAmount = s.trim();
@@ -32,26 +39,13 @@ public class SellForm extends FormBean{
 		return action;
 	}
 	
-	public String getId() {
-		return id;
-	}
-
-	public int getIdAsInt() {
-		// Be sure to first call getValidationErrors() to ensure
-		// that NullPointer exception or NumberFormatException will not be
-		// thrown!
-		if(id == null) {
-			return 0;
-		}
-		return Integer.parseInt(id);
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
+		if(fundName == null || fundName.length() == 0) {
+			errors.add("Please enter the fund name");
+			return errors;
+		}
 		if (sellAmount == null || sellAmount.length() == 0) {
 			errors.add("Please enter the amount of shares you want to sell");
 			return errors;

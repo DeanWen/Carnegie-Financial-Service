@@ -35,14 +35,12 @@
                                             <td align="right">${record.getShares()}</td>
                                             <td align="right">${record.getPrice()}</td>
                                             <td align="right">${record.getValue()}</td>
-                                            <form action="sellFund.do" method="POST">
                                             <td>
+                                            <form action="transactionHistoryView.do" method="POST">
                                             <input type="hidden" name="id" value="${record.getFundID()}"/>
-                                            </td>
-                                            <td>
-                                            <input type="submit" class="btn btn-outline btn-primary" name="button" value ="Sell"/>
-                                            </td>
+                                            <input type="submit" class="btn btn-outline btn-primary" name="button" value ="View History"/>
                                             </form>
+                                            </td>
                                         </tr>
 										</c:forEach>                                      
                                     </tbody>

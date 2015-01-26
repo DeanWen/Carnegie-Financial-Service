@@ -23,7 +23,6 @@ import databean.TransactionBean;
 import form.SellForm;
 
 public class SellFundAction extends Action{
-	static int id = 0;
 	FundDAO fundDAO;
 	PositionDAO positionDAO;
 	TransactionDAO transactionDAO;
@@ -45,7 +44,9 @@ public class SellFundAction extends Action{
 		HttpSession session = request.getSession();
 		
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
-		List<String> errors = new ArrayList<String>();
+
+		
+		
 		SellForm form = null;
 		try {
 			form = sellFormFactory.create(request);
@@ -53,50 +54,44 @@ public class SellFundAction extends Action{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		if(!form.isPresent()) {
-			System.out.println("sell form doesn't exist");
 			return "sellFund.jsp";
 		}
 		request.setAttribute("form", form);
 		
-		if(form.getId() != null) {
-			id = form.getIdAsInt();
-		}
-		int fundID = id;
-		System.out.println("ID: " +fundID);
-				
-		int customerID = customer.getCustomer_id();
-		FundBean curFund = null;
-		try {
-			curFund = fundDAO.read(fundID);
-		} catch (MyDAOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		request.setAttribute("curFund", curFund);
-		PositionBean position = null;
-		if(curFund != null) {
-			try {
-				position = positionDAO.read(curFund.getFund_id(), customer.getCustomer_id());
-			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				request.setAttribute("errors", errors);
-				return "sellFund.jsp";
-			}
-		
-			request.setAttribute("position", position);
-		}
+		List<String> errors = new ArrayList<String>();
 		errors.addAll(form.getValidationErrors());
+
 		if (errors.size() > 0) {
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}
-		System.out.println(1);
+		
+		FundBean curFund = null;
+		try {
+			curFund = fundDAO.readByName(form.getFundName());
+		} catch (MyDAOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if(curFund == null) {
+			errors.add("You don't have this fund");
+			request.setAttribute("errors", errors);
+			return "sellFund.jsp";
+		}
 		
 		BigDecimal sellAmount = new BigDecimal(form.getCfmAmount());
 		
+		PositionBean position;
+		try {
+			position = positionDAO.read(curFund.getFund_id(), customer.getCustomer_id());
+		} catch (MyDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			request.setAttribute("errors", errors);
+			return "sellFund.jsp";
+		}
 		
 		BigDecimal ownAmount = position.getShares();
 		if(sellAmount.compareTo(ownAmount) == 1) {
@@ -126,8 +121,7 @@ public class SellFundAction extends Action{
 		newTran.setShares(sellAmount);
 		newTran.setCustomer_id(customer.getCustomer_id());
 		newTran.setFund_id(curFund.getFund_id());
-		newTran.setTransaction_type("Sell");
-		newTran.setStatus(false);
+		newTran.setTransaction_type("Pending");
 		try {
 			transactionDAO.create(newTran);
 		} catch (MyDAOException e) {

@@ -61,16 +61,17 @@ public class CreateEmployeeAccountAction extends Action {
 				errors.add("User Exist");
 				return "createEmployeeAccount.jsp";
 			} else {
+				employee.setUsername(form.getUsername());
 				employee.setFirstname(form.getFirstname());
 				employee.setLastname(form.getLastname());
 				employee.setPassword(form.getPassword());
 				employeeDAO.create(employee);
-				request.setAttribute("message", "Register Successfully!");
+				request.setAttribute("message", "Create Employee Account Successfully!");
 				return "success.jsp";
 			}
 		} catch (FormBeanException | MyDAOException e) {
 			errors.add(((Throwable) e).getMessage());
-			return "register.jsp";
+			return "createEmployeeAccount.jsp";
 		}
 	}
 }

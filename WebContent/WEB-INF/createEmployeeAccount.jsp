@@ -1,35 +1,80 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="admin-top.jsp" />
 
-<jsp:include page="error-list.jsp" />
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Create Employee Account</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Please Specify Detail Information:
+                        </div>
+                        <div class="panel-body">
+							<div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <tbody>
+                                    <form action="createEmployeeAccount.do" method="POST">
+                                        <tr class="odd gradeX">
+                                            <th> User Name: </th>
+                                            <td class="center">
+                                                <input class="text" placeholder="User Name" name="username" type="text" value = "${form.getUsername()}"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="odd gradeX">
+                                            <th> Last Name:</th>
+                                            <td class="center">
+                                                <input class="text" placeholder="Last Name" name="lastname" type="text" value = "${form.getLastname()}"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="odd gradeX">
+                                            <th> First Name:</th>
+                                            <td class="center">
+                                                <input class="text" placeholder="First Name" name="firstname" type="text" value = "${form.getFirstname()}"/>
+                                            </td>
+                                        </tr>
+                                         <tr class="odd gradeX">
+                                            <th> Password:</th>
+                                            <td class="center">
+                                                <input class="text" placeholder="Password" name="password" type="text" value = "${form.getPassword()}"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="odd gradeX">
+                                            <td class="center" colspan="2">
+                                                <center><input class="btn btn-lg btn-success btn-block" id = "createEmployeeAccount" type = "submit" name = "action" value = "Done"/></center>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- dataTable_wrapper -->
+                            <c:forEach var="error" items="${errors}">
+								<div class="alert alert-danger">
+                                ${error}.
+                            	</div> 
+							</c:forEach>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- form -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
 
+    </div>
+    <!-- /#wrapper -->
 
-<p>
-<form action="createEmployeeAccount.do" method="post">
-	<input type="hidden" name="redirect" value="${redirect}" />
-	<table>
-		<tr>
-			<td>Username:</td>
-			<td><input type="text" name="userid" value="${form.username}" /></td>
-		</tr>
-		<tr>
-			<td>First Name:</td>
-			<td><input type="text" name="firstname"
-				value="${form.firstname}" /></td>
-		</tr>
-		<tr>
-			<td>Last Name:</td>
-			<td><input type="text" name="lastname" value="${form.lastname}" /></td>
-		</tr>
-		<tr>
-			<td>Password:</td>
-			<td><input type="password" name="password" value="" /></td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center"><input type="submit"
-				name="action" value="Done" /></td>
-		</tr>
-	</table>
-</form>
-</p>
 <jsp:include page="admin-bottom.jsp" />
-

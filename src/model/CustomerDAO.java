@@ -53,8 +53,6 @@ public class CustomerDAO {
 
 		try {
 			con = getConnection();
-			//Transaction Begin
-			con.setAutoCommit(false);
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
 							+ tableName
@@ -76,15 +74,13 @@ public class CustomerDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-			//commit changes to database 
-			con.commit();
+
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					System.err.print("Transaction is being rolled back");
-	                con.rollback();
+					con.close();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -98,8 +94,6 @@ public class CustomerDAO {
 
 		try {
 			con = getConnection();
-			//Transaction Begin
-			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("UPDATE "
 					+ tableName 
 					+ " set username = ? "
@@ -128,15 +122,13 @@ public class CustomerDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-			//Commit Transaction to DB
-			con.commit();
+
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					System.err.print("Transaction is being rolled back");
-	                con.rollback();
+					con.close();
 				}
 			} catch (SQLException e2) {
 
@@ -149,8 +141,6 @@ public class CustomerDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
-			//transaction begin
-			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM "
 					+ tableName + " WHERE customer_id = ?");
 			pstmt.setInt(1, customer_id);
@@ -158,15 +148,12 @@ public class CustomerDAO {
 			if (count != 1) {
 				throw new SQLException("Delete updated" + count + "rows");
 			}
-			//commit transaction
-			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					System.err.print("Transaction is being rolled back");
-	                con.rollback();
+					con.close();
 				}
 			} catch (SQLException e2) {
 
@@ -179,12 +166,11 @@ public class CustomerDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
-			//transaction begin
-			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE customer_id = ?");
 			pstmt.setInt(1, customer_id);
 			ResultSet rs = pstmt.executeQuery();
+
 			CustomerBean customer;
 			if (!rs.next()) {
 				customer = null;
@@ -203,8 +189,7 @@ public class CustomerDAO {
 				customer.setZip(rs.getInt("zip"));
 				customer.setCash(rs.getBigDecimal("cash"));
 			}
-			//commit transaction
-			con.commit();
+
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -212,8 +197,7 @@ public class CustomerDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					System.err.print("Transaction is being rolled back");
-	                con.rollback();
+					con.close();
 				}
 			} catch (SQLException e2) {
 				/* ignore */

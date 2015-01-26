@@ -54,7 +54,6 @@ public class PositionDAO {
 
 		try {
 			con = getConnection();
-			con.setAutoCommit(false);
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
 							+ tableName
@@ -68,14 +67,13 @@ public class PositionDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-			con.commit();
+
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					System.err.print("Transaction is being rolled back");
-	                con.rollback();
+					con.close();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -89,7 +87,6 @@ public class PositionDAO {
 
 		try {
 			con = getConnection();
-			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("UPDATE "
 					+ tableName 
 					+ " set shares = ? "
@@ -103,14 +100,13 @@ public class PositionDAO {
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-			con.commit();
+
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					System.err.print("Transaction is being rolled back");
-	                con.rollback();
+					con.close();
 				}
 			} catch (SQLException e2) {
 
@@ -123,7 +119,6 @@ public class PositionDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
-			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM "
 					+ tableName + " where Fund_fund_id = ? and Customer_customer_id = ? ");
 			pstmt.setInt(1, fund_id);
@@ -133,14 +128,12 @@ public class PositionDAO {
 			if (count != 1) {
 				throw new SQLException("Delete updated" + count + "rows");
 			}
-			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					System.err.print("Transaction is being rolled back");
-	                con.rollback();
+					con.close();
 				}
 			} catch (SQLException e2) {
 
@@ -153,12 +146,12 @@ public class PositionDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
-			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE Fund_fund_id = ? AND Customer_customer_id = ?");
 			pstmt.setInt(1, fund_id);
 			pstmt.setInt(2, customer_id);
 			ResultSet rs = pstmt.executeQuery();
+
 			PositionBean item;
 			if (!rs.next()) {
 				item = null;
@@ -168,8 +161,7 @@ public class PositionDAO {
 				item.setCustomer_id(rs.getInt("Customer_customer_id"));
 				item.setShares(rs.getBigDecimal("shares"));
 			}
-			//transaction type
-			con.commit();
+
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -177,8 +169,7 @@ public class PositionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					System.err.print("Transaction is being rolled back");
-	                con.rollback();
+					con.close();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -192,11 +183,11 @@ public class PositionDAO {
 		ArrayList<PositionBean> positions = new ArrayList<PositionBean>();
 		try {
 			con = getConnection();
-			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE Customer_customer_id = ? ORDER BY Fund_fund_id ASC");
 			pstmt.setInt(1, customer_id);
 			ResultSet rs = pstmt.executeQuery();
+
 			PositionBean item;
 			while(rs.next()) {
 				item = new PositionBean();
@@ -205,8 +196,7 @@ public class PositionDAO {
 				item.setShares(rs.getBigDecimal("shares"));
 				positions.add(item);
 			}
-			
-			con.commit();
+
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -214,8 +204,7 @@ public class PositionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					System.err.print("Transaction is being rolled back");
-	                con.rollback();
+					con.close();
 				}
 			} catch (SQLException e2) {
 				/* ignore */

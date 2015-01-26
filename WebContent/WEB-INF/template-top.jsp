@@ -280,16 +280,19 @@
                                     <a href="customerAccountView.do">Manage Account</a>
                                 </li>
                                 <li>
-                                    <a href="fundListView.do"> Fund History </a>
-                                </li>
-                                <li>
-									<a href="transactionHistoryView.do"> Transaction History </a>
+                                    <a href="fundListView.do"> Fund List </a>
                                 </li>
                                 <li>
                                     <a href="changePWD.do"> Change Password </a>
                                 </li>
                                 <li>
                                 	<a href="requestCheck.do">Request Check</a>
+                                </li>
+                                <li>
+                                	<a href="buyFund.do"> Buy Fund </a>
+                                </li>
+                                <li>
+                                	<a href="sellFund.do"> Sell Fund </a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
