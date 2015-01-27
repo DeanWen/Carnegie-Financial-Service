@@ -128,6 +128,7 @@ public class SellFundAction extends Action{
 		newTran.setFund_id(curFund.getFund_id());
 		newTran.setTransaction_type("Sell");
 		newTran.setStatus(false);
+		
 		try {
 			transactionDAO.create(newTran);
 		} catch (MyDAOException e) {

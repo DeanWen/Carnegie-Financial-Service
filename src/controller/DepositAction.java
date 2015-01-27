@@ -77,27 +77,28 @@ public class DepositAction extends Action{
 		        // customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
 		        customer.setCash(new BigDecimal(newCash));
 		        customerDAO.update(customer);
+		        		        
+				TransactionBean transactionBean = new TransactionBean();
+				transactionBean.setAmount(new BigDecimal(newCash));
+				transactionBean.setCustomer_id(Integer.parseInt(form.getUserid()));
+				transactionBean.setTransaction_type("Deposit");
+				transactionBean.setStatus(false);
+		        
+				try {
+					transactionDAO.create(transactionBean);
+				} catch (MyDAOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					errors.add("Add transaction failed");
+					request.setAttribute("errors", errors);
+					return "deposit.jsp";
+				}
+		        
 		        request.setAttribute("message", "Deposit Successfully!");
 		        return "success.jsp";
 		        
 			} catch (MyDAOException e1) {
 				e1.printStackTrace();
-			}
-	        
-			TransactionBean transactionBean = new TransactionBean();
-			transactionBean.setAmount(new BigDecimal(newCash));
-			transactionBean.setCustomer_id(customer.getCustomer_id());
-			transactionBean.setTransaction_type("Deposit");
-			transactionBean.setStatus(false);
-
-			
-			try {
-				transactionDAO.create(transactionBean);
-			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				request.setAttribute("errors", errors);
-				return "deposit.jsp";
 			}
 	        
 			return "deposit.do";
