@@ -10,20 +10,24 @@ import javax.servlet.http.HttpSession;
 import model.CustomerDAO;
 import model.Model;
 import model.MyDAOException;
+import model.TransactionDAO;
 
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
+import databean.TransactionBean;
 import form.DepositForm;
 
 public class DepositAction extends Action{
 	private FormBeanFactory<DepositForm> formBeanFactory = FormBeanFactory.getInstance(DepositForm.class);
 	
 	private CustomerDAO customerDAO;
+	private TransactionDAO transactionDAO;
 
 	public DepositAction(Model model) {
 		customerDAO = model.getCustomerDAO();
+		transactionDAO = model.getTransactionDAO();
 	}
 
 	public String getName() { return "deposit.do"; }
@@ -57,6 +61,7 @@ public class DepositAction extends Action{
 	        
 	        // Look up the user and update cash
 	        CustomerBean customer = null;
+	        int newCash = 0;
 	        try {
 		        customer = customerDAO.read(Integer.parseInt(form.getUserid()));
 		        
@@ -68,10 +73,27 @@ public class DepositAction extends Action{
 		        // Update cash
 		        int currentCash = customerDAO.read(Integer.parseInt(form.getUserid())).getCash().intValue();
 		        int addAmount = Integer.parseInt(form.getDepositAmount());
-		        int newCash = currentCash + addAmount;
+		        newCash = currentCash + addAmount;
 		        // customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
 		        customer.setCash(new BigDecimal(newCash));
 		        customerDAO.update(customer);
+		        		        
+				TransactionBean transactionBean = new TransactionBean();
+				transactionBean.setAmount(new BigDecimal(newCash));
+				transactionBean.setCustomer_id(Integer.parseInt(form.getUserid()));
+				transactionBean.setTransaction_type("Deposit");
+				transactionBean.setStatus(false);
+		        
+				try {
+					transactionDAO.create(transactionBean);
+				} catch (MyDAOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					errors.add("Add transaction failed");
+					request.setAttribute("errors", errors);
+					return "deposit.jsp";
+				}
+		        
 		        request.setAttribute("message", "Deposit Successfully!");
 		        return "success.jsp";
 		        
