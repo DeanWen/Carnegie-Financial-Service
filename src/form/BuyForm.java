@@ -6,16 +6,24 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class BuyForm extends FormBean{
-	String fundName;
+	String id;
 	String buyAmount;
 	String cfmAmount;
 	String action;
 	
-	public void setFundName(String s) {
-		fundName = s.trim();
+	public String getId() {
+		return id;
 	}
-	public String getFundName() {
-		return fundName;
+	
+	public int getIdAsInt() {
+		// Be sure to first call getValidationErrors() to ensure
+		// that NullPointer exception or NumberFormatException will not be
+		// thrown!
+		return Integer.parseInt(id);
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public void setBuyAmount(String s) {
@@ -42,11 +50,9 @@ public class BuyForm extends FormBean{
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if(fundName == null || fundName.length() == 0) {
-			errors.add("Please enter the fund name");
-		}
 		if (buyAmount == null || buyAmount.length() == 0) {
 			errors.add("Please enter the amount of shares you want to buy");
+			return errors;
 		}
 		
 		if (buyAmount != null && buyAmount.length() != 0) {
@@ -64,7 +70,7 @@ public class BuyForm extends FormBean{
 			errors.add("Shares amounts are not consistent");
 		}
 		
-		if(action == null || !action.equals("Done")) {
+		if(action == null || !action.equals("Buy")) {
 			errors.add("Invalid Button");
 		}
 		return errors;

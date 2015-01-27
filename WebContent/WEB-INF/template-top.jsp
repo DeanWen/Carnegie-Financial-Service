@@ -270,7 +270,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="researchFund.do"><i class="fa fa-dashboard fa-fw"></i> Research Fund</a>
                         </li>
                         
                         <li>

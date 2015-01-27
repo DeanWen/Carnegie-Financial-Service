@@ -11,6 +11,7 @@ import model.CustomerDAO;
 import model.FundDAO;
 import model.Model;
 import model.MyDAOException;
+import model.PositionDAO;
 import model.TransactionDAO;
 
 import org.mybeans.form.FormBeanException;
@@ -24,6 +25,7 @@ import form.BuyForm;
 import form.SellForm;
 
 public class BuyFundAction extends Action{
+	static int id = 0;
 	private FundDAO fundDAO;
 	private TransactionDAO transactionDAO;
 	private CustomerDAO customerDAO;
@@ -42,21 +44,38 @@ public class BuyFundAction extends Action{
 	
 	public String perform(HttpServletRequest request) {
 		boolean check = false;
-		HttpSession session = request.getSession();
-		
+		HttpSession session = request.getSession();		
 		CustomerBean customerBean = (CustomerBean) session.getAttribute("customer");
-		BuyForm form = null;
 		
+		
+		BuyForm form = null;		
 		try {
 			form = buyFormFactory.create(request);
 		} catch (FormBeanException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		if(!form.isPresent()) {
 			return "buyFund.jsp";
 		}
+		
 		request.setAttribute("form", form);
+		
+		if(form.getId() != null) {
+			id = form.getIdAsInt();
+		}
+		
+		FundBean curFund = null;
+		
+		try {
+			curFund = fundDAO.read(id);
+		} catch (MyDAOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		request.setAttribute("curFund",curFund);
+		request.setAttribute("customerBean", customerBean);
 		
 		List<String> errors = new ArrayList<String>();
 		errors.addAll(form.getValidationErrors());
@@ -66,19 +85,6 @@ public class BuyFundAction extends Action{
 			return "buyFund.jsp";
 		}
 		
-		FundBean curFund = null;
-		try {
-			curFund = fundDAO.readByName(form.getFundName());
-		} catch (MyDAOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		if(curFund == null) {
-			errors.add("This fund doesn't exist!");
-			request.setAttribute("errors", errors);
-			return "buyFund.jsp";
-		}
 		
 		BigDecimal buyAmount = new BigDecimal(form.getBuyAmount());		
 		BigDecimal cash = customerBean.getCash();
@@ -106,11 +112,11 @@ public class BuyFundAction extends Action{
 		}
 		
 		TransactionBean newTran = new TransactionBean();
-		newTran.setShares(buyAmount);
+		newTran.setAmount(buyAmount);
 		newTran.setCustomer_id(customerBean.getCustomer_id());
 		newTran.setFund_id(curFund.getFund_id());
-		newTran.setTransaction_type("Pending");
-//		newTran.setStatus("Pending");
+		newTran.setTransaction_type("Buy");
+		newTran.setStatus(false);
 		
 		try {
 			transactionDAO.create(newTran);

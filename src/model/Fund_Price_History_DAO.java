@@ -196,6 +196,47 @@ public class Fund_Price_History_DAO {
 		}
 	}
 	
+	public ArrayList<Fund_Price_History_Bean> read(int fund_id) throws MyDAOException {
+		Connection con = null;
+		try {
+			con = getConnection();
+			//transaction begin
+			con.setAutoCommit(false);
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
+					+ tableName + " WHERE Fund_fund_id = ?");
+			pstmt.setInt(1, fund_id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			ArrayList<Fund_Price_History_Bean> beans = new ArrayList<Fund_Price_History_Bean>();
+			Fund_Price_History_Bean item;
+			while(rs.next()) {
+				item = new Fund_Price_History_Bean();
+				item.setFund_id(rs.getInt("Fund_fund_id"));
+				item.setPrice_date(rs.getDate("price_date"));
+				item.setPrice(rs.getBigDecimal("price"));
+				beans.add(item);
+			}
+			
+			//commit transaction 
+			con.commit();
+			rs.close();
+			pstmt.close();
+			releaseConnection(con);
+			return beans;
+		} catch (SQLException e) {
+			try {
+				if (con != null) {
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
+				}
+			} catch (SQLException e2) {
+				/* ignore */
+			}
+			throw new MyDAOException(e);
+		}
+	}
+	
+	
 	public Fund_Price_History_Bean readLast(int fund_id) throws MyDAOException {
 		Connection con = null;
 		try {
