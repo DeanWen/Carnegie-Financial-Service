@@ -15,10 +15,16 @@
                                 
                                     <tbody>
                                     <form action="buyFund.do" method="POST">
-                                        <tr class="odd gradeX">
+                                        <tr class="odd gradeX">                             
                                             <th> Fund Name </th>
                                             <td class="center">
-                                                <input class="text" placeholder="Fund Name" name="fundName" value="${form.getFundName()}"/>
+                                                ${curFund.getName()}
+                                            </td>
+                                        </tr>
+                                        <tr class="odd gradeX">                             
+                                            <th> Account Balance </th>
+                                            <td class="center">
+                                                ${customerBean.getCash()}
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
@@ -35,10 +41,13 @@
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center" colspan="2">
-                                                <center><input class="btn btn-lg btn-success btn-block" id = "buyFund" type = "submit" name = "action" value = "Done"/></center>
+                                                <center><input class="btn btn-success" id = "buyFund" type = "submit" name = "action" value = "Buy"/></center>
                                             </td>
                                         </tr>
-                                    </form>
+                             		</form>
+                             		<td class="center" colspan="2">
+                                        <center><a href = "researchFund.do"><input class="btn btn-success" type = "button" name = "back" value = "Back"/></a></center>
+                                     </td>
                                     </tbody>
                                 </table>
                             </div>

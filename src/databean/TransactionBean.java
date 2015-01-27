@@ -19,6 +19,16 @@ public class TransactionBean implements Serializable {
 	private BigDecimal shares;
 	private String transaction_type;
 	private BigDecimal amount;
+	private Boolean status;
+	
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 
 	public int getTransaction_id() {
 		return transaction_id;

@@ -54,11 +54,12 @@ public class TransactionDAO {
 
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
 							+ tableName
-							+ "(transaction_id, customer_id, fund_id, execute_date, shares, transaction_type, amount) "
-							+ "VALUES (?, ?, ?, ?, ?, ?, ?)");
+							+ "(transaction_id, customer_id, fund_id, execute_date, shares, transaction_type, amount, status) "
+							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 			pstmt.setInt(1, item.getTransaction_id());
 			pstmt.setInt(2, item.getCustomer_id());
 			pstmt.setInt(3, item.getFund_id());
@@ -66,18 +67,19 @@ public class TransactionDAO {
 			pstmt.setBigDecimal(5, item.getShares());
 			pstmt.setString(6, item.getTransaction_type());
 			pstmt.setBigDecimal(7, item.getAmount());
-
+			pstmt.setBoolean(8, item.getStatus());
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -91,6 +93,7 @@ public class TransactionDAO {
 
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("UPDATE"
 					+ tableName 
 					+ "set customer_id = ? "
@@ -99,6 +102,7 @@ public class TransactionDAO {
 					  + ", shares = ? "
 					  + ", transaction_type = ? "
 					  + ", amount = ? "
+					  + ", status = ? "
 				    + "where transaction_id = ?");
 			pstmt.setInt(1, item.getCustomer_id());
 			pstmt.setInt(2, item.getFund_id());
@@ -106,19 +110,21 @@ public class TransactionDAO {
 			pstmt.setBigDecimal(4, item.getShares());
 			pstmt.setString(5, item.getTransaction_type());
 			pstmt.setBigDecimal(6, item.getAmount());
-			pstmt.setInt(7, item.getTransaction_id());
+			pstmt.setBoolean(7, item.getStatus());
+			pstmt.setInt(8, item.getTransaction_id());
 			
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
 			}
-
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 
@@ -131,6 +137,7 @@ public class TransactionDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM "
 					+ tableName + " WHERE transaction_id = ?");
 			pstmt.setInt(1, transaction_id);
@@ -138,12 +145,14 @@ public class TransactionDAO {
 			if (count != 1) {
 				throw new SQLException("Delete updated" + count + "rows");
 			}
+			con.commit();
 			pstmt.close();
 			releaseConnection(con);
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 
@@ -156,6 +165,7 @@ public class TransactionDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE execute_date = (SELECT MAX(execute_date) FROM " + tableName + " WHERE customer_id = ?)");
 			pstmt.setInt(1, customer_id);
@@ -173,8 +183,9 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
+				item.setStatus(rs.getBoolean("status"));
 			}
-
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -182,7 +193,8 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -195,6 +207,7 @@ public class TransactionDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE transaction_id = ?");
 			pstmt.setInt(1, transaction_id);
@@ -212,8 +225,9 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
+				item.setStatus(rs.getBoolean("status"));
 			}
-			
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -221,7 +235,8 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
@@ -230,14 +245,14 @@ public class TransactionDAO {
 		}
 	}
 	
-	public ArrayList<TransactionBean> getTransactions(int customerID, int fundID) throws MyDAOException {
+	public ArrayList<TransactionBean> getTransactions(int customerID) throws MyDAOException {
 		Connection con = null;
 		try {
 			con = getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
-					+ tableName + " WHERE customer_id = ? AND fund_id = ? ORDER BY execute_date ASC");
+					+ tableName + " WHERE customer_id = ? ORDER BY execute_date ASC");
 			pstmt.setInt(1, customerID);
-			pstmt.setInt(2, fundID);
 			ResultSet rs = pstmt.executeQuery();
 			
 			ArrayList<TransactionBean> transactions = new ArrayList<TransactionBean>();
@@ -251,9 +266,10 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
+				item.setStatus(rs.getBoolean("status"));
 				transactions.add(item);
 			}
-			
+			con.commit();
 			rs.close();
 			pstmt.close();
 			releaseConnection(con);
@@ -261,7 +277,8 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			try {
 				if (con != null) {
-					con.close();
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
 				}
 			} catch (SQLException e2) {
 				/* ignore */
