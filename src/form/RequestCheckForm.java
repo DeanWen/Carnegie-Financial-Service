@@ -34,7 +34,7 @@ public class RequestCheckForm extends FormBean {
 			return errors;
 		}
 		if (requestCfmAmount == null || requestCfmAmount.length() == 0) {
-			errors.add("Please enter the confirm amount:");
+			errors.add("Please enter the confirm amount");
 			return errors;
 		}
 		

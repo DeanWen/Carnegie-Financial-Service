@@ -77,7 +77,7 @@ public class RequestCheckAction extends Action {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				request.setAttribute("errors", errors);
-				return "buyFund.jsp";
+				return "requestCheck.jsp";
 			}
 		}
 
@@ -95,7 +95,7 @@ public class RequestCheckAction extends Action {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				request.setAttribute("errors", errors);
-				return "buyFund.jsp";
+				return "requestCheck.jsp";
 			}
 		
 			check = true;
