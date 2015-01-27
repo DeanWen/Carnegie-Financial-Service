@@ -12,6 +12,7 @@ public class HistoryBean implements Serializable{
 	private BigDecimal shares;
 	private BigDecimal price;
 	private BigDecimal amount;
+	private String status;
 	
 	public Date getDate() {
 		return date;
@@ -50,5 +51,16 @@ public class HistoryBean implements Serializable{
 	}
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(boolean b) {
+		if(b == false) {
+			status = "Pending";
+		}
+		if(b == true) {
+			status = "Done";
+		}
 	}
 }
