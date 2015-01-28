@@ -42,13 +42,14 @@ public class ViewCustomerAccountAction extends Action{
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		
 		if (form.getAction().equals("Login")) {
-			request.setAttribute("customer", customer);
+			session.setAttribute("customer", customer);
 			return "editCustomerAccount.do";
 		}
 //		if (session.getAttribute("customer") == null) {
 //			return "login.jsp";
 //		}
 		//request.setAttribute("customer", customer);
+		session.removeAttribute("customer");
 		return "viewCustomerAccount.jsp";
 	}
 }
