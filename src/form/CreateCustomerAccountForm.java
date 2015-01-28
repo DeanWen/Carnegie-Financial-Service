@@ -12,7 +12,7 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class CreateCustomerAccountForm extends FormBean {
-	private int customer_id;
+	private String customer_id;
 	private String username;
 	private String password;
 	private String firstname;
@@ -21,14 +21,14 @@ public class CreateCustomerAccountForm extends FormBean {
 	private String addr_line2;
 	private String city;
 	private String state;
-	private int zip;
+	private String zip;
 	private String action;
 
-	public int getCustomer_id() {
+	public String getCustomer_id() {
 		return customer_id;
 	}
 
-	public void setCustomer_id(int customer_id) {
+	public void setCustomer_id(String customer_id) {
 		this.customer_id = customer_id;
 	}
 
@@ -96,11 +96,11 @@ public class CreateCustomerAccountForm extends FormBean {
 		this.state = state;
 	}
 
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
 
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
@@ -111,8 +111,14 @@ public class CreateCustomerAccountForm extends FormBean {
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		if (customer_id == 0) {
+		if (customer_id == null || customer_id.length() == 0) {
 			errors.add("customer id is required");
+		}
+		if (customer_id.matches("^0$")) {
+			errors.add("customer id can not be zero");
+		}
+		if (!customer_id.matches("[0-9]+")) {
+			errors.add("customer id can only contain digits");
 		}
 		if (username == null || username.length() == 0) {
 			errors.add("userName is required");
@@ -138,8 +144,11 @@ public class CreateCustomerAccountForm extends FormBean {
 		if(state == null || state.length() == 0){
 			errors.add("State is required");
 		}
-		if (zip == 0) {
+		if (zip == null || zip.length() == 0) {
 			errors.add("Zip is required");
+		}
+		if (!zip.matches("[0-9]{5}")) {
+			errors.add("Zip code is not accpeted");
 		}
 		
 		if (action == null) {
