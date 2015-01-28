@@ -168,7 +168,7 @@ public class EmployeeDAO {
 	public void update(EmployeeBean user) throws MyDAOException {
 		Connection con = null;
 		String sql = "UPDATE " + tableName
-				+ " set password = ? where userID = ?";
+				+ " set password = ? where username = ?";
 		try {
 			con = getConnection();
 			//transaction begin
