@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Create Fund</h1>
+                        <h1 class="page-header">Manage Customer Account</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -16,28 +16,22 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Please Specify Detail Information:
+                            Please enter the customer id you would like to manage:
                         </div>
                         <div class="panel-body">
 							<div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <tbody>
-                                    <form action="createFund.do" method="POST">
+                                    <form action="findCustomer.do" method="POST">
                                         <tr class="odd gradeX">
-                                            <th> Fund Name</th>
+                                            <th> Customer ID</th>
                                             <td class="center">
-                                                <input class="text" placeholder="Name" name="fundName" type="text" value = "${form.getFundName()}"/>
-                                            </td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <th> Fund Ticker</th>
-                                            <td class="center">
-                                                <input class="text" placeholder="Ticker" name="fundTicker" type="text" value = "${form.getFundTicker()}"/>
+                                                <input class="text" placeholder="User ID" name="userid" type="text" value = "${form.getUserid()}"/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center" colspan="2">
-                                                <center><input class="btn btn-lg btn-success btn-block" id = "createFund" type = "submit" name = "action" value = "Done"/></center>
+                                                <center><input class="btn btn-lg btn-success btn-block" id = "deposit" type = "submit" name = "action" value = "Done"/></center>
                                             </td>
                                         </tr>
                                     </form>
@@ -65,5 +59,5 @@
 
     </div>
     <!-- /#wrapper -->
-
+    
 <jsp:include page="admin-bottom.jsp" />

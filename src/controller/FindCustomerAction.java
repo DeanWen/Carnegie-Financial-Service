@@ -21,20 +21,18 @@ import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
 import databean.TransactionBean;
-import form.DepositForm;
+import form.FindCustomerForm;
 
-public class DepositAction extends Action{
-	private FormBeanFactory<DepositForm> formBeanFactory = FormBeanFactory.getInstance(DepositForm.class);
+public class FindCustomerAction extends Action{
+	private FormBeanFactory<FindCustomerForm> formBeanFactory = FormBeanFactory.getInstance(FindCustomerForm.class);
 	
 	private CustomerDAO customerDAO;
-	private TransactionDAO transactionDAO;
 
-	public DepositAction(Model model) {
+	public FindCustomerAction(Model model) {
 		customerDAO = model.getCustomerDAO();
-		transactionDAO = model.getTransactionDAO();
 	}
 
-	public String getName() { return "deposit.do"; }
+	public String getName() { return "findCustomer.do"; }
     
     public String perform(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -43,7 +41,7 @@ public class DepositAction extends Action{
         request.setAttribute("errors",errors);
         
         try {
-	    	DepositForm form = formBeanFactory.create(request);
+	    	FindCustomerForm form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
 	        
 //	        // If not logged in, return to homepage
@@ -54,62 +52,36 @@ public class DepositAction extends Action{
 	        // If no params were passed, return with no errors so that the form will be
 	        // presented (we assume for the first time).
 	        if (!form.isPresent()) {
-	            return "deposit.jsp";
+	            return "findCustomer.jsp";
 	        }
 
 	        // Any validation errors?
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() != 0) {
-	            return "deposit.jsp";
+	            return "findCustomer.jsp";
 	        }
 	        
 	        // Look up the user and update cash
 	        CustomerBean customer = null;
-	        int newCash = 0;
 	        try {
 		        customer = customerDAO.read(Integer.parseInt(form.getUserid()));
 		        
 		        if (customer == null) {
 		            errors.add("User Name not found");
-		            return "deposit.jsp";
-		        }	        	
+		            return "findCustomer.jsp";
+		        }	     
 		        
-		        // Update cash
-		        int currentCash = customerDAO.read(Integer.parseInt(form.getUserid())).getCash().intValue();
-		        int addAmount = Integer.parseInt(form.getDepositAmount());
-		        newCash = currentCash + addAmount;
-		        // customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
-		        customer.setCash(new BigDecimal(newCash));
-		        customerDAO.update(customer);
-		        		        
-				TransactionBean transactionBean = new TransactionBean();
-				transactionBean.setAmount(new BigDecimal(newCash));
-				transactionBean.setCustomer_id(Integer.parseInt(form.getUserid()));
-				transactionBean.setFund_id(0);
-				transactionBean.setTransaction_type("Deposit");
-				transactionBean.setStatus(false);
-		        
-				try {
-					transactionDAO.create(transactionBean);
-				} catch (MyDAOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					errors.add("Add transaction failed");
-					request.setAttribute("errors", errors);
-					return "deposit.jsp";
-				}
-		        
-		        request.setAttribute("message", "Deposit Successfully!");
-		        return "success.jsp";
+		        session.setAttribute("customer", customer);
+		        return "viewCustomerAccount.jsp";
 		        
 			} catch (MyDAOException e1) {
 				e1.printStackTrace();
 			}
 	        
-			return "deposit.do";
+			return "findCustomer.do";
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
-        	return "deposit.jsp";
+        	return "findCustomer.jsp";
         }
     }
 }

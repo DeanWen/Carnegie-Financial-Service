@@ -1,3 +1,4 @@
+<!-- Tian Zheng CMU Jan 27, 2015 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -295,7 +296,7 @@
                             <a href="deposit.do"><i class="fa fa-money fa-fw"></i> Deposit Check</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-pencil-square-o fa-fw"></i> Manage Customer Account</a>
+                            <a href="findCustomer.do"><i class="fa fa-pencil-square-o fa-fw"></i> Manage Customer Account</a>
                         </li>
                         <li>
                             <a href="login.do"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
