@@ -45,10 +45,10 @@
                                             <td>${fundList.getSymbol()}</td>
                                             <td align="right">${fundList.getPrice()}</td>
 
-                                            <td>
+<%--                                             <td>
                                             <input type="hidden" name="id" value="${fundList.getFund_id()}"/>
                                             <input type="text" name="value"/>
-                                            </td>
+                                            </td> --%>
 
                                         </tr>
                                         </c:forEach>                                      

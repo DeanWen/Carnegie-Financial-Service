@@ -44,9 +44,9 @@ public class TransitionAction extends Action{
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         
-//        try {
-//	    	TransitionForm form = formBeanFactory.create(request);
-//	        request.setAttribute("form",form);
+        try {
+	    	TransitionForm form = formBeanFactory.create(request);
+	        request.setAttribute("form",form);
 	        
 //	        // If not logged in, return to homepage
 //			if (session.getAttribute("employee") != null) {
@@ -89,7 +89,7 @@ public class TransitionAction extends Action{
 					e.printStackTrace();
 				}
 				
-//				if(fund == null || history == null) {
+//				if(fund == null) {
 //					continue;
 //				}
 
@@ -99,7 +99,7 @@ public class TransitionAction extends Action{
 				if (history != null) {
 					item.setPrice(history.getPrice());	
 				} else {
-					item.setPrice(new BigDecimal(0));
+					item.setPrice(null);
 				}
 				
 				item.setShare(new BigDecimal(0));
@@ -108,10 +108,10 @@ public class TransitionAction extends Action{
 			
 			request.setAttribute("fundList", fundList);
 	        
-			return "transition.do";
-//        } catch (FormBeanException e) {
-//        	errors.add(e.getMessage());
-//        	return "transition.jsp";
-//        }
+			return "transition.jsp";
+        } catch (FormBeanException e) {
+        	errors.add(e.getMessage());
+        	return "transition.jsp";
+        }
     }
 }
