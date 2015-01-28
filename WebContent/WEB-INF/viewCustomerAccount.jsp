@@ -10,7 +10,7 @@
                         <form action="viewCustomerAccount.do" method="POST">
                         <div class="panel-heading">
                             Customer Information 
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="customerAccountEdit.do" style="color:#000000; text-decoration:none"><button class="btn btn-outline btn-default" type="button">Edit</button></a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="editCustomerAccount.do" style="color:#000000; text-decoration:none"><button class="btn btn-outline btn-default" type="button">Edit</button></a>
                         </div>
 						</form>
                         <!-- /.panel-heading -->
@@ -36,6 +36,9 @@
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.panel-body -->
+                        
+
+                        
                         </div>
                 </div>
                     <!-- /.col-lg-12 -->
@@ -70,12 +73,55 @@
                             </div>
                             <!-- /.table-responsive -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.panel-body -->                                               
                     </div>
                 </div>
                     <!-- /.col-lg-12 -->
             </div>
                 <!-- /.row -->
+                
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Transaction History 
+                        </div>
+                         <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <td><b>Name</b></td>
+                                            <td><b>Date</b></td>
+                                            <td><b>Type</b></td>
+                                            <td><b>Status</b></td>
+                                            <td align="right"><b>Shares</b></td>
+                                            <td align="right"><b>Price</b></td>
+                                            <td align="right"><b>Amount</b></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="history" items="${histories}">
+                                        <tr class="success">
+                                            <td>${history.getFundName()}</td>
+                                            <td>${history.getDate()}</td>
+                                            <td>${history.getType()}</td>
+                                            <td>${history.getStatus()}</td>
+                                            <td align="right">${history.getShares()}</td>
+                                            <td align="right">${history.getPrice()}</td>
+                                            <td align="right">${history.getAmount()}</td>
+                                        </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <!-- /.container-fluid -->
