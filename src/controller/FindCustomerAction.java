@@ -72,12 +72,11 @@ public class FindCustomerAction extends Action{
 		        }	     
 		        
 		        session.setAttribute("customer", customer);
-		        return "viewCustomerAccount.jsp";
+		        return "viewCustomerAccount.do";
 		        
 			} catch (MyDAOException e1) {
 				e1.printStackTrace();
 			}
-	        
 			return "findCustomer.do";
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());

@@ -55,9 +55,11 @@ public class ViewCustomerAccountAction extends Action{
 		}
 		request.setAttribute("form", form);
 		HttpSession session = request.getSession(true);
+		CustomerBean customer = (CustomerBean) session.getAttribute("customer");		
+
 		TransactionBean transaction = null;
 		System.out.println(session);
-		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+
 		
 		int customerID = customer.getCustomer_id();
 		System.out.println("Customer ID" + customerID);
@@ -110,15 +112,15 @@ public class ViewCustomerAccountAction extends Action{
 				cur.setPrice(fph.getPrice());
 				System.out.println("Price: " + fph.getPrice());
 			}
+			
 			histories.add(cur);
 		}
-		
 		request.setAttribute("histories", histories);
 		
-		if (form.getAction().equals("Edit")) {
-			session.setAttribute("customer", customer);
-			return "editCustomerAccount.do";
-		}
+//		if (form.getAction().equals("Edit")) {
+//			session.setAttribute("customer", customer);
+//			return "editCustomerAccount.do";
+//		}
 
 		return "viewCustomerAccount.jsp";
 	}

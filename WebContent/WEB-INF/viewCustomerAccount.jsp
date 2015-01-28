@@ -1,5 +1,6 @@
 <!-- Tian Zheng CMU Jan 27, 2015 -->
 <jsp:include page="admin-top.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div id="page-wrapper">
             <div class="container-fluid">
