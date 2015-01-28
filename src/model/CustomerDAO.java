@@ -58,8 +58,8 @@ public class CustomerDAO {
 			PreparedStatement pstmt = con
 					.prepareStatement("INSERT INTO "
 							+ tableName
-							+ "(customer_id, username, password, firstname, lastname, addr_line1, addr_line2, city, state, zip, cash) "
-							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+							+ "(customer_id, username, password, firstname, lastname, addr_line1, addr_line2, city, state, zip, cash, total) "
+							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			pstmt.setInt(1, customer.getCustomer_id());
 			pstmt.setString(2, customer.getUsername());
 			pstmt.setString(3, customer.getPassword());
@@ -71,6 +71,7 @@ public class CustomerDAO {
 			pstmt.setString(9, customer.getState());
 			pstmt.setInt(10, customer.getZip());
 			pstmt.setBigDecimal(11, customer.getCash());
+			pstmt.setBigDecimal(12, customer.getTotal());
 
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
@@ -112,6 +113,7 @@ public class CustomerDAO {
 					  + ", state = ? "
 					  + ", zip = ? "
 					  + ", cash = ? "
+					  + ", total = ? "
 				    + "where customer_id = ?");
 			pstmt.setString(1, customer.getUsername());
 			pstmt.setString(2, customer.getPassword());
@@ -123,7 +125,8 @@ public class CustomerDAO {
 			pstmt.setString(8, customer.getState());
 			pstmt.setInt(9, customer.getZip());
 			pstmt.setBigDecimal(10, customer.getCash());
-			pstmt.setInt(11, customer.getCustomer_id());
+			pstmt.setBigDecimal(11, customer.getTotal());
+			pstmt.setInt(12, customer.getCustomer_id());
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
@@ -202,6 +205,7 @@ public class CustomerDAO {
 				customer.setState(rs.getString("state"));
 				customer.setZip(rs.getInt("zip"));
 				customer.setCash(rs.getBigDecimal("cash"));
+				customer.setTotal(rs.getBigDecimal("total"));
 			}
 			//commit transaction
 			con.commit();

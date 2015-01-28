@@ -22,6 +22,7 @@ public class CustomerBean implements Serializable {
 	private String state;
 	private int zip;
 	private BigDecimal cash;
+	private BigDecimal total;
 
 	public int getCustomer_id() {
 		return customer_id;
@@ -109,6 +110,14 @@ public class CustomerBean implements Serializable {
 
 	public void setCash(BigDecimal cash) {
 		this.cash = cash;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
 
 }
