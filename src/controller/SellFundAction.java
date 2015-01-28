@@ -43,7 +43,9 @@ public class SellFundAction extends Action{
 	public String perform(HttpServletRequest request) {
 		boolean check = false;
 		HttpSession session = request.getSession();
-		
+		if (session.getAttribute("customer") == null) {
+			return "login.jsp";
+		}		
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		List<String> errors = new ArrayList<String>();
 		SellForm form = null;
