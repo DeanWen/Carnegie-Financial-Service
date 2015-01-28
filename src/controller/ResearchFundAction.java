@@ -62,14 +62,19 @@ public class ResearchFundAction extends Action {
 				e.printStackTrace();
 			}
 			
-			if(fund == null || history == null) {
+			if(fund == null) {
 				continue;
 			}
 
 			item.setFund_id(fund.getFund_id());
 			item.setName(fund.getName());
 			item.setSymbol(fund.getSymbol());
-			item.setPrice(history.getPrice());
+			if (history == null) {
+				item.setPrice(null);
+			}
+			else {
+				item.setPrice(history.getPrice());
+			}
 			if (position == null) {
 				item.setShare(new BigDecimal(0));
 			}else {
