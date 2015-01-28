@@ -43,7 +43,7 @@
                                          <tr class="odd gradeX">
                                             <th> Password:</th>
                                             <td class="center">
-                                                <input class="text" placeholder="Password" name="password" type="text" value = "${form.getPassword()}"/>
+                                                <input class="text" placeholder="Password" name="password" type="password" value = "${form.getPassword()}"/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
