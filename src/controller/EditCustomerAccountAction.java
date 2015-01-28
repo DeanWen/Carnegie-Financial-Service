@@ -92,8 +92,7 @@ public class EditCustomerAccountAction extends Action{
 				request.setAttribute("errors", errors);
 				return "editCustomerAccount.jsp";
 			}			
-			request.setAttribute("customer", customer);
-			session.removeAttribute("customer");
+			session.setAttribute("customer", customer);
 			return "viewCustomerAccount.jsp";
 		}
 		return "editCustomerAccount.jsp";

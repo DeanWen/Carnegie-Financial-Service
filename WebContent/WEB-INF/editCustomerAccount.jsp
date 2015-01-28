@@ -9,7 +9,7 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">Manage Account</h1>
                         <div class="panel panel-default">
-                        <form action="editcustomerAccount.do" method="POST">
+                        <form action="editCustomerAccount.do" method="POST">
                         <div class="panel-heading">
                             Personal Information &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="action" value="Done" />
                         </div>
