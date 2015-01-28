@@ -21,15 +21,43 @@
                         <div class="panel-body">
                             <div class="row">
 								<div class="col-lg-6">
-                                    <form role="form">
+                                    <form action="transition.do" method="POST">
                                     	<div class="form-group">
                                             <label>Enter Date:</label>
                                             <input class="form-control" placeholder="Date:" name="date" value = "${form.getDate()}"/>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Price by fund (one fund per line, ticker and price separated by whitespace)</label>
-                                            <textarea class="form-control" rows="3" name="change" value = "${form.getChange()}"></textarea>
-                                        </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <td><b>#</b></td>
+                                            <td><b>Fund</b></td>
+                                            <td><b>Ticker</b></td>
+                                            <td align="right"><b>Shares</b></td>
+                                            <td align="right"><b>Price</b></td>
+                                            <td align="right"><b>Value</b></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="record" items="${records}">
+                                        <tr class="success">
+                                            <td>${record.getFundID()}</td>
+                                            <td>${record.getFundName()}</td>
+                                            <td>${record.getFundSymbol()}</td>
+                                            <td align="right">${record.getShares()}</td>
+                                            <td align="right">${record.getPrice()}</td>
+                                            <td align="right">${record.getValue()}</td>
+                                            <td>
+                                            <input type="hidden" name="id" value="${record.getFundID()}"/>
+                                            </td>
+                                            <td>
+                                            <input type="submit" class="btn btn-outline btn-primary" name="button" value ="Sell"/>
+                                            </td>
+                                        </tr>
+                                        </c:forEach>                                      
+                                    </tbody>
+                                </table>
+                            </div>
                                         <button type="submit" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     </form>

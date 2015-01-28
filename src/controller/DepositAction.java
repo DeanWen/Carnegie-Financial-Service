@@ -65,7 +65,7 @@ public class DepositAction extends Action{
 	        
 	        // Look up the user and update cash
 	        CustomerBean customer = null;
-	        int newCash = 0;
+	        BigDecimal newCash = new BigDecimal(0);
 	        try {
 		        customer = customerDAO.read(Integer.parseInt(form.getUserid()));
 		        
@@ -75,15 +75,15 @@ public class DepositAction extends Action{
 		        }	        	
 		        
 		        // Update cash
-		        int currentCash = customerDAO.read(Integer.parseInt(form.getUserid())).getCash().intValue();
-		        int addAmount = Integer.parseInt(form.getDepositAmount());
-		        newCash = currentCash + addAmount;
+		        BigDecimal currentCash = new BigDecimal(customerDAO.read(Integer.parseInt(form.getUserid())).getCash().intValue());
+		        BigDecimal addAmount = new BigDecimal(form.getDepositAmount());
+		        newCash = currentCash.add(addAmount);
 		        // customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
-		        customer.setCash(new BigDecimal(newCash));
+		        customer.setCash(newCash);
 		        customerDAO.update(customer);
 		        		        
 				TransactionBean transactionBean = new TransactionBean();
-				transactionBean.setAmount(new BigDecimal(newCash));
+				transactionBean.setAmount(newCash);
 				transactionBean.setCustomer_id(Integer.parseInt(form.getUserid()));
 				transactionBean.setFund_id(0);
 				transactionBean.setTransaction_type("Deposit");
