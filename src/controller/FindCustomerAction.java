@@ -44,10 +44,10 @@ public class FindCustomerAction extends Action{
 	    	FindCustomerForm form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
 	        
-//	        // If not logged in, return to homepage
-//			if (session.getAttribute("employee") != null) {
-//				return "login.jsp";
-//			}
+	        // If not logged in, return to homepage
+			if (session.getAttribute("employee") == null) {
+				return "login.jsp";
+			}
 	        
 	        // If no params were passed, return with no errors so that the form will be
 	        // presented (we assume for the first time).

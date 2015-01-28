@@ -40,8 +40,10 @@ public class EditCustomerAccountAction extends Action{
 	
 	
 	public String perform(HttpServletRequest request) {
-		HttpSession session = request.getSession(true);
-		
+		HttpSession session = request.getSession();
+		if (session.getAttribute("employee") == null) {
+			return "login.jsp";
+		}		
 		TransactionBean transaction = null;
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		try {

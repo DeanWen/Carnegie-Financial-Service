@@ -97,7 +97,7 @@ public class LoginAction extends Action{
 				employee = employeeDAO.read(form.getUserid());
 				if (employee == null) {
 					errors = new ArrayList<String>();
-					errors.add("This account does not exists");
+					errors.add("This account does not exist");
 					request.setAttribute("errors", errors);
 					return "login.jsp";
 				} else if(!employee.getPassword().equals(form.getPassword())){

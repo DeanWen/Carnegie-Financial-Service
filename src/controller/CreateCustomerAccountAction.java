@@ -7,6 +7,7 @@
 package controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +43,14 @@ public class CreateCustomerAccountAction extends Action {
 		try {	
 			CreateCustomerAccountForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-
+			
 			// If no params were passed, return with no errors so that the form
 			// will be
 			// presented (we assume for the first time).
+			HttpSession session = request.getSession();
+			if (session.getAttribute("employee") == null) {
+				return "login.jsp";
+			}
 			if (!form.isPresent()) {
 				return "createCustomerAccount.jsp";
 			}

@@ -41,7 +41,10 @@ public class TransactionHistoryViewAction extends Action{
 	}
 	
 	public String perform(HttpServletRequest request) {
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("employee") == null) {
+			return "login.jsp";
+		}
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		
 		

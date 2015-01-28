@@ -5,6 +5,7 @@
 package controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,10 @@ public class CreateFundAction extends Action {
 			// If no params were passed, return with no errors so that the form
 			// will be
 			// presented (we assume for the first time).
+			HttpSession session = request.getSession();
+			if (session.getAttribute("employee") == null) {
+				return "login.jsp";
+			}
 			if (!form.isPresent()) {
 				return "createFund.jsp";
 			}
