@@ -46,7 +46,7 @@ public class TransitionAction extends Action{
 	        request.setAttribute("form",form);
 	        
 //	        // If not logged in, return to homepage
-	        if (session.getAttribute("employee") != null) {
+	        if (session.getAttribute("employee") == null) {
 				return "login.jsp";
 			}
 	        
