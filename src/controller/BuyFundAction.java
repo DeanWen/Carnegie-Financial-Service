@@ -45,8 +45,17 @@ public class BuyFundAction extends Action{
 	public String perform(HttpServletRequest request) {
 		boolean check = false;
 		HttpSession session = request.getSession();		
-		CustomerBean customerBean = (CustomerBean) session.getAttribute("customer");
+//		CustomerBean customerBean = (CustomerBean) session.getAttribute("customer");
 		
+		CustomerBean oldCustomer = (CustomerBean) session.getAttribute("customer");
+		int customer_id = oldCustomer.getCustomer_id();
+		CustomerBean customerBean = null;
+		try {
+			customerBean = customerDAO.read(customer_id);
+		} catch (MyDAOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		BuyForm form = null;		
 		try {
@@ -126,7 +135,8 @@ public class BuyFundAction extends Action{
 			errors.add("Update database failed)");
 			request.setAttribute("errors", errors);
 			return "buyFund.jsp";
-		}	
+		}
+		session.setAttribute("customerBean", customerBean);
 		
 		check = true;
 		request.setAttribute("check", check);
