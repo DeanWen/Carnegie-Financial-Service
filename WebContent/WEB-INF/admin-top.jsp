@@ -270,9 +270,9 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <li>
+                        <!--  <li>
                             <a href="transition.do"><i class="fa fa-paper-plane fa-fw"></i> Transition Day</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="changeEmpPWD.do"><i class="fa fa-key fa-fw"></i> Change Password</a>
                         </li>
