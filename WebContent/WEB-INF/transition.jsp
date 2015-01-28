@@ -27,32 +27,29 @@
                                             <input class="form-control" placeholder="Date:" name="date" value = "${form.getDate()}"/>
                                         </div>
                             <div class="table-responsive">
-                                <table class="table">
+                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <td><b>#</b></td>
                                             <td><b>Fund</b></td>
                                             <td><b>Ticker</b></td>
-                                            <td align="right"><b>Shares</b></td>
-                                            <td align="right"><b>Price</b></td>
-                                            <td align="right"><b>Value</b></td>
+                                            <td align="right"><b>Current Price</b></td>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="record" items="${records}">
+                                        <c:forEach var="fundList" items="${fundList}">
                                         <tr class="success">
-                                            <td>${record.getFundID()}</td>
-                                            <td>${record.getFundName()}</td>
-                                            <td>${record.getFundSymbol()}</td>
-                                            <td align="right">${record.getShares()}</td>
-                                            <td align="right">${record.getPrice()}</td>
-                                            <td align="right">${record.getValue()}</td>
+                                            <td>${fundList.getFund_id()}</td>
+                                            <td>${fundList.getName()}</td>
+                                            <td>${fundList.getSymbol()}</td>
+                                            <td align="right">${fundList.getPrice()}</td>
+
                                             <td>
-                                            <input type="hidden" name="id" value="${record.getFundID()}"/>
+                                            <input type="hidden" name="id" value="${fundList.getFund_id()}"/>
+                                            <input type="text" name="value"/>
                                             </td>
-                                            <td>
-                                            <input type="submit" class="btn btn-outline btn-primary" name="button" value ="Sell"/>
-                                            </td>
+
                                         </tr>
                                         </c:forEach>                                      
                                     </tbody>
@@ -66,7 +63,7 @@
                             <!-- row -->
                             <c:forEach var="error" items="${errors}">
 								<div class="alert alert-danger">
-                                ${error}.
+                                ${error}
                             	</div> 
 							</c:forEach>
                         </div>

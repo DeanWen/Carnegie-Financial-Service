@@ -57,14 +57,20 @@ public class CreateCustomerAccountAction extends Action {
 			}
 			
 			CustomerBean customer = new CustomerBean();
-			if(customerDAO.read(form.getCustomer_id()) != null) {
+			if(customerDAO.read(Integer.parseInt(form.getCustomer_id())) != null) {
 				errors.add("User Exist");
 				return "createCustomerAccount.jsp";
 			} else {
-				customer.setCustomer_id(form.getCustomer_id());
+				customer.setCustomer_id(Integer.parseInt(form.getCustomer_id()));
+				customer.setUsername(form.getUsername());
 				customer.setFirstname(form.getFirstname());
 				customer.setLastname(form.getLastname());
 				customer.setPassword(form.getPassword());
+				customer.setAddr_line1(form.getAddr_line1());
+				customer.setAddr_line2(form.getAddr_line2());
+				customer.setCity(form.getCity());
+				customer.setState(form.getState());
+				customer.setZip(Integer.parseInt(form.getZip()));
 				customerDAO.create(customer);
 				request.setAttribute("message", "Create Customer Account Successfully!");
 				return "success.jsp";
