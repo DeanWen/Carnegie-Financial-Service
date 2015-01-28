@@ -1,6 +1,6 @@
 <!-- Tian Zheng CMU Jan 27, 2015 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="template-top.jsp" />
+<jsp:include page="admin-top.jsp" />
 
 <div id="page-wrapper">
             <div class="container-fluid">
@@ -146,4 +146,4 @@
         </div>
         <!-- /#page-wrapper -->
 </form>
-<jsp:include page="template-bottom.jsp" />
+<jsp:include page="admin-bottom.jsp" />
