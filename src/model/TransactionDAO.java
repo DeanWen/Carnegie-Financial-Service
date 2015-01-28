@@ -245,6 +245,47 @@ public class TransactionDAO {
 		}
 	}
 	
+	public ArrayList<TransactionBean> getAllPending() throws MyDAOException {
+		Connection con = null;
+		try {
+			con = getConnection();
+			con.setAutoCommit(false);
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
+					+ tableName + " WHERE status = 0");
+			ResultSet rs = pstmt.executeQuery();
+			
+			ArrayList<TransactionBean> transactions = new ArrayList<TransactionBean>();
+			TransactionBean item;
+			while(rs.next()) {
+				item = new TransactionBean();
+				item.setTransaction_id(rs.getInt("transaction_id"));
+				item.setCustomer_id(rs.getInt("customer_id"));
+				item.setFund_id(rs.getInt("fund_id"));
+				item.setShares(rs.getBigDecimal("shares"));
+				item.setExecute_date(rs.getDate("execute_date"));
+				item.setTransaction_type(rs.getString("transaction_type"));
+				item.setAmount(rs.getBigDecimal("amount"));
+				item.setStatus(rs.getBoolean("status"));
+				transactions.add(item);
+			}
+			con.commit();
+			rs.close();
+			pstmt.close();
+			releaseConnection(con);
+			return transactions;
+		} catch (SQLException e) {
+			try {
+				if (con != null) {
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
+				}
+			} catch (SQLException e2) {
+				/* ignore */
+			}
+			throw new MyDAOException(e);
+		}
+	}
+	
 	public ArrayList<TransactionBean> getTransactions(int customerID) throws MyDAOException {
 		Connection con = null;
 		try {
