@@ -38,6 +38,10 @@ public class DepositForm extends FormBean{
 			errors.add("Please enter the deposit amount:");
 			return errors;
 		}
+		if (!depositAmount.matches("^[0-9]{1,12}([.][0-9]{1,2})?$")) {
+			errors.add("Deposit amount number is not accepted");
+			return errors;
+		}
 		
 		return errors;
 	}

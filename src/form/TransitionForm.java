@@ -4,8 +4,6 @@
  */
 package form;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +11,7 @@ import org.mybeans.form.FormBean;
 
 public class TransitionForm extends FormBean{
 	String date;
+	String change;
 	
 	public void setDate(String s) {
 		date = s.trim();
@@ -21,20 +20,34 @@ public class TransitionForm extends FormBean{
 		return date;
 	}
 	
+	public void setChange(String s) {
+		change = s.trim();
+	}
+	public String getChange() {
+		return change;
+	}
+	
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (date == null || date.length() == 0) {
-			errors.add("Please enter the date");
+		if(date == null || date.length() == 0) {
+			errors.add("Please enter the date:");
 			return errors;
 		}
 		
-		SimpleDateFormat format = new SimpleDateFormat("MM/dd/YYYY");
-		try {
-			format.parse(date);
-		} catch(ParseException e){
-			errors.add("Please enter date in format MM/dd/YYYY");
-		    return errors;
+		if(!date.matches("^[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}$")) {
+			errors.add("Date format must be YYYY/MM/DD");
+			return errors;
+		}
+		
+		if (change == null || change.length() == 0) {
+			errors.add("Please enter the change on transition day:");
+			return errors;
+		}
+		
+		if (!change.matches("^[0-9]{1,12}([.][0-9]{1,2})?$")) {
+			errors.add("Price number is not accepted");
+			return errors;
 		}
 		
 		return errors;

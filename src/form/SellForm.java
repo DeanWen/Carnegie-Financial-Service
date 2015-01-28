@@ -56,6 +56,9 @@ public class SellForm extends FormBean{
 			errors.add("Please enter the amount of shares you want to sell");
 			return errors;
 		}
+		if (!sellAmount.matches("^[0-9]{1,13}([.][0-9]{1,3})?$")) {
+			errors.add("Shares number is not accepted");
+		}
 		if (cfmAmount == null || cfmAmount.length() == 0) {
 			errors.add("Please confirm shares you want to sell");
 			return errors;

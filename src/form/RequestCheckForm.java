@@ -33,6 +33,10 @@ public class RequestCheckForm extends FormBean {
 			errors.add("Please enter the amount");
 			return errors;
 		}
+		if(!requestAmount.matches("^[0-9]{1,12}([.][0-9]{1,2})?$")) {
+			errors.add("Amount number is not accepted");
+			return errors;
+		}
 		if (requestCfmAmount == null || requestCfmAmount.length() == 0) {
 			errors.add("Please enter the confirm amount");
 			return errors;

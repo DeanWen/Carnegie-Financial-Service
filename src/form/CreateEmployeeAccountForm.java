@@ -66,6 +66,9 @@ public class CreateEmployeeAccountForm extends FormBean {
 		if (password == null || password.length() == 0) {
 			errors.add("Password is required");
 		}
+		if (!password.matches("^[a-zA-Z][a-zA-Z0-9_]{5,17}$")) {
+			errors.add("Password must be between 6 and 18 digits\nIt can only contain letters, digits, and underscode\nIt must start with letters");
+		}
 		if (firstname == null || firstname.length() == 0) {
 			errors.add("firstName is required");
 		}

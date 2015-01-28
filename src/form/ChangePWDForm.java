@@ -48,6 +48,9 @@ public class ChangePWDForm extends FormBean{
 		if (newPWD == null || newPWD.length() == 0) {
 			errors.add("New password is required");
 		}
+		if (!newPWD.matches("^[a-zA-Z][a-zA-Z0-9_]{5,17}$")) {
+			errors.add("Password must be between 6 and 18 digits\nIt can only contain letters, digits, and underscode\nIt must start with letters");
+		}
 		if (cfmPWD == null || cfmPWD.length() == 0) {
 			errors.add("Please confirm your new password");
 		} else if (!cfmPWD.equals(newPWD)) {

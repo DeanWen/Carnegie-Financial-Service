@@ -55,6 +55,11 @@ public class BuyForm extends FormBean{
 			return errors;
 		}
 		
+		if(!buyAmount.matches("^[0-9]{1,12}([.][0-9]{1,2})?$")) {
+			errors.add("Amount number is not accpeted");
+			return errors;
+		}
+		
 		if (buyAmount != null && buyAmount.length() != 0) {
 			float tmp = Float.parseFloat(buyAmount);
 			if (tmp < 0.01) {
@@ -66,9 +71,16 @@ public class BuyForm extends FormBean{
 			errors.add("Please confirm shares you want to buy");
 			return errors;
 		}
+		
+		if(!cfmAmount.matches("^[0-9]{1,12}([.][0-9]{1,2})?$")) {
+			errors.add("Amount number is not accpeted");
+			return errors;
+		}
 		if (!cfmAmount.equals(buyAmount)) {
 			errors.add("Shares amounts are not consistent");
 		}
+		
+		
 		
 		if(action == null || !action.equals("Buy")) {
 			errors.add("Invalid Button");
