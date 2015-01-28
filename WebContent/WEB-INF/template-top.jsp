@@ -295,7 +295,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="login.do"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
+                            <a href="logout.do"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
                         </li>
                         
                     </ul>

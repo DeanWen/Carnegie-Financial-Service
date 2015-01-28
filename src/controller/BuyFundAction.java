@@ -45,7 +45,6 @@ public class BuyFundAction extends Action{
 	public String perform(HttpServletRequest request) {
 		boolean check = false;
 		HttpSession session = request.getSession();		
-//		CustomerBean customerBean = (CustomerBean) session.getAttribute("customer");
 		
 		CustomerBean oldCustomer = (CustomerBean) session.getAttribute("customer");
 		int customer_id = oldCustomer.getCustomer_id();

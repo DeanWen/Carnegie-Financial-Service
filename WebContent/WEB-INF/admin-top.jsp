@@ -299,7 +299,7 @@
                             <a href="findCustomer.do"><i class="fa fa-pencil-square-o fa-fw"></i> Manage Customer Account</a>
                         </li>
                         <li>
-                            <a href="login.do"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
+                            <a href="logout.do"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
                         </li>
                         
                     </ul>
