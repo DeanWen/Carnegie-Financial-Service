@@ -62,7 +62,7 @@ public class ResearchFundAction extends Action {
 				e.printStackTrace();
 			}
 			
-			if(fund == null) {
+			if(fund == null || fund.getFund_id() == 0) {
 				continue;
 			}
 
