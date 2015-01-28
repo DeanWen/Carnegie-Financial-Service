@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.FundDAO;
+import model.Fund_Price_History_DAO;
 import model.Model;
 import model.MyDAOException;
 
@@ -19,14 +20,19 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
+import databean.FundBean;
+import databean.Fund_Price_History_Bean;
+import databean.PositionBean;
+import databean.ResearchBean;
 import form.TransitionForm;
 
 public class TransitionAction extends Action{
 	private FormBeanFactory<TransitionForm> formBeanFactory = FormBeanFactory.getInstance(TransitionForm.class);
-	
+	Fund_Price_History_DAO fundPriceHistoryDAO;
 	private FundDAO fundDAO;
 
 	public TransitionAction(Model model) {
+		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 		fundDAO = model.getFundDAO();
 	}
 
@@ -38,55 +44,74 @@ public class TransitionAction extends Action{
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         
-        try {
-	    	TransitionForm form = formBeanFactory.create(request);
-	        request.setAttribute("form",form);
+//        try {
+//	    	TransitionForm form = formBeanFactory.create(request);
+//	        request.setAttribute("form",form);
 	        
 //	        // If not logged in, return to homepage
 //			if (session.getAttribute("employee") != null) {
 //				return "login.jsp";
 //			}
 	        
-	        // If no params were passed, return with no errors so that the form will be
-	        // presented (we assume for the first time).
-	        if (!form.isPresent()) {
-	            return "transition.jsp";
-	        }
-
-	        // Any validation errors?
-	        errors.addAll(form.getValidationErrors());
-	        if (errors.size() != 0) {
-	            return "transition.jsp";
-	        }
+//	        // If no params were passed, return with no errors so that the form will be
+//	        // presented (we assume for the first time).
+//	        if (!form.isPresent()) {
+//	            return "transition.jsp";
+//	        }
+//
+//	        // Any validation errors?
+//	        errors.addAll(form.getValidationErrors());
+//	        if (errors.size() != 0) {
+//	            return "transition.jsp";
+//	        }
 	        
-//	        // Look up the user and update cash
-//	        CustomerBean customer = null;
-//	        try {
-//		        customer = fundDAO.read(Integer.parseInt(form.getUserid()));
-//		        
-//		        if (customer == null) {
-//		            errors.add("User Name not found");
-//		            return "transition.jsp";
-//		        }	        	
-//		        
-//		        // Update cash
-//		        int currentCash = customerDAO.read(Integer.parseInt(form.getUserid())).getCash().intValue();
-//		        int addAmount = Integer.parseInt(form.getDepositAmount());
-//		        int newCash = currentCash + addAmount;
-//		        // customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
-//		        customer.setCash(new BigDecimal(newCash));
-//		        customerDAO.update(customer);
-//		        request.setAttribute("message", "Transition Day Added successfully!");
-//		        return "success.jsp";
-//		        
-//			} catch (MyDAOException e1) {
-//				e1.printStackTrace();
-//			}
+			ArrayList<ResearchBean> fundList = new ArrayList<ResearchBean>();
+			 
+			ArrayList<FundBean> funds = new ArrayList<FundBean>();
+			try {
+				funds = fundDAO.readAll();
+			} catch (MyDAOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			for(int i = 0; i < funds.size(); i++) {
+				ResearchBean item = new ResearchBean();
+				int fundID = funds.get(i).getFund_id();
+				
+				FundBean fund = null;
+				Fund_Price_History_Bean history = null;
+				
+				try {
+					fund = fundDAO.read(fundID);
+					history = fundPriceHistoryDAO.readLast(fundID);
+				} catch (MyDAOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+//				if(fund == null || history == null) {
+//					continue;
+//				}
+
+				item.setFund_id(fund.getFund_id());
+				item.setName(fund.getName());
+				item.setSymbol(fund.getSymbol());
+				if (history != null) {
+					item.setPrice(history.getPrice());	
+				} else {
+					item.setPrice(new BigDecimal(0));
+				}
+				
+				item.setShare(new BigDecimal(0));
+				fundList.add(item);
+			}
+			
+			request.setAttribute("fundList", fundList);
 	        
 			return "transition.do";
-        } catch (FormBeanException e) {
-        	errors.add(e.getMessage());
-        	return "transition.jsp";
-        }
+//        } catch (FormBeanException e) {
+//        	errors.add(e.getMessage());
+//        	return "transition.jsp";
+//        }
     }
 }

@@ -47,7 +47,7 @@
                             <!-- dataTable_wrapper -->
                             <c:forEach var="error" items="${errors}">
 								<div class="alert alert-danger">
-                                ${error}.
+                                ${error}
                             	</div> 
 							</c:forEach>
                         </div>
