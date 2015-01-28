@@ -55,7 +55,6 @@ public class SellFundAction extends Action{
 		}
 		
 		if(!form.isPresent()) {
-			System.out.println("sell form doesn't exist");
 			return "sellFund.jsp";
 		}
 		request.setAttribute("form", form);

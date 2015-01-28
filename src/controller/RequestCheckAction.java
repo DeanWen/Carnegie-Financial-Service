@@ -38,6 +38,9 @@ public class RequestCheckAction extends Action {
 		boolean check = false;
 		
 		HttpSession session = request.getSession();
+		if (session.getAttribute("customer") == null) {
+			return "login.jsp";
+		}
 		List<String> errors = new ArrayList<String>();
 		CustomerBean customerBean = (CustomerBean) session.getAttribute("customer");
 					

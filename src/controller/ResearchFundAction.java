@@ -33,7 +33,10 @@ public class ResearchFundAction extends Action {
 	}
 	
 	public String perform(HttpServletRequest request) {
-		HttpSession session = request.getSession();		
+		HttpSession session = request.getSession();
+		if (session.getAttribute("customer") == null) {
+			return "login.jsp";
+		}		
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		
 		ArrayList<ResearchBean> fundList = new ArrayList<ResearchBean>();
