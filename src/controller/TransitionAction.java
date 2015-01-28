@@ -40,10 +40,7 @@ public class TransitionAction extends Action{
     
     public String perform(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        
         List<String> errors = new ArrayList<String>();
-        request.setAttribute("errors",errors);
-        
         try {
 	    	TransitionForm form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
@@ -64,6 +61,9 @@ public class TransitionAction extends Action{
 //	        if (errors.size() != 0) {
 //	            return "transition.jsp";
 //	        }
+	        
+	        
+	        
 	        
 			ArrayList<ResearchBean> fundList = new ArrayList<ResearchBean>();
 			 
@@ -107,7 +107,14 @@ public class TransitionAction extends Action{
 			}
 			
 			request.setAttribute("fundList", fundList);
-	        
+			if(!form.isPresent()) {
+	        	return "transition.jsp";
+	        }
+			errors = form.getValidationErrors();
+	        if (errors.size() > 0) {
+	        	request.setAttribute("errors", errors);
+	        	return "transition.jsp";
+	        }
 			return "transition.jsp";
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
