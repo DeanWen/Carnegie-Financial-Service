@@ -4,6 +4,8 @@
  */
 package form;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +24,17 @@ public class TransitionForm extends FormBean{
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if(date == null || date.length() == 0) {
-			errors.add("Please enter the date:");
+		if (date == null || date.length() == 0) {
+			errors.add("Please enter the date");
 			return errors;
+		}
+		
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/YYYY");
+		try {
+			format.parse(date);
+		} catch(ParseException e){
+			errors.add("Please enter date in format MM/dd/YYYY");
+		    return errors;
 		}
 		
 		return errors;

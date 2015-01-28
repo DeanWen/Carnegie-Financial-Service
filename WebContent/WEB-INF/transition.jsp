@@ -23,8 +23,8 @@
 								<div class="col-lg-6">
                                     <form action="transition.do" method="POST">
                                     	<div class="form-group">
-                                            <label>Enter Date:</label>
-                                            <input class="form-control" placeholder="Date:" name="date" value = "${form.getDate()}"/>
+                                            <label>Enter Date (MM/DD/YYYY):</label>
+                                            <input class="form-control" placeholder="MM/DD/YYYY" name="date" value = "${form.getDate()}"/>
                                         </div>
                             <div class="table-responsive">
                                  <table class="table">
@@ -34,7 +34,7 @@
                                             <td><b>Fund</b></td>
                                             <td><b>Ticker</b></td>
                                             <td align="right"><b>Current Price</b></td>
-
+                                            <td><b>Change</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -45,10 +45,10 @@
                                             <td>${fundList.getSymbol()}</td>
                                             <td align="right">${fundList.getPrice()}</td>
 
-<%--                                             <td>
+                                            <td>
                                             <input type="hidden" name="id" value="${fundList.getFund_id()}"/>
                                             <input type="text" name="value"/>
-                                            </td> --%>
+                                            </td>
 
                                         </tr>
                                         </c:forEach>                                      

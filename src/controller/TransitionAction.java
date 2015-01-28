@@ -89,9 +89,9 @@ public class TransitionAction extends Action{
 					e.printStackTrace();
 				}
 				
-//				if(fund == null) {
-//					continue;
-//				}
+				if(fund == null || fundID == 0) {
+					continue;
+				}
 
 				item.setFund_id(fund.getFund_id());
 				item.setName(fund.getName());
