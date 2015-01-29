@@ -65,10 +65,8 @@ public class TransitionAction extends Action{
 				CustomerBean customer = customerDAO.read(tran.getCustomer_id());
 				PositionBean cusPosition = positionDAO.read(tran.getFund_id(), tran.getCustomer_id());
 				
-				//Here assume all number are correct like
 				//current total must > withdraw amount
 				//current total + deposit must < big decimal limit
-				//current holding shares must > sell amount
 				//shares * prices < big decimal limit
 				//deposit < big decimal limit
 				
@@ -84,16 +82,22 @@ public class TransitionAction extends Action{
 					//1. minus shares
 					//2. calculate income
 					//3. add to total
-					BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(tran.getShares());
-					cusPosition.setShares(cusPosition.getShares().subtract(tran.getShares()));
-					System.out.print(afterSell);
-					if (MAX.compareTo(afterSell) == 1 && 
-							MAX.compareTo(customer.getTotal().add(afterSell)) == 1) {
-						customer.setTotal(customer.getTotal().add(afterSell));
-						positionDAO.update(cusPosition);
-					}else {
+					
+					//current holding shares must > sell shares
+					if (cusPosition.getShares().subtract(tran.getShares()).compareTo(BigDecimal.ZERO) == -1) {
 						System.out.println("total money exceed limit, transaction failed");
 						tran.setStatus(-1);
+					}else {
+						cusPosition.setShares(cusPosition.getShares().subtract(tran.getShares()));						
+						BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(tran.getShares());						
+						if (MAX.compareTo(afterSell) == 1 && 
+								MAX.compareTo(customer.getTotal().add(afterSell)) == 1) {
+							customer.setTotal(customer.getTotal().add(afterSell));
+							positionDAO.update(cusPosition);
+						}else {
+							System.out.println("total money exceed limit, transaction failed");
+							tran.setStatus(-1);
+						}
 					}
 				}
 				else if (tran.getTransaction_type().equalsIgnoreCase("Buy")) {
