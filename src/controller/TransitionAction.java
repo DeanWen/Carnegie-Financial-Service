@@ -39,6 +39,7 @@ public class TransitionAction extends Action{
 	private CustomerDAO customerDAO;
 	private TransactionDAO transactionDAO;
 	private PositionDAO positionDAO;
+	private final BigDecimal MAX = new BigDecimal(9999999999.99);
 
 	public TransitionAction(Model model) {
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
@@ -82,7 +83,13 @@ public class TransitionAction extends Action{
 					//3. update total
 					cusPosition.setShares(cusPosition.getShares().subtract(tran.getAmount()));
 					BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(cusPosition.getShares());
-					customer.setTotal(customer.getTotal().add(afterSell));
+					
+					if (MAX.compareTo(afterSell) == 1 && 
+							MAX.compareTo(customer.getTotal().add(afterSell)) == 1) {
+						customer.setTotal(customer.getTotal().add(afterSell));
+					}else {
+
+					}
 				}
 				else if (tran.getTransaction_type().equalsIgnoreCase("Buy")) {
 					//1. add shares

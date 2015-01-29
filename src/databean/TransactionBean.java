@@ -19,14 +19,14 @@ public class TransactionBean implements Serializable {
 	private BigDecimal shares;
 	private String transaction_type;
 	private BigDecimal amount;
-	private Boolean status;
+	private int status;
 	
 
-	public Boolean getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

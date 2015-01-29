@@ -67,7 +67,7 @@ public class TransactionDAO {
 			pstmt.setBigDecimal(5, item.getShares());
 			pstmt.setString(6, item.getTransaction_type());
 			pstmt.setBigDecimal(7, item.getAmount());
-			pstmt.setBoolean(8, item.getStatus());
+			pstmt.setInt(8, item.getStatus());
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
 				throw new SQLException("Insert updated " + count + " rows");
@@ -110,7 +110,7 @@ public class TransactionDAO {
 			pstmt.setBigDecimal(4, item.getShares());
 			pstmt.setString(5, item.getTransaction_type());
 			pstmt.setBigDecimal(6, item.getAmount());
-			pstmt.setBoolean(7, item.getStatus());
+			pstmt.setInt(7, item.getStatus());
 			pstmt.setInt(8, item.getTransaction_id());
 			
 			int count = pstmt.executeUpdate();
@@ -183,7 +183,7 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
-				item.setStatus(rs.getBoolean("status"));
+				item.setStatus(rs.getInt("status"));
 			}
 			con.commit();
 			rs.close();
@@ -225,7 +225,7 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
-				item.setStatus(rs.getBoolean("status"));
+				item.setStatus(rs.getInt("status"));
 			}
 			con.commit();
 			rs.close();
@@ -265,7 +265,7 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
-				item.setStatus(rs.getBoolean("status"));
+				item.setStatus(rs.getInt("status"));
 				transactions.add(item);
 			}
 			con.commit();
@@ -307,7 +307,7 @@ public class TransactionDAO {
 				item.setExecute_date(rs.getDate("execute_date"));
 				item.setTransaction_type(rs.getString("transaction_type"));
 				item.setAmount(rs.getBigDecimal("amount"));
-				item.setStatus(rs.getBoolean("status"));
+				item.setStatus(rs.getInt("status"));
 				transactions.add(item);
 			}
 			con.commit();
