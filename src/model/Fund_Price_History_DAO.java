@@ -280,7 +280,7 @@ public class Fund_Price_History_DAO {
 			con.setAutoCommit(false);
 			
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
-					+ tableName + " WHERE price_date = (SELECT MAX(price_date) from " + tableName + " WHERE Fund_fund_id = ?)");
+					+ tableName + " WHERE Fund_fund_id = ? AND price_date = (SELECT MAX(price_date) from " + tableName + ")");
 			pstmt.setInt(1, fund_id);
 			ResultSet rs = pstmt.executeQuery();
 			Fund_Price_History_Bean item;

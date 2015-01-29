@@ -24,7 +24,7 @@
                                     <form action="transition.do" method="POST">
                                     	<div class="form-group">
                                             <label>Enter Date (yyyy-mm-dd):</label>
-                                            <input class="form-control" placeholder="yyyy-mm-dd" name="date" value = "${form.getDate()}"/>
+                                            <input class="form-control" placeholder="yyyy-mm-dd" name="date" value = "${preDate}"/>
                                         </div>
                             <div class="table-responsive">
                                  <table class="table">
@@ -47,7 +47,7 @@
 
                                             <td>
                                             <input type="hidden" name="id" value="${fundList.getFund_id()}"/>
-                                            <input type="text" name="price"/>
+                                            <input type="text" name="price" value = "${fundList.getPrice()}"/>
                                             </td>
 
                                         </tr>
@@ -66,10 +66,10 @@
                                 ${error}
                             	</div> 
 							</c:forEach>
-							<c:if test="${check}">
-                            <div class="alert alert-success">
-                            	Update price successfully!    
-                            </div> 
+							<c:if test="${requestScope.check}">
+	                            <div class="alert alert-success">
+	                            	Update price successfully!    
+	                            </div> 
                             </c:if>
                         </div>
                         <!-- /.panel-body -->

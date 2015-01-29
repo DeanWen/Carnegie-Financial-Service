@@ -56,10 +56,10 @@ public class PositionDAO {
 			con = getConnection();
 			con.setAutoCommit(false);
 			PreparedStatement pstmt = con
-					.prepareStatement("INSERT INTO "
+					.prepareStatement(" INSERT INTO "
 							+ tableName
-							+ "(Fund_fund_id, Customer_customer_id, shares) "
-							+ "VALUES (?, ?, ?)");
+							+ " (Fund_fund_id, Customer_customer_id, shares) "
+							+ " VALUES (?, ?, ?)");
 			pstmt.setInt(1, item.getFund_id());
 			pstmt.setInt(2, item.getCustomer_id());
 			pstmt.setBigDecimal(3, item.getShares());

@@ -94,9 +94,9 @@ public class TransactionDAO {
 		try {
 			con = getConnection();
 			con.setAutoCommit(false);
-			PreparedStatement pstmt = con.prepareStatement("UPDATE"
+			PreparedStatement pstmt = con.prepareStatement("UPDATE "
 					+ tableName 
-					+ "set customer_id = ? "
+					+ " set customer_id = ? "
 					  + ", fund_id = ? "
 					  + ", execute_date = ? "
 					  + ", shares = ? "
@@ -106,7 +106,7 @@ public class TransactionDAO {
 				    + "where transaction_id = ?");
 			pstmt.setInt(1, item.getCustomer_id());
 			pstmt.setInt(2, item.getFund_id());
-			pstmt.setDate(3, (java.sql.Date) item.getExecute_date());
+			pstmt.setDate(3, item.getExecute_date());
 			pstmt.setBigDecimal(4, item.getShares());
 			pstmt.setString(5, item.getTransaction_type());
 			pstmt.setBigDecimal(6, item.getAmount());

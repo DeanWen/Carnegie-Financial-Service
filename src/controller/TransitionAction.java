@@ -8,13 +8,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import java.sql.Date;
-
-import java.util.Date;
-import java.util.HashMap;
-
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,12 +26,12 @@ import model.TransactionDAO;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import databean.CustomerBean;
 import databean.FundBean;
 import databean.Fund_Price_History_Bean;
+import databean.PositionBean;
 import databean.ResearchBean;
-
 import databean.TransitionIdBean;
-import databean.TransactionBean;
 import databean.TransactionBean;
 import form.TransitionForm;
 
@@ -62,7 +56,7 @@ public class TransitionAction extends Action{
 	
 
 //----------------------Transition Function------Dian Wen--1/28/2015-----------------------------------------
-	public void process (HashMap<Integer, BigDecimal> currentPrices, Date executeDate) {
+	public void process (HashMap<Integer, BigDecimal> currentPrices, java.sql.Date executeDate) {
 		try {
 			ArrayList<TransactionBean> allPending = transactionDAO.getAllPending();
 			
@@ -90,12 +84,13 @@ public class TransitionAction extends Action{
 					//1. minus shares
 					//2. calculate income
 					//3. add to total
-					cusPosition.setShares(cusPosition.getShares().subtract(tran.getAmount()));
-					BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(cusPosition.getShares());
-					
+					BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(tran.getShares());
+					cusPosition.setShares(cusPosition.getShares().subtract(tran.getShares()));
+					System.out.print(afterSell);
 					if (MAX.compareTo(afterSell) == 1 && 
 							MAX.compareTo(customer.getTotal().add(afterSell)) == 1) {
 						customer.setTotal(customer.getTotal().add(afterSell));
+						positionDAO.update(cusPosition);
 					}else {
 						System.out.println("total money exceed limit, transaction failed");
 						tran.setStatus(-1);
@@ -105,13 +100,24 @@ public class TransitionAction extends Action{
 					//1. calculate how much shares can buy
 					//2. add shares
 					//3. minus money from total
-					BigDecimal newShares = tran.getAmount().divide(currentPrices.get(tran.getFund_id())).add(cusPosition.getShares());
-					if (MAX.compareTo(newShares) == 1) {
-						cusPosition.setShares(cusPosition.getShares().add(newShares));
+					BigDecimal tmp = tran.getAmount().divide(currentPrices.get(tran.getFund_id()));
+					if (cusPosition == null) {
+						cusPosition = new PositionBean();
+						cusPosition.setCustomer_id(tran.getCustomer_id());
+						cusPosition.setFund_id(tran.getFund_id());
+						cusPosition.setShares(tmp);
 						customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
+						positionDAO.create(cusPosition);
 					}else {
-						System.out.println("total shares exceed limit, transaction failed");
-						tran.setStatus(-1);
+						BigDecimal newShares = tmp.add(cusPosition.getShares());
+						if (MAX.compareTo(newShares) == 1) {
+							cusPosition.setShares(newShares);
+							customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
+							positionDAO.update(cusPosition);
+						}else {
+							System.out.println("total shares exceed limit, transaction failed");
+							tran.setStatus(-1);
+						}
 					}
 				}
 				
@@ -126,7 +132,6 @@ public class TransitionAction extends Action{
 				
 				//update database;
 				customerDAO.update(customer);
-				positionDAO.update(cusPosition);
 				transactionDAO.update(tran);		
 			}
 		} catch (MyDAOException e2) {
@@ -216,26 +221,35 @@ public class TransitionAction extends Action{
 				item.setShare(new BigDecimal(0));
 				fundList.add(item);
 			}
+			
+			Date preDate = null;
+			try {
+				preDate = fundPriceHistoryDAO.readLastDate();
+				request.setAttribute("preDate", preDate); 
+			} catch (MyDAOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			request.setAttribute("fundList", fundList); 
 			String[] prices = (String[])request.getParameterValues("price");
 			
 			if(prices == null) {
 				return "transition.jsp";
 			}
+			
+			
 			String d = form.getDate();
 			Date date = java.sql.Date.valueOf(d);
-			Date preDate = null;
-			try {
-				preDate = fundPriceHistoryDAO.readLastDate();
-			} catch (MyDAOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+
 			if(date.equals(preDate) || preDate.after(date)) {
 				errors.add("Date entered this time must be after that you entered last time");
 				request.setAttribute("errors", errors);
 				return "transition.jsp";
 			}
+			
+			HashMap<Integer, BigDecimal> currPrice = new HashMap<Integer, BigDecimal>();
+			
 				for(int i = 0; i < fundList.size(); i++) {
 					int id = fundList.get(i).getFund_id();
 					BigDecimal price = null;
@@ -253,9 +267,13 @@ public class TransitionAction extends Action{
 					fphb.setFund_id(id);
 					fphb.setPrice(price);
 					fphb.setPrice_date(date);
+					
+					
+					
 					try {
 						try {
 							fundPriceHistoryDAO.create(fphb);
+							currPrice.put(id, price);
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -265,7 +283,10 @@ public class TransitionAction extends Action{
 						errors.add("Update failed");
 					}
 				}
-			
+		
+				process(currPrice, date);
+
+				
 			if(!form.isPresent()) {
 	        	return "transition.jsp";
 	        }
