@@ -80,7 +80,7 @@ public class TransitionAction extends Action{
 				else if (tran.getTransaction_type().equalsIgnoreCase("Sell")) {
 					//1. minus shares
 					//2. calculate income
-					//3. update total
+					//3. add to total
 					cusPosition.setShares(cusPosition.getShares().subtract(tran.getAmount()));
 					BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(cusPosition.getShares());
 					
@@ -88,23 +88,31 @@ public class TransitionAction extends Action{
 							MAX.compareTo(customer.getTotal().add(afterSell)) == 1) {
 						customer.setTotal(customer.getTotal().add(afterSell));
 					}else {
-
+						System.out.println("total money exceed limit, transaction failed");
+						tran.setStatus(-1);
 					}
 				}
 				else if (tran.getTransaction_type().equalsIgnoreCase("Buy")) {
-					//1. add shares
-					//2. calculate cost
-					//3. update total
-					cusPosition.setShares(cusPosition.getShares().add(tran.getAmount()));
-					BigDecimal afterBuy = currentPrices.get(tran.getFund_id()).multiply(cusPosition.getShares());
-					customer.setTotal(customer.getTotal().subtract(afterBuy));
+					//1. calculate how much shares can buy
+					//2. add shares
+					//3. minus money from total
+					BigDecimal newShares = tran.getAmount().divide(currentPrices.get(tran.getFund_id())).add(cusPosition.getShares());
+					if (MAX.compareTo(newShares) == 1) {
+						cusPosition.setShares(cusPosition.getShares().add(newShares));
+						customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
+					}else {
+						System.out.println("total shares exceed limit, transaction failed");
+						tran.setStatus(-1);
+					}
 				}
 				
 				//update available cash to total
 				customer.setCash(customer.getTotal());
 				
 				//update transaction status and execute date to complete
-				tran.setStatus(1);
+				if (tran.getStatus() == 0) {
+					tran.setStatus(1);
+				}
 				tran.setExecute_date(executeDate);
 				
 				//update database;
