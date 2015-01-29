@@ -55,12 +55,15 @@ public class HistoryBean implements Serializable{
 	public String getStatus() {
 		return status;
 	}
-	public void setStatus(boolean b) {
-		if(b == false) {
+	public void setStatus(int i) {
+		if(i == 0) {
 			status = "Pending";
 		}
-		if(b == true) {
+		if(i == 1) {
 			status = "Done";
+		}
+		if (i == -1) {
+			status = "Fail";
 		}
 	}
 }

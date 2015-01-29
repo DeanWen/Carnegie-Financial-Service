@@ -97,7 +97,7 @@ public class DepositAction extends Action{
 				transactionBean.setCustomer_id(Integer.parseInt(form.getUserid()));
 				transactionBean.setFund_id(0);
 				transactionBean.setTransaction_type("Deposit");
-				transactionBean.setStatus(false);
+				transactionBean.setStatus(0);
 		        
 				try {
 					transactionDAO.create(transactionBean);

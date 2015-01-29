@@ -124,7 +124,7 @@ public class BuyFundAction extends Action{
 		newTran.setCustomer_id(customerBean.getCustomer_id());
 		newTran.setFund_id(curFund.getFund_id());
 		newTran.setTransaction_type("Buy");
-		newTran.setStatus(false);
+		newTran.setStatus(0);
 		
 		try {
 			transactionDAO.create(newTran);

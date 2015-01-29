@@ -89,7 +89,7 @@ public class RequestCheckAction extends Action {
 			transactionBean.setAmount(amount);
 			transactionBean.setCustomer_id(customerBean.getCustomer_id());
 			transactionBean.setTransaction_type("Withdraw");
-			transactionBean.setStatus(false);
+			transactionBean.setStatus(0);
 
 			
 			try {

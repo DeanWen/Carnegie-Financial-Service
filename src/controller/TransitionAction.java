@@ -104,7 +104,7 @@ public class TransitionAction extends Action{
 				customer.setCash(customer.getTotal());
 				
 				//update transaction status and execute date to complete
-				tran.setStatus(true);
+				tran.setStatus(1);
 				tran.setExecute_date(executeDate);
 				
 				//update database;
