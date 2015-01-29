@@ -1,5 +1,6 @@
 package controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,7 @@ public class FundListViewAction extends Action{
 	
 	public String perform(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("customer") == null) {
-			return "login.jsp";
-		}		
+		
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		ArrayList<RecordBean> records = new ArrayList<RecordBean>();
 		ArrayList<PositionBean> positions = new ArrayList<PositionBean>();
@@ -66,7 +65,7 @@ public class FundListViewAction extends Action{
 			item.setFundName(fund.getName());
 			item.setFundSymbol(fund.getSymbol());
 			item.setPrice(history.getPrice());
-			item.setValue(history.getPrice().multiply(positions.get(i).getShares()).setScale(2));
+			item.setValue(history.getPrice().multiply(positions.get(i).getShares()).setScale(2, BigDecimal.ROUND_HALF_UP));
 			records.add(item);
 		}
 		
