@@ -77,9 +77,17 @@ public class DepositAction extends Action{
 		        }	        	
 		        
 		        // Update cash
-		        BigDecimal currentCash = new BigDecimal(customerDAO.read(Integer.parseInt(form.getUserid())).getCash().intValue());
+		        BigDecimal currentCash = customerDAO.read(Integer.parseInt(form.getUserid())).getCash();
 		        BigDecimal addAmount = new BigDecimal(form.getDepositAmount());
-		        newCash = currentCash.add(addAmount);
+		        if (currentCash.add(addAmount).compareTo(new BigDecimal("9999999999")) == 1) {
+		        	errors.add("Please enter a smaller amount");
+					request.setAttribute("errors", errors);
+					return "deposit.jsp";	
+		        } else {
+		        	newCash = currentCash.add(addAmount);
+		        }
+		        	
+		        
 		        // customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
 		        customer.setCash(newCash);
 		        customerDAO.update(customer);
