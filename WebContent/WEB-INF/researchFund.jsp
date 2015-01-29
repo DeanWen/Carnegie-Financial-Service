@@ -42,6 +42,13 @@
                                             </form>
                                             </td>
                                             
+                                            <td>
+                                            <form action="sellFund.do" method="POST">
+                                            <input type="hidden" name="id" value="${fundList.getFund_id()}"/>
+                                            <input type="submit" class="btn btn-outline btn-primary" name="button" value ="Sell"/>
+                                            </form>
+                                            </td>
+                                            
                                             <td>                            
                                             <form action="fundChart.do" target="_blank" method="POST">
                                             <input type="hidden" name="id" value="${fundList.getFund_id()}"/>
