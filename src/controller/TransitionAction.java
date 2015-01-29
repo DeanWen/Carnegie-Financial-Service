@@ -297,7 +297,7 @@ public class TransitionAction extends Action{
 	        }
 	        check = true;
 	        request.setAttribute("check", check);
-			return "transition.do";
+			return "transition.jsp";
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
         	return "transition.jsp";
