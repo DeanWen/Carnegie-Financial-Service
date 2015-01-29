@@ -8,12 +8,14 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-<<<<<<< HEAD
+
 import java.sql.Date;
-=======
+
 import java.util.Date;
 import java.util.HashMap;
->>>>>>> FETCH_HEAD
+
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,11 +35,10 @@ import org.mybeans.form.FormBeanFactory;
 import databean.FundBean;
 import databean.Fund_Price_History_Bean;
 import databean.ResearchBean;
-<<<<<<< HEAD
+
 import databean.TransitionIdBean;
-=======
 import databean.TransactionBean;
->>>>>>> FETCH_HEAD
+import databean.TransactionBean;
 import form.TransitionForm;
 
 public class TransitionAction extends Action{
@@ -149,13 +150,12 @@ public class TransitionAction extends Action{
         try {
 	    	form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
-<<<<<<< HEAD
 	        //If not logged in, return to homepage
 			if (session.getAttribute("employee") == null) {
 				return "login.jsp";
 			}
 			
-=======
+
 	        
 //	        // If not logged in, return to homepage
 	        if (session.getAttribute("employee") == null) {
@@ -175,7 +175,6 @@ public class TransitionAction extends Action{
 //	        }
 	        
 	        
->>>>>>> FETCH_HEAD
 			ArrayList<ResearchBean> fundList = new ArrayList<ResearchBean>();
 			 
 			ArrayList<FundBean> funds = new ArrayList<FundBean>();
