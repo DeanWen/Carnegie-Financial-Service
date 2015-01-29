@@ -103,11 +103,13 @@ public class CreateCustomerAccountForm extends FormBean {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-
-
+	public void setAction(String action) {
+		this.action = action;
+	}
 	public String getAction() {
 		return action;
 	}
+
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();

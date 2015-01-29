@@ -30,7 +30,9 @@ public class ChangeEmpPWDAction extends Action{
 	
 	public String perform(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		
+		if (session.getAttribute("employee") == null) {
+			return "login.jsp";
+		}		
 		EmployeeBean employee = (EmployeeBean) session.getAttribute("employee");
 		
 		ChangeEmpPWDForm form = null;

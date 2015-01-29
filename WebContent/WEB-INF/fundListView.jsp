@@ -35,14 +35,20 @@
                                             <td align="right">${record.getShares()}</td>
                                             <td align="right">${record.getPrice()}</td>
                                             <td align="right">${record.getValue()}</td>
-                                            <form action="sellFund.do" method="POST">
                                             <td>
+                                                <form action="buyFund.do" method="POST">
                                             <input type="hidden" name="id" value="${record.getFundID()}"/>
+
+                                            <input type="submit" class="btn btn-outline btn-primary" name="button" value ="Buy"/>
+                                                </form>
                                             </td>
+                                                                                        
                                             <td>
+                                                <form action="sellFund.do" method="POST">
+                                            <input type="hidden" name="id" value="${record.getFundID()}"/>
                                             <input type="submit" class="btn btn-outline btn-primary" name="button" value ="Sell"/>
-                                            </td>
-                                            </form>
+                                                </form>
+                                            </td>                                            
                                         </tr>
 										</c:forEach>                                      
                                     </tbody>

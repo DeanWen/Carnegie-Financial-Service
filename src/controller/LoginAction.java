@@ -72,7 +72,13 @@ public class LoginAction extends Action{
 		if (form.getAction().equals("Login")) {
 			CustomerBean customer = null;
 			try {
-				customer = customerDAO.read(Integer.parseInt(form.getUserid()));
+				try {
+					customer = customerDAO.read(Integer.parseInt(form.getUserid()));
+				} catch (NumberFormatException e) {
+					errors.add("Please enter digits in order to login as customer");
+					request.setAttribute("errors", errors);
+					return "login.jsp";
+				}
 				if (customer == null) {
 					errors = new ArrayList<String>();
 					errors.add("This account does not exists");
@@ -97,7 +103,7 @@ public class LoginAction extends Action{
 				employee = employeeDAO.read(form.getUserid());
 				if (employee == null) {
 					errors = new ArrayList<String>();
-					errors.add("This account does not exists");
+					errors.add("This account does not exist");
 					request.setAttribute("errors", errors);
 					return "login.jsp";
 				} else if(!employee.getPassword().equals(form.getPassword())){

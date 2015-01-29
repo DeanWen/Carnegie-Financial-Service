@@ -7,7 +7,7 @@ package databean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 
 public class Fund_Price_History_Bean implements Serializable {
 	private static final long serialVersionUID = 1L;

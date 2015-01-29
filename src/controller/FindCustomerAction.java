@@ -44,10 +44,10 @@ public class FindCustomerAction extends Action{
 	    	FindCustomerForm form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
 	        
-//	        // If not logged in, return to homepage
-//			if (session.getAttribute("employee") != null) {
-//				return "login.jsp";
-//			}
+	        // If not logged in, return to homepage
+			if (session.getAttribute("employee") == null) {
+				return "login.jsp";
+			}
 	        
 	        // If no params were passed, return with no errors so that the form will be
 	        // presented (we assume for the first time).
@@ -72,12 +72,11 @@ public class FindCustomerAction extends Action{
 		        }	     
 		        
 		        session.setAttribute("customer", customer);
-		        return "viewCustomerAccount.jsp";
+		        return "viewCustomerAccount.do";
 		        
 			} catch (MyDAOException e1) {
 				e1.printStackTrace();
 			}
-	        
 			return "findCustomer.do";
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());

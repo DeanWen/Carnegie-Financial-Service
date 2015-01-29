@@ -5,6 +5,8 @@ package model;
  */
 import java.sql.*;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import databean.Fund_Price_History_Bean;
@@ -18,7 +20,7 @@ public class Fund_Price_History_DAO {
 	private String tableName;
 	private String db_username;
 	private String db_password;
-
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	public Fund_Price_History_DAO(String jdbcDriver, String jdbcURL, String tableName, String db_username, String db_password)
 			throws MyDAOException {
 		this.jdbcDriver = jdbcDriver;
@@ -50,7 +52,7 @@ public class Fund_Price_History_DAO {
 		connectionPool.add(con);
 	}
 
-	public void create(Fund_Price_History_Bean item) throws MyDAOException {
+	public void create(Fund_Price_History_Bean item) throws MyDAOException, ParseException {
 		Connection con = null;
 
 		try {
@@ -62,7 +64,7 @@ public class Fund_Price_History_DAO {
 							+ tableName
 							+ "(price_date, price, Fund_fund_id) "
 							+ "VALUES (?, ?, ?)");
-			pstmt.setDate(1, (Date) item.getPrice_date());
+			pstmt.setDate(1, item.getPrice_date());
 			pstmt.setBigDecimal(2, item.getPrice());
 			pstmt.setInt(3, item.getFund_id());
 
@@ -87,7 +89,7 @@ public class Fund_Price_History_DAO {
 		}
 	}
 
-	public void update(Fund_Price_History_Bean item) throws MyDAOException {
+	public void update(Fund_Price_History_Bean item) throws MyDAOException, ParseException {
 		Connection con = null;
 
 		try {
@@ -101,7 +103,7 @@ public class Fund_Price_History_DAO {
 			
 			pstmt.setBigDecimal(1, item.getPrice());
 			pstmt.setInt(2, item.getFund_id());
-			pstmt.setDate(3, (Date) item.getPrice_date());
+			pstmt.setDate(3, item.getPrice_date());
 			
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
@@ -133,7 +135,7 @@ public class Fund_Price_History_DAO {
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM "
 					+ tableName + " WHERE Fund_fund_id = ? and price_date = ?");
 			pstmt.setInt(1, fund_id);
-			pstmt.setDate(2, price_date);
+			pstmt.setDate(2, (java.sql.Date) price_date);
 			int count = pstmt.executeUpdate();
 			if (count != 1) {
 				throw new SQLException("Delete updated" + count + "rows");
@@ -164,7 +166,7 @@ public class Fund_Price_History_DAO {
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM "
 					+ tableName + " WHERE Fund_fund_id = ? and price_date = ?");
 			pstmt.setInt(1, fund_id);
-			pstmt.setDate(2, price_date);
+			pstmt.setDate(2, (java.sql.Date) price_date);
 			ResultSet rs = pstmt.executeQuery();
 			
 			Fund_Price_History_Bean item;
@@ -236,6 +238,39 @@ public class Fund_Price_History_DAO {
 		}
 	}
 	
+	public Date readLastDate() throws MyDAOException {
+		Connection con = null;
+		
+		try {
+			con = getConnection();
+			//transaction begin
+			con.setAutoCommit(false);
+			
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT MAX(price_date) from " + tableName);
+			Date d = null;
+			while(rs.next()) {
+				d = rs.getDate("Max(price_date)");
+			}
+			
+			//commit transaction 
+			con.commit();
+			rs.close();
+			stmt.close();
+			releaseConnection(con);
+			return d;
+		} catch (SQLException e) {
+			try {
+				if (con != null) {
+					System.err.print("Transaction is being rolled back");
+	                con.rollback();
+				}
+			} catch (SQLException e2) {
+				/* ignore */
+			}
+			throw new MyDAOException(e);
+		}
+	}
 	
 	public Fund_Price_History_Bean readLast(int fund_id) throws MyDAOException {
 		Connection con = null;

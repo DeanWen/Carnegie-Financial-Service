@@ -38,6 +38,9 @@ public class RequestCheckAction extends Action {
 		boolean check = false;
 		
 		HttpSession session = request.getSession();
+		if (session.getAttribute("customer") == null) {
+			return "login.jsp";
+		}
 		List<String> errors = new ArrayList<String>();
 		CustomerBean customerBean = (CustomerBean) session.getAttribute("customer");
 					
@@ -86,7 +89,7 @@ public class RequestCheckAction extends Action {
 			transactionBean.setAmount(amount);
 			transactionBean.setCustomer_id(customerBean.getCustomer_id());
 			transactionBean.setTransaction_type("Withdraw");
-			transactionBean.setStatus(false);
+			transactionBean.setStatus(0);
 
 			
 			try {

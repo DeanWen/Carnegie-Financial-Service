@@ -43,7 +43,9 @@ public class SellFundAction extends Action{
 	public String perform(HttpServletRequest request) {
 		boolean check = false;
 		HttpSession session = request.getSession();
-		
+		if (session.getAttribute("customer") == null) {
+			return "login.jsp";
+		}		
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		List<String> errors = new ArrayList<String>();
 		SellForm form = null;
@@ -55,7 +57,6 @@ public class SellFundAction extends Action{
 		}
 		
 		if(!form.isPresent()) {
-			System.out.println("sell form doesn't exist");
 			return "sellFund.jsp";
 		}
 		request.setAttribute("form", form);
@@ -127,7 +128,7 @@ public class SellFundAction extends Action{
 		newTran.setCustomer_id(customer.getCustomer_id());
 		newTran.setFund_id(curFund.getFund_id());
 		newTran.setTransaction_type("Sell");
-		newTran.setStatus(false);
+		newTran.setStatus(0);
 		
 		try {
 			transactionDAO.create(newTran);

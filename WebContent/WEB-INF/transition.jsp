@@ -23,8 +23,8 @@
 								<div class="col-lg-6">
                                     <form action="transition.do" method="POST">
                                     	<div class="form-group">
-                                            <label>Enter Date (MM/DD/YYYY):</label>
-                                            <input class="form-control" placeholder="MM/DD/YYYY" name="date" value = "${form.getDate()}"/>
+                                            <label>Enter Date (yyyy-mm-dd):</label>
+                                            <input class="form-control" placeholder="yyyy-mm-dd" name="date" value = "${form.getDate()}"/>
                                         </div>
                             <div class="table-responsive">
                                  <table class="table">
@@ -47,7 +47,7 @@
 
                                             <td>
                                             <input type="hidden" name="id" value="${fundList.getFund_id()}"/>
-                                            <input type="text" name="value"/>
+                                            <input type="text" name="price"/>
                                             </td>
 
                                         </tr>
@@ -55,8 +55,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                        <button type="reset" class="btn btn-default">Reset</button>
+                            			<button class="btn btn-default">Submit</button>
+                            			<input type="reset" class="btn btn-default" value = "Reset" />
                                     </form>
                                 </div>
                             </div>
@@ -66,6 +66,11 @@
                                 ${error}
                             	</div> 
 							</c:forEach>
+							<c:if test="${check}">
+                            <div class="alert alert-success">
+                            	Update price successfully!    
+                            </div> 
+                            </c:if>
                         </div>
                         <!-- /.panel-body -->
                     </div>

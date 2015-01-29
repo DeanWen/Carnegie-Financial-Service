@@ -37,8 +37,10 @@ public class DepositAction extends Action{
 	public String getName() { return "deposit.do"; }
     
     public String perform(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        
+    	HttpSession session = request.getSession();
+		if (session.getAttribute("employee") == null) {
+			return "login.jsp";
+		}        
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         
@@ -75,9 +77,17 @@ public class DepositAction extends Action{
 		        }	        	
 		        
 		        // Update cash
-		        BigDecimal currentCash = new BigDecimal(customerDAO.read(Integer.parseInt(form.getUserid())).getCash().intValue());
+		        BigDecimal currentCash = customerDAO.read(Integer.parseInt(form.getUserid())).getCash();
 		        BigDecimal addAmount = new BigDecimal(form.getDepositAmount());
-		        newCash = currentCash.add(addAmount);
+		        if (currentCash.add(addAmount).compareTo(new BigDecimal("9999999999")) == 1) {
+		        	errors.add("Please enter a smaller amount");
+					request.setAttribute("errors", errors);
+					return "deposit.jsp";	
+		        } else {
+		        	newCash = currentCash.add(addAmount);
+		        }
+		        	
+		        
 		        // customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
 		        customer.setCash(newCash);
 		        customerDAO.update(customer);
@@ -87,7 +97,7 @@ public class DepositAction extends Action{
 				transactionBean.setCustomer_id(Integer.parseInt(form.getUserid()));
 				transactionBean.setFund_id(0);
 				transactionBean.setTransaction_type("Deposit");
-				transactionBean.setStatus(false);
+				transactionBean.setStatus(0);
 		        
 				try {
 					transactionDAO.create(transactionBean);

@@ -45,7 +45,6 @@ public class BuyFundAction extends Action{
 	public String perform(HttpServletRequest request) {
 		boolean check = false;
 		HttpSession session = request.getSession();		
-//		CustomerBean customerBean = (CustomerBean) session.getAttribute("customer");
 		
 		CustomerBean oldCustomer = (CustomerBean) session.getAttribute("customer");
 		int customer_id = oldCustomer.getCustomer_id();
@@ -125,7 +124,7 @@ public class BuyFundAction extends Action{
 		newTran.setCustomer_id(customerBean.getCustomer_id());
 		newTran.setFund_id(curFund.getFund_id());
 		newTran.setTransaction_type("Buy");
-		newTran.setStatus(false);
+		newTran.setStatus(0);
 		
 		try {
 			transactionDAO.create(newTran);

@@ -23,7 +23,10 @@ public class CustomerAccountViewAction extends Action{
 	}
 	
 	public String perform(HttpServletRequest request) {
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("customer") == null) {
+			return "login.jsp";
+		}
 		TransactionBean transaction = null;
 		CustomerBean oldCustomer = (CustomerBean) session.getAttribute("customer");
 		int customer_id = oldCustomer.getCustomer_id();

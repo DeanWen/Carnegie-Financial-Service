@@ -1,6 +1,6 @@
 <!-- Tian Zheng CMU Jan 27, 2015 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="template-top.jsp" />
+<jsp:include page="admin-top.jsp" />
 
 <div id="page-wrapper">
             <div class="container-fluid">
@@ -9,7 +9,7 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">Manage Account</h1>
                         <div class="panel panel-default">
-                        <form action="editcustomerAccount.do" method="POST">
+                        <form action="editCustomerAccount.do" method="POST">
                         <div class="panel-heading">
                             Personal Information &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="action" value="Done" />
                         </div>
@@ -146,4 +146,4 @@
         </div>
         <!-- /#page-wrapper -->
 </form>
-<jsp:include page="template-bottom.jsp" />
+<jsp:include page="admin-bottom.jsp" />

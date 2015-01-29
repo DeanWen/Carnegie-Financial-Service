@@ -41,7 +41,10 @@ public class TransactionHistoryViewAction extends Action{
 	}
 	
 	public String perform(HttpServletRequest request) {
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("customer") == null) {
+			return "login.jsp";
+		}
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		
 		
@@ -64,7 +67,7 @@ public class TransactionHistoryViewAction extends Action{
 			int fundID = transactions.get(i).getFund_id();
 			System.out.println("fund id: " + fundID);
 			try {
-				fph = fundPriceHistoryDAO.read(fundID, (Date) transactions.get(i).getExecute_date());
+				fph = fundPriceHistoryDAO.read(fundID, (java.sql.Date) transactions.get(i).getExecute_date());
 			} catch (MyDAOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
