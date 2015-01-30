@@ -38,6 +38,9 @@ public class ViewChartAction extends Action {
 	
 	public String perform(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
+		if (session.getAttribute("customer") == null) {
+			return "login.jsp";
+		}
 		IdForm form = null;
 		try {
 			form = idFormFactory.create(request);

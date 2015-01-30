@@ -39,7 +39,11 @@ public class CreateEmployeeAccountAction extends Action {
 
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-
+		HttpSession session = request.getSession();
+		if (session.getAttribute("employee") == null) {
+			return "login.jsp";
+		}
+		
 		try {	
 			CreateEmployeeAccountForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
@@ -47,10 +51,7 @@ public class CreateEmployeeAccountAction extends Action {
 			// If no params were passed, return with no errors so that the form
 			// will be
 			// presented (we assume for the first time).
-			HttpSession session = request.getSession();
-			if (session.getAttribute("employee") == null) {
-				return "login.jsp";
-			}
+			
 			if (!form.isPresent()) {
 				return "createEmployeeAccount.jsp";
 			}

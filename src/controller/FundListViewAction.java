@@ -34,6 +34,9 @@ public class FundListViewAction extends Action{
 	
 	public String perform(HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		if (session.getAttribute("customer") == null) {
+			return "login.jsp";
+		}
 		
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		ArrayList<RecordBean> records = new ArrayList<RecordBean>();

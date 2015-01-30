@@ -48,13 +48,16 @@ public class ViewCustomerAccountAction extends Action{
 	
 	public String perform(HttpServletRequest request) {
 		ViewCustomerAccountForm form = null;
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("employee") == null) {
+			return "login.jsp";
+		}
 		try{
 			form = formBeanFactory.create(request);
 		} catch (FormBeanException e1) {
 			e1.printStackTrace();
 		}
 		request.setAttribute("form", form);
-		HttpSession session = request.getSession(true);
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");		
 
 		TransactionBean transaction = null;

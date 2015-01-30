@@ -156,14 +156,14 @@ public class TransitionAction extends Action{
         List<String> errors = new ArrayList<String>();
         List<TransitionIdBean> transitionBeans = new ArrayList<TransitionIdBean>();
         TransitionForm form = null;
-        
+        if (session.getAttribute("employee") == null) {
+			return "login.jsp";
+		}
         try {
 	    	form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
 	        //If not logged in, return to homepage
-			if (session.getAttribute("employee") == null) {
-				return "login.jsp";
-			}
+			
 			
 
 	        
