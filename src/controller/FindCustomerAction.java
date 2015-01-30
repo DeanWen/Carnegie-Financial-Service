@@ -4,7 +4,6 @@
  */
 package controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +13,10 @@ import javax.servlet.http.HttpSession;
 import model.CustomerDAO;
 import model.Model;
 import model.MyDAOException;
-import model.TransactionDAO;
-
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
-import databean.TransactionBean;
 import form.FindCustomerForm;
 
 public class FindCustomerAction extends Action{
@@ -32,9 +28,11 @@ public class FindCustomerAction extends Action{
 		customerDAO = model.getCustomerDAO();
 	}
 
+	@Override
 	public String getName() { return "findCustomer.do"; }
     
-    public String perform(HttpServletRequest request) {
+    @Override
+	public String perform(HttpServletRequest request) {
         HttpSession session = request.getSession();
         
         List<String> errors = new ArrayList<String>();

@@ -11,7 +11,6 @@ import model.CustomerDAO;
 import model.FundDAO;
 import model.Model;
 import model.MyDAOException;
-import model.PositionDAO;
 import model.TransactionDAO;
 
 import org.mybeans.form.FormBeanException;
@@ -19,10 +18,8 @@ import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
 import databean.FundBean;
-import databean.PositionBean;
 import databean.TransactionBean;
 import form.BuyForm;
-import form.SellForm;
 
 public class BuyFundAction extends Action{
 	static int id = 0;
@@ -38,10 +35,12 @@ public class BuyFundAction extends Action{
 		customerDAO = model.getCustomerDAO();
 	}
 	
+	@Override
 	public String getName() {
 		return "buyFund.do";
 	}
 	
+	@Override
 	public String perform(HttpServletRequest request) {
 		boolean check = false;
 		HttpSession session = request.getSession();		

@@ -36,10 +36,12 @@ public class SellFundAction extends Action{
 		transactionDAO = model.getTransactionDAO();
 	}
 	
+	@Override
 	public String getName() {
 		return "sellFund.do";
 	}
 	
+	@Override
 	public String perform(HttpServletRequest request) {
 		boolean check = false;
 		HttpSession session = request.getSession();
@@ -67,7 +69,6 @@ public class SellFundAction extends Action{
 		int fundID = id;
 		System.out.println("ID: " +fundID);
 				
-		int customerID = customer.getCustomer_id();
 		FundBean curFund = null;
 		try {
 			curFund = fundDAO.read(fundID);

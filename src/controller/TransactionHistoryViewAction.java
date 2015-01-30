@@ -1,5 +1,4 @@
 package controller;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,37 +8,31 @@ import model.FundDAO;
 import model.Fund_Price_History_DAO;
 import model.Model;
 import model.MyDAOException;
-import model.PositionDAO;
 import model.TransactionDAO;
-
-import org.mybeans.form.FormBeanException;
-import org.mybeans.form.FormBeanFactory;
 
 import databean.CustomerBean;
 import databean.FundBean;
 import databean.Fund_Price_History_Bean;
 import databean.HistoryBean;
-import databean.PositionBean;
-import databean.RecordBean;
 import databean.TransactionBean;
 public class TransactionHistoryViewAction extends Action{
 	private TransactionDAO transactionDAO;
-	private PositionDAO positionDAO;
 	private FundDAO fundDAO;
 	private Fund_Price_History_DAO fundPriceHistoryDAO;
 	
 	
 	public TransactionHistoryViewAction(Model model) {
 		transactionDAO = model.getTransactionDAO();
-		positionDAO = model.getPositionDAO();
 		fundDAO = model.getFundDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 	}
 	
+	@Override
 	public String getName() {
 		return "transactionHistoryView.do";
 	}
 	
+	@Override
 	public String perform(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("customer") == null) {
@@ -76,7 +69,7 @@ public class TransactionHistoryViewAction extends Action{
 			int fundID = pendings.get(i).getFund_id();
 			System.out.println("fund id: " + fundID);
 			try {
-				fph = fundPriceHistoryDAO.read(fundID, (java.sql.Date) pendings.get(i).getExecute_date());
+				fph = fundPriceHistoryDAO.read(fundID, pendings.get(i).getExecute_date());
 			} catch (MyDAOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -109,13 +102,14 @@ public class TransactionHistoryViewAction extends Action{
 			}
 			histories.add(cur);
 		}
+		
 		for(int i = 0; i < transactions.size(); i++) {
 			HistoryBean cur = new HistoryBean();
 			Fund_Price_History_Bean fph = null;
 			int fundID = transactions.get(i).getFund_id();
 			System.out.println("fund id: " + fundID);
 			try {
-				fph = fundPriceHistoryDAO.read(fundID, (java.sql.Date) transactions.get(i).getExecute_date());
+				fph = fundPriceHistoryDAO.read(fundID, transactions.get(i).getExecute_date());
 			} catch (MyDAOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

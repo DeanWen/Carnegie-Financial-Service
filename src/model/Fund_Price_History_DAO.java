@@ -6,7 +6,6 @@ package model;
 import java.sql.*;
 import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import databean.Fund_Price_History_Bean;
@@ -20,7 +19,6 @@ public class Fund_Price_History_DAO {
 	private String tableName;
 	private String db_username;
 	private String db_password;
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	public Fund_Price_History_DAO(String jdbcDriver, String jdbcURL, String tableName, String db_username, String db_password)
 			throws MyDAOException {
 		this.jdbcDriver = jdbcDriver;

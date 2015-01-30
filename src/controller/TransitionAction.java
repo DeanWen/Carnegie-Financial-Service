@@ -6,7 +6,6 @@ package controller;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashMap;
@@ -31,7 +30,6 @@ import databean.FundBean;
 import databean.Fund_Price_History_Bean;
 import databean.PositionBean;
 import databean.ResearchBean;
-import databean.TransitionIdBean;
 import databean.TransactionBean;
 import form.TransitionForm;
 
@@ -52,6 +50,7 @@ public class TransitionAction extends Action{
 		positionDAO = model.getPositionDAO();
 	}
 
+	@Override
 	public String getName() { return "transition.do"; }
 	
 
@@ -161,14 +160,13 @@ public class TransitionAction extends Action{
 //------------------------------------------------------------------------------------------------------
 
      
-    public String perform(HttpServletRequest request) {
+    @Override
+	public String perform(HttpServletRequest request) {
     	
     	Boolean check = false;
     	request.setAttribute("check", check);
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         HttpSession session = request.getSession();
         List<String> errors = new ArrayList<String>();
-        List<TransitionIdBean> transitionBeans = new ArrayList<TransitionIdBean>();
         TransitionForm form = null;
         if (session.getAttribute("employee") == null) {
 			return "login.jsp";
@@ -251,7 +249,7 @@ public class TransitionAction extends Action{
 			}
 			
 			request.setAttribute("fundList", fundList); 
-			String[] prices = (String[])request.getParameterValues("price");
+			String[] prices = request.getParameterValues("price");
 			
 			if(prices == null) {
 				return "transition.jsp";

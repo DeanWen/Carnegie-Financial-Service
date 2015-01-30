@@ -9,13 +9,10 @@ import model.FundDAO;
 import model.Fund_Price_History_DAO;
 import model.Model;
 import model.MyDAOException;
-import model.PositionDAO;
-import model.TransactionDAO;
 
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databean.CustomerBean;
 import databean.FundBean;
 import databean.Fund_Price_History_Bean;
 import form.IdForm;
