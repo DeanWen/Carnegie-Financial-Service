@@ -59,7 +59,7 @@
                                     <a href="customerAccountView.do">Manage Account</a>
                                 </li>
                                 <li>
-                                    <a href="fundListView.do"> Fund History </a>
+                                    <a href="fundListView.do"> My Fund List </a>
                                 </li>
                                 <li>
 									<a href="transactionHistoryView.do"> Transaction History </a>
