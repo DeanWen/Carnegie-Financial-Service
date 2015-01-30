@@ -53,6 +53,12 @@ public class DepositForm extends FormBean{
 		
 		if (!depositAmount.equals(depositConfirm)) {
 			errors.add("Please confrim your amount!");
+			return errors;
+		}
+		
+		if (Double.parseDouble(depositAmount) >= 1000000.00) {
+			errors.add("Deposit amount should be smaller than 1,000,000.00");
+			return errors;	
 		}
 		
 		return errors;

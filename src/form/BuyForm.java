@@ -85,6 +85,10 @@ public class BuyForm extends FormBean{
 		if(action == null || !action.equals("Buy")) {
 			errors.add("Invalid Button");
 		}
+		
+		if (Double.parseDouble(buyAmount) >= 10000) {
+			errors.add("The max amount of shares you can buy is 10,000.000");
+		}
 		return errors;
 	}
 }
