@@ -18,8 +18,12 @@
                                     <tbody>
                                      <form action="requestCheck.do" method="POST">
                                         <tr class="odd gradeX">
-                                            <th class="col-md-3"> Cash Balance </th>
+                                            <th class="col-md-3"> Available Balance </th>
                                             <td > ${customer.getCash()} </td>
+                                        </tr>
+                                        <tr class="odd gradeX">
+                                            <th class="col-md-3"> Cash Balance </th>
+                                            <td > ${customer.getTotal()} </td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <th> Amount</th>
