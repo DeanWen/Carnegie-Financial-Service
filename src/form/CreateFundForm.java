@@ -31,11 +31,16 @@ public class CreateFundForm extends FormBean{
 		List<String> errors = new ArrayList<String>();
 
 		if(fundName == null || fundName.length() == 0) {
-			errors.add("Please enter the fund name:");
+			errors.add("Please enter the fund name.");
 			return errors;
 		}
 		if (fundTicker == null || fundTicker.length() == 0) {
-			errors.add("Please enter the fund ticker:");
+			errors.add("Please enter the fund ticker.");
+			return errors;
+		}
+		
+		if (!fundTicker.matches("^[A-Za-z0-9]{1,5}$")) {
+			errors.add("Please enter a 1 to 5 letters or digits ticker.");
 			return errors;
 		}
 		

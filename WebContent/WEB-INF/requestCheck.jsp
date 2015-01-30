@@ -18,6 +18,10 @@
                                     <tbody>
                                      <form action="requestCheck.do" method="POST">
                                         <tr class="odd gradeX">
+                                            <th class="col-md-3"> Cash Balance </th>
+                                            <td > ${customer.getCash()} </td>
+                                        </tr>
+                                        <tr class="odd gradeX">
                                             <th> Amount</th>
                                             <td class="center">
                                                 <input type="text" class="input-block-level" placeholder="Amount" name="requestAmount" value="${form.getRequestAmount()}"/>
