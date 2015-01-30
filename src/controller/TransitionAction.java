@@ -76,7 +76,7 @@ public class TransitionAction extends Action{
 				}
 				else if (tran.getTransaction_type().equalsIgnoreCase("Deposit")) {
 					//update total
-					customer.setTotal(customer.getCash().add(tran.getAmount()));
+					customer.setTotal(customer.getTotal().add(tran.getAmount()));
 				}
 				else if (tran.getTransaction_type().equalsIgnoreCase("Sell")) {
 					//1. minus shares

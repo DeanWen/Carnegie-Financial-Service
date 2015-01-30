@@ -9,6 +9,7 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,8 @@ public class CreateCustomerAccountAction extends Action {
 				customer.setCity(form.getCity());
 				customer.setState(form.getState());
 				customer.setZip(Integer.parseInt(form.getZip()));
+				customer.setCash(new BigDecimal(0));
+				customer.setTotal(new BigDecimal(0));
 				customerDAO.create(customer);
 				request.setAttribute("message", "Create Customer Account Successfully!");
 				return "success.jsp";
