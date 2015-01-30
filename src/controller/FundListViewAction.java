@@ -60,6 +60,9 @@ public class FundListViewAction extends Action{
 			if(fund == null || history == null) {
 				continue;
 			}
+			if(positions.get(i).getShares().compareTo(new BigDecimal("0.00")) <= 0) {
+				continue;
+			}
 			item.setFundID(fund.getFund_id());
 			item.setShares(positions.get(i).getShares());
 			item.setFundName(fund.getName());

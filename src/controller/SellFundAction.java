@@ -89,6 +89,9 @@ public class SellFundAction extends Action{
 		
 			request.setAttribute("position", position);
 		}
+		if(position == null) {
+			return "sellFundError.jsp";
+		}
 		errors.addAll(form.getValidationErrors());
 		if (errors.size() > 0) {
 			request.setAttribute("errors", errors);
