@@ -35,6 +35,11 @@
                                                 <input class="text" placeholder="Deposit Amount" name="depositAmount" type="text" value = "${form.getDepositAmount()}"/>
                                             </td>
                                         </tr>
+                                        <th> Confirm Amount</th>
+                                            <td class="center">
+                                                <input class="text" placeholder="Confirm Amount" name="depositConfirm" type="text" value = "${form.getDepositConfirm()}"/>
+                                            </td>
+                                        </tr>
                                         <tr class="odd gradeX">
                                             <td class="center" colspan="2">
                                                 <center><input class="btn btn-lg btn-success btn-block" id = "deposit" type = "submit" name = "action" value = "Done"/></center>
