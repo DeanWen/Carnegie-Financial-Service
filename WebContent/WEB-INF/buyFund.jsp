@@ -30,13 +30,13 @@
                                         <tr class="odd gradeX">
                                             <th> Buy Amount ($)</th>
                                             <td class="center">
-                                                <input class="text" placeholder="Buy Amount" name="buyAmount" value="${form.getBuyAmount()}"/>
+                                                <input class="text" placeholder="Buy Amount" name="buyAmount" value=""/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
                                             <th> Confirm Amount ($)</th>
                                             <td class="center">
-                                                <input class="text" placeholder="Confirm Amount" name="cfmAmount" value="${form.getCfmAmount()}"/>
+                                                <input class="text" placeholder="Confirm Amount" name="cfmAmount" value=""/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
