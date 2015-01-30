@@ -143,6 +143,9 @@ public class CreateCustomerAccountForm extends FormBean {
 		if(city == null||city.length() == 0){
 			errors.add("city is required");
 		}
+		if(city.matches(".*[0-9]+.*")) {
+			errors.add("city name is invalid");
+		}
 		if(state == null || state.length() == 0){
 			errors.add("State is required");
 		}
@@ -152,7 +155,7 @@ public class CreateCustomerAccountForm extends FormBean {
 		if (zip == null || zip.length() == 0) {
 			errors.add("Zip is required");
 		}
-		if (zip != null && !zip.matches("[0-9]{5}")) {
+		if (zip != null && zip.length() != 0 && !zip.matches("[0-9]{5}")) {
 			errors.add("Zip code is not accpeted");
 		}
 		

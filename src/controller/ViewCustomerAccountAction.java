@@ -4,6 +4,7 @@
  */
 package controller;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -17,11 +18,14 @@ import model.FundDAO;
 import model.Fund_Price_History_DAO;
 import model.Model;
 import model.MyDAOException;
+import model.PositionDAO;
 import model.TransactionDAO;
 import databean.CustomerBean;
 import databean.FundBean;
 import databean.Fund_Price_History_Bean;
 import databean.HistoryBean;
+import databean.PositionBean;
+import databean.RecordBean;
 import databean.TransactionBean;
 import form.ViewCustomerAccountForm;
 
@@ -32,11 +36,13 @@ public class ViewCustomerAccountAction extends Action{
 	private TransactionDAO transactionDAO;
 	private FundDAO fundDAO;
 	private Fund_Price_History_DAO fundPriceHistoryDAO;
+	PositionDAO positionDAO;
 	
 	public ViewCustomerAccountAction(Model model) {
 		transactionDAO = model.getTransactionDAO();
 		fundDAO = model.getFundDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
+		positionDAO = model.getPositionDAO();
 	}
 	
 	public String getName() {
@@ -57,7 +63,43 @@ public class ViewCustomerAccountAction extends Action{
 		request.setAttribute("form", form);
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");		
 
-		System.out.println(session);
+		ArrayList<RecordBean> records = new ArrayList<RecordBean>();
+		ArrayList<PositionBean> positions = new ArrayList<PositionBean>();
+		try {
+			positions = positionDAO.getPositions(customer.getCustomer_id());
+		} catch (MyDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i = 0; i < positions.size(); i++) {
+			RecordBean item = new RecordBean();
+			int fundID = positions.get(i).getFund_id();
+			
+			FundBean fund = null;
+			Fund_Price_History_Bean history = null;
+			try {
+				fund = fundDAO.read(fundID);
+				history = fundPriceHistoryDAO.readLast(fundID);
+			} catch (MyDAOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(fund == null || history == null) {
+				continue;
+			}
+			if(positions.get(i).getShares().compareTo(new BigDecimal("0.00")) <= 0) {
+				continue;
+			}
+			item.setFundID(fund.getFund_id());
+			item.setShares(positions.get(i).getShares());
+			item.setFundName(fund.getName());
+			item.setFundSymbol(fund.getSymbol());
+			item.setPrice(history.getPrice());
+			item.setValue(history.getPrice().multiply(positions.get(i).getShares()).setScale(2, BigDecimal.ROUND_HALF_UP));
+			records.add(item);
+		}
+		
+		request.setAttribute("records", records);
 
 		
 		int customerID = customer.getCustomer_id();
