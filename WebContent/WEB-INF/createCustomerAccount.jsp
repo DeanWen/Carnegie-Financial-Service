@@ -29,7 +29,7 @@
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th> User Name: </th>
+                                            <th> Nick Name: </th>
                                             <td class="center">
                                                 <input class="text" placeholder="User Name" name="username" type="text" value = "${form.getUsername()}"/>
                                             </td>

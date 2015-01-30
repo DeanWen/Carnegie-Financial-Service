@@ -146,10 +146,13 @@ public class CreateCustomerAccountForm extends FormBean {
 		if(state == null || state.length() == 0){
 			errors.add("State is required");
 		}
+		if(!state.matches("[A-Z]{2}")) {
+			errors.add("State must be two uppercase letters");
+		}
 		if (zip == null || zip.length() == 0) {
 			errors.add("Zip is required");
 		}
-		if (!zip.matches("[0-9]{5}")) {
+		if (zip != null && !zip.matches("[0-9]{5}")) {
 			errors.add("Zip code is not accpeted");
 		}
 		

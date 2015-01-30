@@ -258,9 +258,16 @@ public class TransitionAction extends Action{
 			
 			
 			String d = form.getDate();
-			Date date = java.sql.Date.valueOf(d);
+			Date date = null;
+			try {
+				date = java.sql.Date.valueOf(d);
+			} catch (Exception e) {
+				errors.add("Date format must be yyyy/mm/dd");
+				request.setAttribute("errors", errors);
+				return "transition.jsp";
+			}
 
-			if(date.equals(preDate) || preDate.after(date)) {
+			if(preDate != null && (date.equals(preDate) || preDate.after(date))) {
 				errors.add("Date entered this time must be after that you entered last time");
 				request.setAttribute("errors", errors);
 				return "transition.jsp";

@@ -33,7 +33,7 @@ public class TransitionForm extends FormBean{
 		if(date == null || date.length() == 0) {
 			errors.add("Please input date");
 		}
-		if(!date.matches("[0-9]{4}[-][0-9]{2}[-][0-9]{2}")) {
+		if(!date.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")) {
 			errors.add("Date format is not correct");
 		}
 		

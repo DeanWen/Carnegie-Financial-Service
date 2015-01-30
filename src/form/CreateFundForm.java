@@ -39,8 +39,8 @@ public class CreateFundForm extends FormBean{
 			return errors;
 		}
 		
-		if (!fundTicker.matches("^[A-Za-z0-9]{1,5}$")) {
-			errors.add("Please enter a 1 to 5 letters or digits ticker.");
+		if (!fundTicker.matches("^[A-Z]{5}$")) {
+			errors.add("Please enter 5 uppercase letter ticker.");
 			return errors;
 		}
 		
