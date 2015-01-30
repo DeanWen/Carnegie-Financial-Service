@@ -34,7 +34,7 @@
                                             <td><b>Fund</b></td>
                                             <td><b>Ticker</b></td>
                                             <td align="right"><b>Current Price</b></td>
-                                            <td><b>Change</b></td>
+                                            <td><b>New Price</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>
