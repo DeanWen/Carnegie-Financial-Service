@@ -115,9 +115,9 @@ public class SellFundAction extends Action{
 			return "sellFund.jsp";
 		}
 		
-		BigDecimal newAmount = ownAmount.subtract(sellAmount);
+		//BigDecimal newAmount = ownAmount.subtract(sellAmount);
 		
-		position.setShares(newAmount);
+		// position.setShares(newAmount);
 		try {
 			positionDAO.update(position);
 		} catch (MyDAOException e) {

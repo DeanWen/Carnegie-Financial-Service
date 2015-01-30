@@ -88,6 +88,7 @@ public class TransitionAction extends Action{
 //						System.out.println("total money exceed limit, transaction failed");
 //						tran.setStatus(-1);
 //					}else {
+						
 						cusPosition.setShares(cusPosition.getShares().subtract(tran.getShares()));						
 						BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(tran.getShares());						
 //						if (MAX.compareTo(afterSell) == 1 && 
@@ -239,7 +240,7 @@ public class TransitionAction extends Action{
 					item.setPrice(null);
 				}
 				
-				item.setShare(new BigDecimal(0));
+				//item.setShare(new BigDecimal(0));
 				fundList.add(item);
 			}
 			
