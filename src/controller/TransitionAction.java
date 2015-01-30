@@ -261,7 +261,7 @@ public class TransitionAction extends Action{
 					try {
 						price = new BigDecimal(prices[i]);
 					} catch(Exception e) {
-						errors.add("Please input prices for all funds");
+						errors.add("Some price numbers are invalid");
 						request.setAttribute("errors", errors);
 						return "transition.jsp";
 					}
