@@ -28,13 +28,13 @@
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th> Sell Amount</th>
+                                            <th> Sell Shares</th>
                                             <td class="center">
                                                 <input class="text" placeholder="Sell Amount" name="sellAmount" value=""/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th> Confirm Amount</th>
+                                            <th> Confirm Shares</th>
                                             <td class="center">
                                                 <input class="text" placeholder="Confirm Amount" name="cfmAmount" value=""/>
                                             </td>

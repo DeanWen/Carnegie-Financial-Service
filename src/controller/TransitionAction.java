@@ -301,7 +301,11 @@ public class TransitionAction extends Action{
 	        }
 	        check = true;
 	        request.setAttribute("check", check);
-			return "transition.jsp";
+	        if(check) {
+	        	return "transition.do";
+	        }else {
+	        	return "transition.jsp";
+	        }
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
         	return "transition.jsp";
