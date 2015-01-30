@@ -88,15 +88,18 @@ public class TransitionAction extends Action{
 					//3. add to total
 						
 						cusPosition.setShares(cusPosition.getShares().subtract(tran.getShares()));						
-						BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(tran.getShares());						
-							customer.setTotal(customer.getTotal().add(afterSell));
-							positionDAO.update(cusPosition);
+						BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(tran.getShares());	
+						tran.setAmount(afterSell);
+						customer.setTotal(customer.getTotal().add(afterSell));
+						positionDAO.update(cusPosition);
 				}
 				else if (tran.getTransaction_type().equalsIgnoreCase("Buy")) {
+					
 					//1. calculate how much shares can buy
 					//2. add shares
 					//3. minus money from total
 					BigDecimal tmp = tran.getAmount().divide(currentPrices.get(tran.getFund_id()), 3, RoundingMode.HALF_UP);
+					tran.setShares(tmp);
 					if (cusPosition == null) {
 						cusPosition = new PositionBean();
 						cusPosition.setCustomer_id(tran.getCustomer_id());
