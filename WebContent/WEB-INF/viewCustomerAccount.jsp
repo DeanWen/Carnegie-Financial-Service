@@ -66,11 +66,11 @@
                                             <td> ${lastTransaction.getExecute_date()} </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th class="col-md-3"> Available Balance </th>
+                                            <th class="col-md-3"> Available Balance ($) </th>
                                             <td > ${customer.getCash()} </td>
                                         </tr> 
                                         <tr class="odd gradeX">
-                                            <th class="col-md-3"> Total Balance </th>
+                                            <th class="col-md-3"> Total Balance ($) </th>
                                             <td > ${customer.getTotal()} </td>
                                         </tr>                       
                                     </tbody>
@@ -97,13 +97,13 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <td><b>Name</b></td>
+                                            <td><b>Fund</b></td>
                                             <td><b>Date</b></td>
                                             <td><b>Type</b></td>
                                             <td><b>Status</b></td>
                                             <td align="right"><b>Shares</b></td>
-                                            <td align="right"><b>Price</b></td>
-                                            <td align="right"><b>Amount</b></td>
+                                            <td align="right"><b>Price ($)</b></td>
+                                            <td align="right"><b>Amount ($)</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>

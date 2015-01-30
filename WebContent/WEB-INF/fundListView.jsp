@@ -22,8 +22,8 @@
                                             <td><b>Fund</b></td>
                                             <td><b>Ticker</b></td>
                                             <td align="right"><b>Shares</b></td>
-                                            <td align="right"><b>Price</b></td>
-                                            <td align="right"><b>Shares*Price</b></td>
+                                            <td align="right"><b>Price ($)</b></td>
+                                            <td align="right"><b>Shares*Price ($)</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -24,13 +24,13 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <td><b>Name</b></td>
+                                            <td><b>Fund</b></td>
                                             <td><b>Date</b></td>
                                             <td><b>Type</b></td>
                                             <td><b>Status</b></td>
                                             <td align="right"><b>Shares</b></td>
-                                            <td align="right"><b>Price</b></td>
-                                            <td align="right"><b>Amount</b></td>
+                                            <td align="right"><b>Price ($)</b></td>
+                                            <td align="right"><b>Amount ($)</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>

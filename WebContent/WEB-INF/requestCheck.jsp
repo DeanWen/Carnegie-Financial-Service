@@ -18,21 +18,21 @@
                                     <tbody>
                                      <form action="requestCheck.do" method="POST">
                                         <tr class="odd gradeX">
-                                            <th class="col-md-3"> Available Balance </th>
+                                            <th class="col-md-3"> Available Balance ($) </th>
                                             <td > ${customer.getCash()} </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th class="col-md-3"> Total Balance </th>
+                                            <th class="col-md-3"> Total Balance ($) </th>
                                             <td > ${customer.getTotal()} </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th> Amount</th>
+                                            <th> Amount ($)</th>
                                             <td class="center">
                                                 <input type="text" class="input-block-level" placeholder="Amount" name="requestAmount" value="${form.getRequestAmount()}"/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th> Confirm Amount</th>
+                                            <th> Confirm Amount ($)</th>
                                             <td class="center">
                                                 <input type="text" class="input-block-level" placeholder="Amount" name="requestCfmAmount" value="${form.getRequestCfmAmount()}"/>
                                             </td>

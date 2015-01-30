@@ -30,12 +30,12 @@
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th> Deposit Amount</th>
+                                            <th> Deposit Amount ($)</th>
                                             <td class="center">
                                                 <input class="text" placeholder="Deposit Amount" name="depositAmount" type="text" value = "${form.getDepositAmount()}"/>
                                             </td>
                                         </tr>
-                                        <th> Confirm Amount</th>
+                                        <th> Confirm Amount ($)</th>
                                             <td class="center">
                                                 <input class="text" placeholder="Confirm Amount" name="depositConfirm" type="text" value = "${form.getDepositConfirm()}"/>
                                             </td>

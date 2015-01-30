@@ -22,19 +22,19 @@
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">                             
-                                            <th> Account Balance </th>
+                                            <th> Account Balance ($) </th>
                                             <td class="center">
                                                 ${customerBean.getCash()}
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th> Buy Amount</th>
+                                            <th> Buy Amount ($)</th>
                                             <td class="center">
                                                 <input class="text" placeholder="Buy Amount" name="buyAmount" value="${form.getBuyAmount()}"/>
                                             </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th> Confirm Amount</th>
+                                            <th> Confirm Amount ($)</th>
                                             <td class="center">
                                                 <input class="text" placeholder="Confirm Amount" name="cfmAmount" value="${form.getCfmAmount()}"/>
                                             </td>
