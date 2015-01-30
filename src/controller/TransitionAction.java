@@ -149,6 +149,7 @@ public class TransitionAction extends Action{
    	 for (String item : prices) {
 				try {
 					BigDecimal price = new BigDecimal(item);
+					if (Double.parseDouble(item) >= 1000) return false;
 					System.out.println(price);
 				} catch(Exception e) {
 					return false;

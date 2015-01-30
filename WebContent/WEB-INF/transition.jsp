@@ -16,7 +16,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Please Specify Detail Information:
+                            Please Specify New Price:
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -36,7 +36,7 @@
                                             <td><b>Fund</b></td>
                                             <td><b>Ticker</b></td>
                                             <td align="right"><b>Current Price ($)</b></td>
-                                            <td><b>New Price ($)</b></td>
+                                            <td><b>New Price (Lower than $1000)</b></td>
                                         </tr>
                                     </thead>
                                     <tbody>
