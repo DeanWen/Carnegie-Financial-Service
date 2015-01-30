@@ -54,6 +54,7 @@ public class RequestCheckAction extends Action {
 		}
 	
 		if (!form.isPresent()) {
+			request.setAttribute("errors", errors);
 			return "requestCheck.jsp";
 		}
 			

@@ -33,7 +33,7 @@ public class ChangePWDAction extends Action{
 		if (session.getAttribute("customer") == null) {
 			return "login.jsp";
 		}
-		
+		List<String> errors = new ArrayList<String>();
 		CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 		
 		ChangePWDForm form = null;
@@ -43,10 +43,11 @@ public class ChangePWDAction extends Action{
 			e1.printStackTrace();
 		}
 		if(!form.isPresent()) {
+			request.setAttribute("errors", errors);
 			return "changePWD.jsp";
 		}
 		request.setAttribute("form", form);
-		List<String> errors = new ArrayList<String>();
+		
 		errors.addAll(form.getValidationErrors());
 		String oldPWD = form.getOldPWD();
 		String cfmPWD = form.getCfmPWD();
