@@ -92,7 +92,11 @@ public class BuyForm extends FormBean{
 		}
 		
 		if (Double.parseDouble(buyAmount) >= 10000) {
-			errors.add("The max amount of shares you can buy is 10,000.000");
+			errors.add("The maximum amount of shares you can buy is 10,000.000");
+		}
+		
+		if (Double.parseDouble(buyAmount) < 1) {
+			errors.add("The minimum amount of shares you can buy is 1.000");
 		}
 		return errors;
 	}
