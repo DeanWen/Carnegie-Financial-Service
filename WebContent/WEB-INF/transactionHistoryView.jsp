@@ -34,8 +34,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <c:forEach var="pendingHistory" items="${pendingHistory}">
+                                        <tr class="success">
+                                            <td>${pendingHistory.getFundName()}</td>
+                                            <td>${pendingHistory.getDate()}</td>
+                                            <td>${pendingHistory.getType()}</td>
+                                            <td>${pendingHistory.getStatus()}</td>
+                                            <td align="right">${pendingHistory.getShares()}</td>
+                                            <td align="right">${pendingHistory.getPrice()}</td>
+                                            <td align="right">${pendingHistory.getAmount()}</td>
+                                        </tr>
+                                        </c:forEach>
                                         <c:forEach var="history" items="${histories}">
-										<tr class="success">
+                                        <tr class="success">
                                             <td>${history.getFundName()}</td>
                                             <td>${history.getDate()}</td>
                                             <td>${history.getType()}</td>
@@ -44,7 +55,7 @@
                                             <td align="right">${history.getPrice()}</td>
                                             <td align="right">${history.getAmount()}</td>
                                         </tr>
-										</c:forEach>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
