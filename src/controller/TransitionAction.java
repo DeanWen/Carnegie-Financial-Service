@@ -104,7 +104,7 @@ public class TransitionAction extends Action{
 					//1. calculate how much shares can buy
 					//2. add shares
 					//3. minus money from total
-					BigDecimal tmp = tran.getAmount().divide(currentPrices.get(tran.getFund_id()), 2, RoundingMode.HALF_UP);
+					BigDecimal tmp = tran.getAmount().divide(currentPrices.get(tran.getFund_id()), 3, RoundingMode.HALF_UP);
 					if (cusPosition == null) {
 						cusPosition = new PositionBean();
 						cusPosition.setCustomer_id(tran.getCustomer_id());
