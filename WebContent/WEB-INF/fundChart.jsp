@@ -42,21 +42,21 @@
 	    	  data.addColumn('number', 'Price');
 	    	  data.addRows(jsArr.length);
 	    	  //alert(jsArr.length);
-	    	  <%  
+	    	    <%  
 		    	    for (int i=0; i < fps.size(); i++) {
-		    	    	if(i==0 || i==fps.size()-1){
+		    	    	
 		    	    %>
 	    	    data.setValue(<%= i %>,0, jsArr[<%= i %>]);
 	    	    data.setValue(<%= i %>,1, parseInt(jsArr2[<%= i %>]));
-	    	    <%}else{%>
-	    	    data.setValue(<%= i %>,0, "");
-	    	    data.setValue(<%= i %>,1, parseInt(jsArr2[<%= i %>]));
-	    	    <%}
+	    	   
+	    	    <%
 		    	    }
 		    	  %>
+
 	    	  
 	        var options = {
-	          title: 'Price History'
+	          title: 'Price History',
+	          hAxis: {title: 'Date'}
 	        };
 	
 	        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
