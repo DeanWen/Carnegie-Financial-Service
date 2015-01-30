@@ -1,3 +1,8 @@
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */
 package controller;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,14 +39,12 @@ public class CustomerAccountViewAction extends Action{
 		try {
 			customer = customerDAO.read(customer_id);
 		} catch (MyDAOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
 		try {
 			transaction = transactionDAO.last(customer.getCustomer_id());
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.setAttribute("lastTransaction", transaction);
@@ -49,7 +52,6 @@ public class CustomerAccountViewAction extends Action{
 		if (session.getAttribute("customer") == null) {
 			return "login.jsp";
 		}
-		//request.setAttribute("customer", customer);
 		return "customerAccountView.jsp";
 	}
 }

@@ -1,4 +1,8 @@
 /*
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
  * Author: Qiyue Ma (AndrewID: qma) 
  * Date: Nov. 30th, 2014
  * Copyright(C) 2014 All rights reserved.  

@@ -1,4 +1,8 @@
 /**
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
  * Tian Zheng CMU
  * Jan 27, 2015
  */
@@ -66,7 +70,6 @@ public class CreateFundAction extends Action {
 				errors.add("Fund Exists");
 				return "createFund.jsp";
 			} else {
-				// fund_id need to be AUTO_INCREMENT
 				fund.setName(form.getFundName());
 				fund.setSymbol(form.getFundTicker());
 				fundDAO.create(fund);

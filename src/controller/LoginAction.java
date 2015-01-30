@@ -1,4 +1,8 @@
 /*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ *
  * Carnegie Finance Service 
  * Author: Xiaodong Zhou (AndrewID: xiaodonz) 
  * Date: Jan. 18th, 2015
@@ -90,7 +94,6 @@ public class LoginAction extends Action{
 					return "login.jsp";
 				}
 			} catch (MyDAOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -112,7 +115,6 @@ public class LoginAction extends Action{
 					return "login.jsp";
 				}
 			} catch (MyDAOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			session.setAttribute("employee", employee);

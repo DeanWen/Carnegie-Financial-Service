@@ -1,3 +1,8 @@
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */
 package controller;
 
 import java.math.BigDecimal;
@@ -54,7 +59,6 @@ public class SellFundAction extends Action{
 		try {
 			form = sellFormFactory.create(request);
 		} catch (FormBeanException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -73,7 +77,6 @@ public class SellFundAction extends Action{
 		try {
 			curFund = fundDAO.read(fundID);
 		} catch (MyDAOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		request.setAttribute("curFund", curFund);
@@ -82,7 +85,6 @@ public class SellFundAction extends Action{
 			try {
 				position = positionDAO.read(curFund.getFund_id(), customer.getCustomer_id());
 			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				request.setAttribute("errors", errors);
 				return "sellFund.jsp";
@@ -114,14 +116,10 @@ public class SellFundAction extends Action{
 			request.setAttribute("errors", errors);
 			return "sellFund.jsp";
 		}
-		
-		//BigDecimal newAmount = ownAmount.subtract(sellAmount);
-		
-		// position.setShares(newAmount);
+
 		try {
 			positionDAO.update(position);
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			errors.add("Update database failed");
 			request.setAttribute("errors", errors);
@@ -137,7 +135,6 @@ public class SellFundAction extends Action{
 		try {
 			transactionDAO.create(newTran);
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			errors.add("Update database failed)");
 			request.setAttribute("errors", errors);

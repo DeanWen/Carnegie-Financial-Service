@@ -1,4 +1,8 @@
 /**
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
  * Tian Zheng CMU
  * Jan 27, 2015
  */
@@ -50,7 +54,6 @@ public class EditCustomerAccountAction extends Action{
 		try {
 			transaction = transactionDAO.last(customer.getCustomer_id());
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.setAttribute("lastTransaction", transaction);
@@ -87,7 +90,6 @@ public class EditCustomerAccountAction extends Action{
 			try {
 				customerDAO.update(customer);
 			} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 				e.printStackTrace();
 				errors.add("Update database failed");
 				request.setAttribute("errors", errors);

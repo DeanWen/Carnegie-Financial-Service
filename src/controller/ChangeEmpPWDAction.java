@@ -1,3 +1,8 @@
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */
 package controller;
 
 import java.util.ArrayList;
@@ -63,7 +68,6 @@ public class ChangeEmpPWDAction extends Action{
 		try {
 			employeeDAO.update(employee);
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			request.setAttribute("check", check);
 			return "changeEmpPWD.jsp";

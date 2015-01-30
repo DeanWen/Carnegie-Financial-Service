@@ -1,4 +1,8 @@
-/**
+
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
  * Homework 9 for 08600-Java J2EE Programming 
  * Author: Dian Wen (AndrewID: dwen) 
  * Date: Nov. 30th, 2014

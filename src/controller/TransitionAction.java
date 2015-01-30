@@ -1,4 +1,8 @@
 /**
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
  * Xiaodong zHOU CMU
  * Jan 27, 2015
  */
@@ -82,24 +86,11 @@ public class TransitionAction extends Action{
 					//1. minus shares
 					//2. calculate income
 					//3. add to total
-					
-					//current holding shares must > sell shares
-//					if (cusPosition.getShares().subtract(tran.getShares()).compareTo(BigDecimal.ZERO) == -1) {
-//						System.out.println("total money exceed limit, transaction failed");
-//						tran.setStatus(-1);
-//					}else {
 						
 						cusPosition.setShares(cusPosition.getShares().subtract(tran.getShares()));						
 						BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(tran.getShares());						
-//						if (MAX.compareTo(afterSell) == 1 && 
-//								MAX.compareTo(customer.getTotal().add(afterSell)) == 1) {
 							customer.setTotal(customer.getTotal().add(afterSell));
 							positionDAO.update(cusPosition);
-//						}else {
-//							System.out.println("total money exceed limit, transaction failed");
-//							tran.setStatus(-1);
-//						}
-//					}
 				}
 				else if (tran.getTransaction_type().equalsIgnoreCase("Buy")) {
 					//1. calculate how much shares can buy
@@ -111,7 +102,6 @@ public class TransitionAction extends Action{
 						cusPosition.setCustomer_id(tran.getCustomer_id());
 						cusPosition.setFund_id(tran.getFund_id());
 						cusPosition.setShares(tmp);
-//						customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
 						customer.setTotal(customer.getTotal().subtract(tmp.multiply(currentPrices.get(tran.getFund_id()))));
 						positionDAO.create(cusPosition);
 					}else {
@@ -119,7 +109,6 @@ public class TransitionAction extends Action{
 						if (MAX.compareTo(newShares) == 1 && 
 								customer.getTotal().subtract(tran.getAmount()).compareTo(BigDecimal.ZERO) == 1) {
 							cusPosition.setShares(newShares);
-//							customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
 							customer.setTotal(customer.getTotal().subtract(tmp.multiply(currentPrices.get(tran.getFund_id()))));
 							positionDAO.update(cusPosition);
 						}else {
@@ -143,7 +132,6 @@ public class TransitionAction extends Action{
 				transactionDAO.update(tran);		
 			}
 		} catch (MyDAOException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		
@@ -187,20 +175,7 @@ public class TransitionAction extends Action{
 //	        // If not logged in, return to homepage
 	        if (session.getAttribute("employee") == null) {
 				return "login.jsp";
-			}
-	        
-//	        // If no params were passed, return with no errors so that the form will be
-//	        // presented (we assume for the first time).
-//	        if (!form.isPresent()) {
-//	            return "transition.jsp";
-//	        }
-//
-//	        // Any validation errors?
-//	        errors.addAll(form.getValidationErrors());
-//	        if (errors.size() != 0) {
-//	            return "transition.jsp";
-//	        }
-	        
+			}	        
 	        
 			ArrayList<ResearchBean> fundList = new ArrayList<ResearchBean>();
 			 
@@ -210,7 +185,6 @@ public class TransitionAction extends Action{
 				funds = fundDAO.readAll();
 				
 			} catch (MyDAOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			for(int i = 0; i < funds.size(); i++) {
@@ -223,7 +197,6 @@ public class TransitionAction extends Action{
 					fund = fundDAO.read(fundID);
 					history = fundPriceHistoryDAO.readLast(fundID);
 				} catch (MyDAOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -240,7 +213,6 @@ public class TransitionAction extends Action{
 					item.setPrice(null);
 				}
 				
-				//item.setShare(new BigDecimal(0));
 				fundList.add(item);
 			}
 			
@@ -249,7 +221,6 @@ public class TransitionAction extends Action{
 				preDate = fundPriceHistoryDAO.readLastDate();
 				request.setAttribute("preDate", preDate); 
 			} catch (MyDAOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -310,11 +281,9 @@ public class TransitionAction extends Action{
 							fundPriceHistoryDAO.create(fphb);
 							currPrice.put(id, price);
 						} catch (ParseException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					} catch (MyDAOException e) {
-						// TODO Auto-generated catch block
 						errors.add("Update failed");
 					}
 				}

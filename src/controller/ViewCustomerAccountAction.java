@@ -1,4 +1,7 @@
-/**
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
  * Tian Zheng CMU
  * Jan 27, 2015
  */
@@ -68,7 +71,6 @@ public class ViewCustomerAccountAction extends Action{
 		try {
 			positions = positionDAO.getPositions(customer.getCustomer_id());
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		for(int i = 0; i < positions.size(); i++) {
@@ -81,7 +83,6 @@ public class ViewCustomerAccountAction extends Action{
 				fund = fundDAO.read(fundID);
 				history = fundPriceHistoryDAO.readLast(fundID);
 			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(fund == null || history == null) {
@@ -108,7 +109,6 @@ public class ViewCustomerAccountAction extends Action{
 		try {
 			transactions = transactionDAO.getCompleteTransactions(customerID);
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -118,7 +118,6 @@ public class ViewCustomerAccountAction extends Action{
 		try {
 			pendings = transactionDAO.getPendingTransactions(customerID);
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -134,7 +133,6 @@ public class ViewCustomerAccountAction extends Action{
 			try {
 				fph = fundPriceHistoryDAO.read(fundID, pendings.get(i).getExecute_date());
 			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -144,7 +142,6 @@ public class ViewCustomerAccountAction extends Action{
 				try {
 					tempFund = fundDAO.read(pendings.get(i).getFund_id());
 				} catch (MyDAOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -174,7 +171,6 @@ public class ViewCustomerAccountAction extends Action{
 			try {
 				fph = fundPriceHistoryDAO.read(fundID, (Date) transactions.get(i).getExecute_date());
 			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -184,7 +180,6 @@ public class ViewCustomerAccountAction extends Action{
 				try {
 					tempFund = fundDAO.read(transactions.get(i).getFund_id());
 				} catch (MyDAOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -208,11 +203,6 @@ public class ViewCustomerAccountAction extends Action{
 		}
 		request.setAttribute("histories", histories);
 		request.setAttribute("pendingHistory", pendingHistory);
-		
-//		if (form.getAction().equals("Edit")) {
-//			session.setAttribute("customer", customer);
-//			return "editCustomerAccount.do";
-//		}
 
 		return "viewCustomerAccount.jsp";
 	}

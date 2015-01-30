@@ -1,4 +1,8 @@
 /**
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
  * Tian Zheng CMU
  * Jan 27, 2015
  */
@@ -48,11 +52,6 @@ public class DepositAction extends Action{
 	    	DepositForm form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
 	        
-//	        // If not logged in, return to homepage
-//			if (session.getAttribute("employee") != null) {
-//				return "login.jsp";
-//			}
-	        
 	        // If no params were passed, return with no errors so that the form will be
 	        // presented (we assume for the first time).
 	        if (!form.isPresent()) {
@@ -87,8 +86,6 @@ public class DepositAction extends Action{
 		        	newCash = currentCash.add(addAmount);
 		        }
 		        	
-		        
-		        // customerDAO.read(Integer.parseInt(form.getUserid())).setCash(new BigDecimal(newCash));
 		        customer.setCash(newCash);
 		        customerDAO.update(customer);
 		        		        
@@ -102,7 +99,6 @@ public class DepositAction extends Action{
 				try {
 					transactionDAO.create(transactionBean);
 				} catch (MyDAOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					errors.add("Add transaction failed");
 					request.setAttribute("errors", errors);

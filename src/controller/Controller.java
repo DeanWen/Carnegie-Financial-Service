@@ -1,5 +1,10 @@
 /*
- * Name: Dean Wen
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ *
+* Name: Dean Wen
  * Date: 1/16/2015
  */
 package controller;
@@ -83,14 +88,7 @@ public class Controller extends HttpServlet {
 			// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do", request);
 		}
-//		
-//		if (action.equals("register.do") || action.equals("login.do")) {
-//			// Allow these actions without logging in
-//			return Action.perform(action, request);
-//		}
-		
-		
-		// Let the logged in user run his chosen action
+
 		return Action.perform(action, request);
 	}
 

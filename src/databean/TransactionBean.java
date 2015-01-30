@@ -1,3 +1,8 @@
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */
 package databean;
 
 /*

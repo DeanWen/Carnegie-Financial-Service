@@ -1,3 +1,8 @@
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */
 package controller;
 
 import java.math.BigDecimal;
@@ -49,7 +54,6 @@ public class RequestCheckAction extends Action {
 			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 		} catch (FormBeanException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
@@ -78,7 +82,6 @@ public class RequestCheckAction extends Action {
 			try {
 				customerDAO.update(customerBean);
 			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				request.setAttribute("errors", errors);
 				return "requestCheck.jsp";
@@ -96,7 +99,6 @@ public class RequestCheckAction extends Action {
 			try {
 				transactionDAO.create(transactionBean);
 			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				request.setAttribute("errors", errors);
 				return "requestCheck.jsp";

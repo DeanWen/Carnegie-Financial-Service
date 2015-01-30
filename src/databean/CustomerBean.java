@@ -1,5 +1,10 @@
-package databean;
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */package databean;
 
+ 
 /*
  * Name: Dean Wen
  * Date: 11/26/2014

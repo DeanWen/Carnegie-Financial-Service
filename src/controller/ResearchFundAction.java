@@ -1,3 +1,8 @@
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */
 package controller;
 
 import java.math.BigDecimal;
@@ -45,7 +50,6 @@ public class ResearchFundAction extends Action {
 		try {
 			funds = fundDAO.readAll();
 		} catch (MyDAOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		for(int i = 0; i < funds.size(); i++) {
@@ -61,7 +65,6 @@ public class ResearchFundAction extends Action {
 				history = fundPriceHistoryDAO.readLast(fundID);
 				position = positionDAO.read(fundID, customer.getCustomer_id());
 			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

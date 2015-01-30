@@ -1,4 +1,8 @@
 /*
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
  * Name: Dean Wen
  * Date: 1/18/2015
  */

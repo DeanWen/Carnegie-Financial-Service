@@ -1,3 +1,8 @@
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */
 package controller;
 
 import java.util.ArrayList;
@@ -42,7 +47,6 @@ public class ViewChartAction extends Action {
 		try {
 			form = idFormFactory.create(request);
 		} catch (FormBeanException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int fundID = form.getIdAsInt();
@@ -51,7 +55,6 @@ public class ViewChartAction extends Action {
 		try {
 			beans = historyDAO.read(fundID);
 		} catch (MyDAOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -59,7 +62,6 @@ public class ViewChartAction extends Action {
 		try {
 			fund = fundDAO.read(fundID);
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String fundName = fund.getName();

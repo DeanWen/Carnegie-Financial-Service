@@ -1,4 +1,8 @@
 /**
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
  * Tian Zheng CMU
  * Jan 27, 2015
  */

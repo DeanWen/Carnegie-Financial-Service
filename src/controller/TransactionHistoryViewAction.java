@@ -46,7 +46,6 @@ public class TransactionHistoryViewAction extends Action{
 		try {
 			transactions = transactionDAO.getCompleteTransactions(customerID);
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -56,7 +55,6 @@ public class TransactionHistoryViewAction extends Action{
 		try {
 			pendings = transactionDAO.getPendingTransactions(customerID);
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -71,7 +69,6 @@ public class TransactionHistoryViewAction extends Action{
 			try {
 				fph = fundPriceHistoryDAO.read(fundID, pendings.get(i).getExecute_date());
 			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -81,7 +78,6 @@ public class TransactionHistoryViewAction extends Action{
 				try {
 					tempFund = fundDAO.read(pendings.get(i).getFund_id());
 				} catch (MyDAOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -111,7 +107,6 @@ public class TransactionHistoryViewAction extends Action{
 			try {
 				fph = fundPriceHistoryDAO.read(fundID, transactions.get(i).getExecute_date());
 			} catch (MyDAOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -121,7 +116,6 @@ public class TransactionHistoryViewAction extends Action{
 				try {
 					tempFund = fundDAO.read(transactions.get(i).getFund_id());
 				} catch (MyDAOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

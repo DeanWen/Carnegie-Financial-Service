@@ -1,3 +1,8 @@
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */
 package controller;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +50,6 @@ public class CustomerAccountEditAction extends Action{
 		try {
 			transaction = transactionDAO.last(customer.getCustomer_id());
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.setAttribute("lastTransaction", transaction);
@@ -82,7 +86,6 @@ public class CustomerAccountEditAction extends Action{
 			try {
 				customerDAO.update(customer);
 			} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 				e.printStackTrace();
 				errors.add("Update database failed");
 				request.setAttribute("errors", errors);

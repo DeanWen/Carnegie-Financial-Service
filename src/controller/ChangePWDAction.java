@@ -1,3 +1,8 @@
+/*
+ *  Team 14 Infinity
+ *  Task 7
+ *  CMU - eBiz
+ */
 package controller;
 
 import java.util.ArrayList;
@@ -65,7 +70,6 @@ public class ChangePWDAction extends Action{
 		try {
 			customerDAO.update(customer);
 		} catch (MyDAOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			request.setAttribute("check", check);
 			return "changePWD.jsp";
