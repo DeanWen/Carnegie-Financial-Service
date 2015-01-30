@@ -84,21 +84,21 @@ public class TransitionAction extends Action{
 					//3. add to total
 					
 					//current holding shares must > sell shares
-					if (cusPosition.getShares().subtract(tran.getShares()).compareTo(BigDecimal.ZERO) == -1) {
-						System.out.println("total money exceed limit, transaction failed");
-						tran.setStatus(-1);
-					}else {
+//					if (cusPosition.getShares().subtract(tran.getShares()).compareTo(BigDecimal.ZERO) == -1) {
+//						System.out.println("total money exceed limit, transaction failed");
+//						tran.setStatus(-1);
+//					}else {
 						cusPosition.setShares(cusPosition.getShares().subtract(tran.getShares()));						
 						BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(tran.getShares());						
-						if (MAX.compareTo(afterSell) == 1 && 
-								MAX.compareTo(customer.getTotal().add(afterSell)) == 1) {
+//						if (MAX.compareTo(afterSell) == 1 && 
+//								MAX.compareTo(customer.getTotal().add(afterSell)) == 1) {
 							customer.setTotal(customer.getTotal().add(afterSell));
 							positionDAO.update(cusPosition);
-						}else {
-							System.out.println("total money exceed limit, transaction failed");
-							tran.setStatus(-1);
-						}
-					}
+//						}else {
+//							System.out.println("total money exceed limit, transaction failed");
+//							tran.setStatus(-1);
+//						}
+//					}
 				}
 				else if (tran.getTransaction_type().equalsIgnoreCase("Buy")) {
 					//1. calculate how much shares can buy
@@ -110,14 +110,16 @@ public class TransitionAction extends Action{
 						cusPosition.setCustomer_id(tran.getCustomer_id());
 						cusPosition.setFund_id(tran.getFund_id());
 						cusPosition.setShares(tmp);
-						customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
+//						customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
+						customer.setTotal(customer.getTotal().subtract(tmp.multiply(currentPrices.get(tran.getFund_id()))));
 						positionDAO.create(cusPosition);
 					}else {
 						BigDecimal newShares = tmp.add(cusPosition.getShares());
 						if (MAX.compareTo(newShares) == 1 && 
 								customer.getTotal().subtract(tran.getAmount()).compareTo(BigDecimal.ZERO) == 1) {
 							cusPosition.setShares(newShares);
-							customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
+//							customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
+							customer.setTotal(customer.getTotal().subtract(tmp.multiply(currentPrices.get(tran.getFund_id()))));
 							positionDAO.update(cusPosition);
 						}else {
 							System.out.println("total shares exceed limit, transaction failed");
