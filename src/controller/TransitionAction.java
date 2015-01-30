@@ -84,11 +84,11 @@ public class TransitionAction extends Action{
 					//3. add to total
 					
 					//current holding shares must > sell shares
-					if (cusPosition.getShares().subtract(tran.getShares()).compareTo(BigDecimal.ZERO) == -1) {
-						System.out.println("total money exceed limit, transaction failed");
+					if (cusPosition.getShares().compareTo(BigDecimal.ZERO) == -1) {
+						System.out.println("not enough shares, transaction failed");
 						tran.setStatus(-1);
 					}else {
-						cusPosition.setShares(cusPosition.getShares().subtract(tran.getShares()));						
+						//cusPosition.setShares(cusPosition.getShares().subtract(tran.getShares()));						
 						BigDecimal afterSell = currentPrices.get(tran.getFund_id()).multiply(tran.getShares());						
 						if (MAX.compareTo(afterSell) == 1 && 
 								MAX.compareTo(customer.getTotal().add(afterSell)) == 1) {
