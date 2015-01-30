@@ -41,13 +41,10 @@
                                         </tr>
                                         <tr class="odd gradeX">
                                             <td class="center" colspan="2">
-                                                <center><input class="btn btn-success" id = "buyFund" type = "submit" name = "action" value = "Buy"/></center>
+                                                <center><input class="btn btn-success" id = "buyFund" type = "submit" name = "action" value = "Buy"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="researchFund.do"><input class="btn btn-success" type = "button" name = "back" value = "Back"/></a></center>
                                             </td>
                                         </tr>
                              		</form>
-                             		<td class="center" colspan="2">
-                                        <center><a href = "researchFund.do"><input class="btn btn-success" type = "button" name = "back" value = "Back"/></a></center>
-                                     </td>
                                     </tbody>
                                 </table>
                             </div>

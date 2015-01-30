@@ -79,7 +79,7 @@ public class ResearchFundAction extends Action {
 				item.setPrice(history.getPrice());
 			}
 			if (position == null) {
-				item.setShare(new BigDecimal(0));
+				item.setShare(new BigDecimal(0).setScale(3));
 			}else {
 				item.setShare(position.getShares());
 			}
