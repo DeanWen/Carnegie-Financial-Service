@@ -23,6 +23,8 @@
 								<div class="col-lg-6">
                                     <form action="transition.do" method="POST">
                                     	<div class="form-group">
+                                    		<label>Current Date: ${preDate}</label>
+                                    		<br/>
                                             <label>Enter Date (yyyy-mm-dd):</label>
                                             <input class="form-control" placeholder="yyyy-mm-dd" name="date" value = "${preDate}"/>
                                         </div>
