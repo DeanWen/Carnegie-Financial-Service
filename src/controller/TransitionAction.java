@@ -145,7 +145,21 @@ public class TransitionAction extends Action{
 		}
 		
 	}
+	
+    public boolean checkInputValidator (String[] prices) {
+   	 for (String item : prices) {
+				try {
+					BigDecimal price = new BigDecimal(item);
+					System.out.println(price);
+				} catch(Exception e) {
+					return false;
+				}
+   	 }
+   	 return true;
+    }
+    
 //------------------------------------------------------------------------------------------------------
+
      
     public String perform(HttpServletRequest request) {
     	
@@ -249,6 +263,12 @@ public class TransitionAction extends Action{
 
 			if(date.equals(preDate) || preDate.after(date)) {
 				errors.add("Date entered this time must be after that you entered last time");
+				request.setAttribute("errors", errors);
+				return "transition.jsp";
+			}
+			
+			if(!checkInputValidator(prices)) {
+				errors.add("Some price numbers are invalid");
 				request.setAttribute("errors", errors);
 				return "transition.jsp";
 			}
