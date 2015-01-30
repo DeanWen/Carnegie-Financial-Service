@@ -129,7 +129,7 @@
                                             <td > ${customer.getCash()} </td>
                                         </tr>
                                         <tr class="odd gradeX">
-                                            <th class="col-md-3"> Cash Balance </th>
+                                            <th class="col-md-3"> Total Balance </th>
                                             <td > ${customer.getTotal()} </td>
                                         </tr>                        
                                     </tbody>
