@@ -114,7 +114,8 @@ public class TransitionAction extends Action{
 						positionDAO.create(cusPosition);
 					}else {
 						BigDecimal newShares = tmp.add(cusPosition.getShares());
-						if (MAX.compareTo(newShares) == 1) {
+						if (MAX.compareTo(newShares) == 1 && 
+								customer.getTotal().subtract(tran.getAmount()).compareTo(BigDecimal.ZERO) == 1) {
 							cusPosition.setShares(newShares);
 							customer.setTotal(customer.getTotal().subtract(tran.getAmount()));
 							positionDAO.update(cusPosition);
