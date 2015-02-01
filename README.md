@@ -4,7 +4,7 @@ This is development repositorty for Carnegie Financial Service, connecting AWS E
 
 Database: Amazon Web Service(AWS) RDS MySQL  
 Deployment: Amazon Web Service(AWS) EC2  
-Architecure: CMU-08600 Java-J2EEE HW9 MVC Architecture  
+Architecure: Java-J2EE MVC Architecture  
 
 <pre>
 File Structure:
@@ -13,7 +13,7 @@ File Structure:
     -Action
     -Controller
     -RegisterAction
-  -Model(DAO) CRUD Interfaces Completed: create() read() update() delete()
+  -Model(DAO) 
     -Customer
     -Employee
     -Fund
@@ -34,7 +34,7 @@ File Structure:
 ### Database
   if you want to access databases, please type follow command in your terminal.Then you will be able to remote AWS RDS MySQL and execute query 
   <pre>
-  mysql -h my-east-db-instance.cq6vzlml6j4g.us-east-1.rds.amazonaws.com -u root -p 12345678
+  mysql -h my-east-db-instance.cq6vzlml6j4g.us-east-1.rds.amazonaws.com
   </pre>
   
   Please note:  
@@ -62,4 +62,4 @@ Let's Ace the Task!
 
 Dean W.  
 Team 14 Infinity  
-Last updated: 1/21/2015
+Last updated: 1/28/2015
