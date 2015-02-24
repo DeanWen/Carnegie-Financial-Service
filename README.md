@@ -12,7 +12,7 @@ File Structure:
   -Controllers
     -Action
     -Controller
-    -RegisterAction
+    - etc...
   -Model(DAO) 
     -Customer
     -Employee
@@ -51,14 +51,6 @@ Two easy ways
 2.Clone the repository from your Github Client
       --Import Exisiting project
 </pre>
-
-### How do you know your configuration succeed?
-Currenlty I implemented employee register action for testing.   
-After you run on your local Tomcat Server,  You will see DAO Test page, once you click "Done" button, "Register Successfully" Message come out. 
-
-Congratulations! You totally did that correctly and start Coding your action and jsp now.
-
-Let's Ace the Task!
 
 Dean W.  
 Team 14 Infinity  
